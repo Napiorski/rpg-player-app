@@ -38,7 +38,8 @@ export default function Home() {
             </a>
           </div>
         </div>
-
+        <h1 style={{color: 'purple'}}>THIS PAGE IS UNDER CONSTRUCTIONS - PLEASE BE VERY PATIENT</h1>
+        <br/>
         <div className={styles.center}>
           <Image
             className={styles.logo}

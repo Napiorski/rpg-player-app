@@ -69,7 +69,7 @@ const NAV_ITEMS = [
   }
 ];
 
-export const NavBar = () => {
+export const Navbar = () => {
   // TODO: setup player context (global store)
   // const {state: {username, isLoggedIn}} = useRpgContext()
 
@@ -237,6 +237,14 @@ function DesktopSubNav({label, href, subLabel}: DesktopSubNavProps) {
   );
 };
 
+
+type NavItemProps = {
+    label: string,
+    href?: string,
+    subLabel?: string
+    children?:any
+}
+
 const MobileNav = () => {
   return (
     <Stack
@@ -250,7 +258,13 @@ const MobileNav = () => {
   );
 };
 
-const MobileNavItem = ({label, children, href = '#'}) => {
+/*
+Should strongly type the child elements you are mapping below but an 'any' will get you over the
+error.  It looks like  a child element is of an object type of {label: string, subLabel?: string, href: string}
+but check this out with Jason tomorrow
+*/
+
+const MobileNavItem = ({label, children, href = '#'}:NavItemProps) => {
   const {isOpen, onToggle} = useDisclosure();
   const router = useRouter()
 
@@ -292,7 +306,7 @@ const MobileNavItem = ({label, children, href = '#'}) => {
           borderColor={useColorModeValue('gray.200', 'gray.700')}
           align={'start'}>
           {children &&
-          children.map((child) => (
+          children.map((child:any) => (
               <NextLink
                 key={child.label}
                 href={child.href}

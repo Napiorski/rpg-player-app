@@ -1,6 +1,15 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
+import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
+import {
+  List,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
+} from '@chakra-ui/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,6 +24,33 @@ export default function Home() {
       </Head>
       <main>
         <h2>Character Sheet</h2>
+        <Box id='top-row' w="100%">
+
+        </Box>
+        <Box id='main-row' w="100%">
+        </Box>
+        <Box id='col-1' w="34%">
+          <Box id='col-attr' w='30%'>
+            <Card>
+              <OrderedList>
+                <ListItem>Strength</ListItem>
+                <ListItem>Dexterity</ListItem>
+                <ListItem>Constitution</ListItem>
+                <ListItem>Intelligence</ListItem>
+              </OrderedList>
+            </Card>
+          </Box>
+          <Box id='col-skilz' w='70%'>
+          </Box>
+          <Box id='col-profs' w='100%'>
+            <Box>
+            </Box>
+            <Box id='col-2' w="33%">
+            </Box>
+            <Box id='col-3' w="33%">
+            </Box>
+          </Box>
+        </Box>
       </main>
     </>
   )

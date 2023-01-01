@@ -25,6 +25,8 @@ import {
 } from '@chakra-ui/icons';
 import NextLink from 'next/link'
 import {useRouter} from 'next/router'
+import dynamic from 'next/dynamic'
+
 
 // See: https://chakra-templates.dev/navigation/navbar
 const NAV_ITEMS = [
@@ -153,12 +155,11 @@ const DesktopNav = () => {
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
-              <NextLink
-                href={navItem.href ?? '#'}
-                passHref
-                shallow={true}
-              >
                 <Link
+                  as={NextLink}
+                  href={navItem.href ?? '#'}
+                  passHref
+                  shallow={true}
                   p={2}
                   fontSize={'sm'}
                   fontWeight={500}
@@ -169,7 +170,6 @@ const DesktopNav = () => {
                   }}>
                   {navItem.label}
                 </Link>
-              </NextLink>
             </PopoverTrigger>
 
             {navItem.children && (
@@ -202,7 +202,6 @@ type DesktopSubNavProps = {
 
 function DesktopSubNav({label, href, subLabel}: DesktopSubNavProps) {
   return (
-    <NextLink href={href} passHref shallow={true}>
       <Link
         href={href}
         role={'group'}
@@ -233,7 +232,6 @@ function DesktopSubNav({label, href, subLabel}: DesktopSubNavProps) {
           </Flex>
         </Stack>
       </Link>
-    </NextLink>
   );
 };
 
@@ -247,14 +245,15 @@ type NavItemProps = {
 
 const MobileNav = () => {
   return (
-    <Stack
-      bg={useColorModeValue('white', 'gray.800')}
-      p={4}
-      display={{md: 'none'}}>
-      {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
-      ))}
-    </Stack>
+    <></>
+    // <Stack
+    //   bg={useColorModeValue('white', 'gray.800')}
+    //   p={4}
+    //   display={{md: 'none'}}>
+    //   {NAV_ITEMS.map((navItem) => (
+    //     <MobileNavItem key={navItem.label} {...navItem} />
+    //   ))}
+    // </Stack>
   );
 };
 
@@ -307,18 +306,16 @@ const MobileNavItem = ({label, children, href = '#'}:NavItemProps) => {
           align={'start'}>
           {children &&
           children.map((child:any) => (
-              <NextLink
+              <Link
+                as={NextLink}
                 key={child.label}
                 href={child.href}
                 shallow={true}
                 passHref
+                py={2}
               >
-                <Link
-                  py={2}
-                >
-                  {child.label}
-                </Link>
-              </NextLink>
+                {child.label}
+              </Link>
             )
           )}
         </Stack>

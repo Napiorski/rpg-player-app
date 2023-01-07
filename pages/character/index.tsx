@@ -1,8 +1,21 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import { Card, CardHeader, CardBody, CardFooter, Grid, GridItem, Button, ButtonGroup, Divider, Heading, Stack } from '@chakra-ui/react'
-import { Box } from '@chakra-ui/react'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "@next/font/google";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Grid,
+  GridItem,
+  Button,
+  ButtonGroup,
+  Divider,
+  Heading,
+  Stack,
+  color,
+} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import {
   List,
   Badge,
@@ -10,21 +23,51 @@ import {
   ListIcon,
   OrderedList,
   UnorderedList,
-  Text
-} from '@chakra-ui/react'
-import styled from "@emotion/styled"
+  Text,
+} from "@chakra-ui/react";
+import styled from "@emotion/styled";
+import { StatCard } from "../../components/stat-card";
 
 const CharacterCard = styled(Card)`
   margin-top: 10px;
-`
-
+  padding: 10px;
+`;
+// Primary div container element
 const Primary = styled.div`
-  margin: 30px;
-`
+  margin: 20px;
+`;
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const listItems = [
+    {
+      title: "STR",
+      quantifier: 0,
+    },
+    {
+      title: "DEX",
+      quantifier: 0,
+    },
+    {
+      title: "CON",
+      quantifier: 0,
+    },
+    {
+      title: "INT",
+      quantifier: 0,
+    },
+    {
+      title: "WIS",
+      quantifier: 0,
+    },
+    {
+      title: "CHA",
+      quantifier: 0,
+    },
+  ];
+
+  // JSX is really the view-layer (put any data or logic above this)
   return (
     <>
       <Head>
@@ -35,60 +78,67 @@ export default function Home() {
       </Head>
       <main>
         <Primary>
-        <Heading>Character Sheet</Heading>
-        
-        <Grid templateColumns='repeat(3, 1fr)' gap={10}>
-          <GridItem w='100%'>
-            <CharacterCard>
-              <OrderedList>
-                <ListItem>Strength</ListItem>
-                <ListItem>Dexterity</ListItem>
-                <ListItem>Constitution</ListItem>
-                <ListItem>Intelligence</ListItem>
-              </OrderedList>
-            </CharacterCard>
-          </GridItem>
-          <GridItem w='100%'>
-            <CharacterCard>
-              <CardBody>
-                <Stack mt='6' spacing='3'>
-                  <Heading size='md'>Living room Sofa</Heading>
-                  <Text>
-                    This sofa is perfect for modern tropical spaces, baroque inspired
-                    spaces, earthy toned spaces and for people who love a chic design with a
-                    sprinkle of vintage design.
-                  </Text>
-                  <Text color='blue.600' fontSize='2xl'>
-                    $450
-                  </Text>
-                </Stack>
-              </CardBody>
-              <Divider />
-              <CardFooter>
-                <ButtonGroup spacing='2'>
-                  <Button variant='solid' colorScheme='blue'>
-                    Buy now
-                  </Button>
-                  <Button variant='ghost' colorScheme='blue'>
-                    Add to cart
-                  </Button>
-                </ButtonGroup>
-              </CardFooter>
-            </CharacterCard>
-          </GridItem>
-          <GridItem w='100%'>
-            <CharacterCard>
-              <OrderedList>
-                <ListItem>Strength</ListItem>
-                <ListItem>Dexterity</ListItem>
-                <ListItem>Constitution</ListItem>
-                <ListItem>Intelligence</ListItem>
-              </OrderedList>
-            </CharacterCard>
-          </GridItem>
-        </Grid>
-</Primary>
+          <Heading>Character Sheet</Heading>
+
+          <Grid templateColumns="repeat(3, 1fr)" gap={10}>
+            <GridItem w="20%">
+              <CharacterCard
+                backgroundColor={"lightgrey"}
+                textAlign="center"
+                fontWeight="bold"
+              >
+                <List>
+                  {listItems.map(({ quantifier, title }) => {
+                    return (
+                      <ListItem key={`list-item-${title}`}>
+                        <StatCard quantifier={quantifier} title={title} />
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              </CharacterCard>
+            </GridItem>
+            <GridItem w="100%">
+              <CharacterCard>
+                <CardBody>
+                  <Stack mt="6" spacing="3">
+                    <List>
+                      <ListItem>AC</ListItem>
+                      <ListItem>INIT</ListItem>
+                      <ListItem>Current Hit Points</ListItem>
+                      <ListItem>Temporary Hit Points</ListItem>
+                      <ListItem>HIT DICE</ListItem>
+                      <ListItem>DEATH SAVES</ListItem>
+                    </List>
+                  </Stack>
+                </CardBody>
+                <Divider />
+              </CharacterCard>
+            </GridItem>
+            <GridItem w="100%">
+              <CharacterCard>
+                <List>
+                  <ListItem>Personality Traits</ListItem>
+                  <ListItem>Ideals</ListItem>
+                  <ListItem>Bonds</ListItem>
+                  <ListItem>Flaws</ListItem>
+                  <ListItem>Alignment</ListItem>
+                </List>
+              </CharacterCard>
+            </GridItem>
+            <GridItem w="100%">
+              <CharacterCard>
+                <OrderedList>
+                  <ListItem>Strength</ListItem>
+                  <ListItem>Dexterity</ListItem>
+                  <ListItem>Constitution</ListItem>
+                  <ListItem>Intelligence</ListItem>
+                </OrderedList>
+              </CharacterCard>
+            </GridItem>
+          </Grid>
+        </Primary>
       </main>
     </>
-  )
+  );
 }

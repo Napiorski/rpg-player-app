@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Card, Badge, Box, CardBody } from "@chakra-ui/react";
+import {
+  Card,
+  Badge,
+  Box,
+  CardBody,
+  CardHeader,
+  Heading,
+} from "@chakra-ui/react";
 import styled from "@emotion/styled";
 
 const StyledCard = styled.div`
@@ -9,9 +16,10 @@ const StyledCard = styled.div`
   flex-direction: column;
   border: 1px solid lightGrey;
   border-radius: 5px;
-  width: 80px;
+  width: 40px;
+  font-weight: bold;
+  text-align: center;
 `;
-
 interface StatCardProps {
   quantifier: number;
   title: string;
@@ -34,6 +42,9 @@ export function StatCard({ quantifier, title }: StatCardProps) {
       </div>
       <Box>
         <Card>
+          <CardHeader>
+            <Heading size="md">Client Report</Heading>
+          </CardHeader>
           <CardBody>
             {title}
             <br />

@@ -30,7 +30,7 @@ export function StatCard({ title }: StatCardProps) {
         <CardBody py={'5px'} >
           <Center flexDirection={'column'}>
               <BoldHeader>{title}</BoldHeader>
-              <Input type="number" size='sm' variant="unstyled" width={'7px'} placeholder="-"/>
+              <Input type="number" size='sm' variant="unstyled" placeholder="-"/>
             </Center>
         </CardBody>
         <Input bg='gray.100' type="number" size='sm'  placeholder="-"/>

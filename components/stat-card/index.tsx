@@ -16,22 +16,6 @@ import {
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 
-const StyledCard = styled.div`
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
-  border: 1px solid lightGrey;
-  border-radius: 5px;
-  width: 40px;
-  font-weight: bold;
-  text-align: center;
-`;
-
-const StyledBadge = styled(Badge)`
-  display: flex;
-`
-
 const BoldHeader = styled.div`
   font-weight: bold;
 `

@@ -91,7 +91,7 @@ export default function Home() {
                   {listItems.map(({ quantifier, title }) => {
                     return (
                       <ListItem key={`list-item-${title}`}>
-                        <StatCard quantifier={quantifier} title={title} />
+                        <StatCard title={title} />
                       </ListItem>
                     );
                   })}

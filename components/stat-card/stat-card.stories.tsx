@@ -19,11 +19,8 @@ export default {
   },
 } as ComponentMeta<typeof StatCard>;
 
-export const StatCardStory: ComponentStory<typeof StatCard> = (args) => {
-  return <StatCard {...args} />;
-};
-
-StatCardStory.args = {
-  title: "STR",
-  quantifier: 6,
+// : ComponentStory<typeof StatCard> 
+export const StatCardStory = () => {
+  const attributes = ['STR', 'DEX', 'CON', 'WIS', 'CHA']
+  return attributes.map((attr, i) => <StatCard key={`attribute-${i}`} title={attr}/>);
 };

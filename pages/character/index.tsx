@@ -79,23 +79,49 @@ export default function Home() {
       <main>
         <Primary>
           <Heading>Character Sheet</Heading>
-
           <Grid templateColumns="repeat(3, 1fr)" gap={10}>
-            <GridItem w="20%">
-              <CharacterCard
-                backgroundColor={"lightgrey"}
-                textAlign="center"
-                fontWeight="bold"
-              >
-                <List>
-                  {listItems.map(({ quantifier, title }) => {
-                    return (
-                      <ListItem key={`list-item-${title}`}>
-                        <StatCard title={title} />
-                      </ListItem>
-                    );
-                  })}
-                </List>
+            <GridItem w="100%">
+              <CharacterCard textAlign="center" fontWeight="bold">
+                <Grid
+                  templateAreas={`
+                  "stat next"
+                  "footer footer"`}
+                  gridTemplateColumns={"70px 1fr"}
+                  gap="1"
+                  fontWeight="bold"
+                >
+                  <GridItem pl="2" area={"stat"}>
+                    <List>
+                      {listItems.map(({ title }) => {
+                        return (
+                          <ListItem key={`list-item-${title}`}>
+                            <StatCard title={title} />
+                          </ListItem>
+                        );
+                      })}
+                    </List>
+                  </GridItem>
+                  <GridItem pl="2" bg="green.300" area={"next"}>
+                    <Card>
+                      <Box>Inspiration</Box>
+                      <Box>Inspiration</Box>
+                      <Box>Inspiration</Box>
+                      <Box>Inspiration</Box>
+                      <Box>Inspiration</Box>
+                      <Box>Inspiration</Box>
+                      <Box>Inspiration</Box>
+                      <Box>Inspiration</Box>
+                      <Box>Inspiration</Box>
+                    </Card>
+                    <Card>Proficiency Bonus</Card>
+                    <Card>Saving Throws</Card>
+                    <Card>Skills</Card>
+                  </GridItem>
+
+                  <GridItem pl="2" bg="blue.300" area={"footer"}>
+                    Footer
+                  </GridItem>
+                </Grid>
               </CharacterCard>
             </GridItem>
             <GridItem w="100%">

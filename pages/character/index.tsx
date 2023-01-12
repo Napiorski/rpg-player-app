@@ -104,22 +104,42 @@ export default function Home() {
                   <GridItem pl="2" bg="green.300" area={"next"}>
                     <Card>
                       <Box>Inspiration</Box>
-                      <Box>Inspiration</Box>
-                      <Box>Inspiration</Box>
-                      <Box>Inspiration</Box>
-                      <Box>Inspiration</Box>
-                      <Box>Inspiration</Box>
-                      <Box>Inspiration</Box>
-                      <Box>Inspiration</Box>
-                      <Box>Inspiration</Box>
                     </Card>
                     <Card>Proficiency Bonus</Card>
-                    <Card>Saving Throws</Card>
-                    <Card>Skills</Card>
+                    <Card>
+                      <Box>Strength</Box>
+                      <Box>Dexterity</Box>
+                      <Box>Constitution</Box>
+                      <Box>Intelligence</Box>
+                      <Box>Wisdom</Box>
+                      <Box>Charisma</Box>
+                      Saving Throws
+                    </Card>
+                    <Card>
+                      <Box>Acrobatics</Box>
+                      <Box>Animal Handling</Box>
+                      <Box>Arcana</Box>
+                      <Box>Athletics</Box>
+                      <Box>Deception</Box>
+                      <Box>History</Box>
+                      <Box>Insight</Box>
+                      <Box>Intimidation</Box>
+                      <Box>Investigator</Box>
+                      <Box>Medicine</Box>
+                      <Box>Nature</Box>
+                      <Box>Perception</Box>
+                      <Box>Performance</Box>
+                      <Box>Pursuasion</Box>
+                      <Box>Religion</Box>
+                      <Box>Sleight of Hand</Box>
+                      <Box>Stealth</Box>
+                      <Box>Survival</Box>
+                      Skills
+                    </Card>
                   </GridItem>
 
                   <GridItem pl="2" bg="blue.300" area={"footer"}>
-                    Footer
+                    PASSIVE WISDOM (PERCEPTION)
                   </GridItem>
                 </Grid>
               </CharacterCard>

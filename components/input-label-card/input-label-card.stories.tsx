@@ -3,15 +3,14 @@ import * as React from "react";
 import { InputLabelCard } from ".";
 
 export default {
-  title: "Components/StatCard",
+  title: "Components/InputLabelCard",
   component: InputLabelCard,
   parameters: {
-    componentSubtitle: "Hero StatCard",
+    componentSubtitle: "Hero InputLabelCard",
   },
   argTypes: {
     title: {
-      description:
-        "Give us a title (string) for othe stat card. For example Strength could be STR.",
+      description: "The InputLabelCard story",
     },
     quantifier: {
       description: "Hero badge quantifier",
@@ -19,11 +18,12 @@ export default {
   },
 } as ComponentMeta<typeof InputLabelCard>;
 
-export const StatCardStory: ComponentStory<typeof InputLabelCard> = (args) => {
+export const InputLabelCardStory: ComponentStory<typeof InputLabelCard> = (
+  args
+) => {
   return <InputLabelCard {...args} />;
 };
 
-StatCardStory.args = {
-  title: "STR",
-  quantifier: 6,
+InputLabelCardStory.args = {
+  label: "INSPIRATION",
 };

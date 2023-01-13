@@ -27,6 +27,7 @@ import {
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { StatCard } from "../../components/stat-card";
+import { InputLabelCard } from "../../components/input-label-card";
 
 const CharacterCard = styled(Card)`
   margin-top: 10px;
@@ -101,20 +102,13 @@ export default function Home() {
                       })}
                     </List>
                   </GridItem>
-                  <GridItem pl="2" bg="green.300" area={"next"}>
-                    <Card>
-                      <Box>Inspiration</Box>
-                    </Card>
-                    <Card>Proficiency Bonus</Card>
-                    <Card>
-                      <Box>Strength</Box>
-                      <Box>Dexterity</Box>
-                      <Box>Constitution</Box>
-                      <Box>Intelligence</Box>
-                      <Box>Wisdom</Box>
-                      <Box>Charisma</Box>
-                      Saving Throws
-                    </Card>
+                  <GridItem pl="2" area={"next"}>
+                    <InputLabelCard
+                      props={{ mb: "12px" }}
+                      label="INSPIRATION"
+                    />
+                    <InputLabelCard label="PROFICIENCY BONUS" />
+                    <Card></Card>
                     <Card>
                       <Box>Acrobatics</Box>
                       <Box>Animal Handling</Box>

@@ -1,13 +1,5 @@
 import * as React from "react";
-import {
-  Card,
-  Badge,
-  Box,
-  CardBody,
-  Center,
-  CardHeader,
-  Input,
-} from "@chakra-ui/react";
+import { Card, Box, CardBody, Center, Input } from "@chakra-ui/react";
 
 interface StatCardProps {
   title: string;

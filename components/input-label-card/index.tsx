@@ -3,27 +3,30 @@ import { Card, Box, CardBody, Center, Input } from "@chakra-ui/react";
 
 type InputLabelCardProps = {
   label: string;
+  props?: any;
 };
 
-export function InputLabelCard({ label }: InputLabelCardProps) {
+export function InputLabelCard({ label, props = {} }: InputLabelCardProps) {
   return (
-    <Box>
-      <Card width="60px" variant="elevated">
-        <CardBody py={"5px"}>
-          <Center flexDirection={"row"}>
-            <Input
-              type="number"
-              size="sm"
-              variant="unstyled"
-              width={"7px"}
-              placeholder="-"
-            />
-            <Box fontWeight={"bold"}>{label}</Box>
-          </Center>
-        </CardBody>
-        <Input bg="gray.100" type="number" size="sm" placeholder="-" />
-      </Card>
-      <br />
-    </Box>
+    <Card {...props} variant="elevated" flexDirection={"row"} p={"10px"}>
+      <Center>
+        <Box>
+          <Input
+            type="number"
+            size="sm"
+            variant="unstyled"
+            placeholder=""
+            mr={"10px"}
+            w={"60px"}
+            border={"1px solid black"}
+          />
+        </Box>
+      </Center>
+      <Center>
+        <Box px="15px" fontWeight={"bold"}>
+          {label}
+        </Box>
+      </Center>
+    </Card>
   );
 }

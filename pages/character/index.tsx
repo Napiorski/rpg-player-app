@@ -28,7 +28,7 @@ import {
 import styled from "@emotion/styled";
 import { StatCard } from "../../components/stat-card";
 import { InputLabelCard } from "../../components/input-label-card";
-import { RadioGroupCard } from "../../components/radio-group-card";
+import { CheckboxGroupCard } from "../../components/checkbox-group-card";
 
 const CharacterCard = styled(Card)`
   margin-top: 10px;
@@ -111,16 +111,16 @@ export default function Home() {
                     <InputLabelCard label="PROFICIENCY BONUS" />
                     <Card>
                       SAVING THROWS
-                      <RadioGroupCard label="Strength" />
-                      <RadioGroupCard label="Dexterity" />
-                      <RadioGroupCard label="Constitution" />
-                      <RadioGroupCard label="Intelligence" />
-                      <RadioGroupCard label="Wisdom" />
-                      <RadioGroupCard label="Charisma" />
+                      <CheckboxGroupCard label="Strength" />
+                      <CheckboxGroupCard label="Dexterity" />
+                      <CheckboxGroupCard label="Constitution" />
+                      <CheckboxGroupCard label="Intelligence" />
+                      <CheckboxGroupCard label="Wisdom" />
+                      <CheckboxGroupCard label="Charisma" />
                     </Card>
                     <Card>
                       SKILLS
-                      <RadioGroupCard label="Acrobatics" />
+                      <CheckboxGroupCard label="Acrobatics" />
                     </Card>
                   </GridItem>
 

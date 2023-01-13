@@ -28,6 +28,7 @@ import {
 import styled from "@emotion/styled";
 import { StatCard } from "../../components/stat-card";
 import { InputLabelCard } from "../../components/input-label-card";
+import { RadioGroupCard } from "../../components/radio-group-card";
 
 const CharacterCard = styled(Card)`
   margin-top: 10px;
@@ -108,27 +109,18 @@ export default function Home() {
                       label="INSPIRATION"
                     />
                     <InputLabelCard label="PROFICIENCY BONUS" />
-                    <Card></Card>
                     <Card>
-                      <Box>Acrobatics</Box>
-                      <Box>Animal Handling</Box>
-                      <Box>Arcana</Box>
-                      <Box>Athletics</Box>
-                      <Box>Deception</Box>
-                      <Box>History</Box>
-                      <Box>Insight</Box>
-                      <Box>Intimidation</Box>
-                      <Box>Investigator</Box>
-                      <Box>Medicine</Box>
-                      <Box>Nature</Box>
-                      <Box>Perception</Box>
-                      <Box>Performance</Box>
-                      <Box>Pursuasion</Box>
-                      <Box>Religion</Box>
-                      <Box>Sleight of Hand</Box>
-                      <Box>Stealth</Box>
-                      <Box>Survival</Box>
-                      Skills
+                      SAVING THROWS
+                      <RadioGroupCard label="Strength" />
+                      <RadioGroupCard label="Dexterity" />
+                      <RadioGroupCard label="Constitution" />
+                      <RadioGroupCard label="Intelligence" />
+                      <RadioGroupCard label="Wisdom" />
+                      <RadioGroupCard label="Charisma" />
+                    </Card>
+                    <Card>
+                      SKILLS
+                      <RadioGroupCard label="Acrobatics" />
                     </Card>
                   </GridItem>
 

@@ -19,9 +19,17 @@ export function RadioGroupCard({ label }: RadioGroupCardProps) {
   const [value, setValue] = React.useState("");
 
   return (
-    <Card variant="elevated" flexDirection={"row"} p={"5px"} border={"thick"}>
+    <Card variant="elevated" flexDirection={"row"} p={"3px"}>
       <Center>
-        <Checkbox size="md" colorScheme="yellow" defaultChecked></Checkbox>
+        <Checkbox
+          size="md"
+          colorScheme="yellow"
+          defaultChecked
+          marginLeft={2}
+          marginRight={-3}
+        >
+          {" "}
+        </Checkbox>
         <Box px="15px" fontWeight={"bold"}>
           <Input placeholder="-" w={10} marginRight={2} />
           {value}

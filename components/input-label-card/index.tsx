@@ -3,12 +3,11 @@ import { Card, Box, CardBody, Center, Input } from "@chakra-ui/react";
 
 type InputLabelCardProps = {
   label: string;
-  props?: any;
 };
 
-export function InputLabelCard({ label, props = {} }: InputLabelCardProps) {
+export function InputLabelCard({ label }: InputLabelCardProps) {
   return (
-    <Card {...props} variant="elevated" flexDirection={"row"} p={"10px"}>
+    <Card variant="elevated" flexDirection={"row"} p={"10px"} mb={"30px"}>
       <Center>
         <Box>
           <Input

@@ -92,7 +92,7 @@ export default function Home() {
                   gap="1"
                   fontWeight="bold"
                 >
-                  <GridItem pl="2" area={"stat"}>
+                  <GridItem pl="2" area={"stat"} mb={3}>
                     <List>
                       {listItems.map(({ title }) => {
                         return (
@@ -104,10 +104,7 @@ export default function Home() {
                     </List>
                   </GridItem>
                   <GridItem pl="2" area={"next"}>
-                    <InputLabelCard
-                      props={{ mb: "12px" }}
-                      label="INSPIRATION"
-                    />
+                    <InputLabelCard label="INSPIRATION" />
                     <InputLabelCard label="PROFICIENCY BONUS" />
                     <Card>
                       SAVING THROWS
@@ -120,7 +117,36 @@ export default function Home() {
                     </Card>
                     <Card>
                       SKILLS
-                      <CheckboxGroupCard label="Acrobatics" />
+                      <CheckboxGroupCard label="Acrobatics" subLabel={"Dex"} />
+                      <CheckboxGroupCard
+                        label="Animal Handling"
+                        subLabel={"Wis"}
+                      />
+                      <CheckboxGroupCard label="Arcana" subLabel={"Int"} />
+                      <CheckboxGroupCard label="Athletics" subLabel={"Str"} />
+                      <CheckboxGroupCard label="Deception" subLabel={"Cha"} />
+                      <CheckboxGroupCard label="History" subLabel={"Int"} />
+                      <CheckboxGroupCard label="Insight" subLabel={"Wis"} />
+                      <CheckboxGroupCard
+                        label="Intimidation"
+                        subLabel={"Cha"}
+                      />
+                      <CheckboxGroupCard
+                        label="Investigation"
+                        subLabel={"Int"}
+                      />
+                      <CheckboxGroupCard label="Medicine" subLabel={"Wis"} />
+                      <CheckboxGroupCard label="Nature" subLabel={"Int"} />
+                      <CheckboxGroupCard label="Perception" subLabel={"Wis"} />
+                      <CheckboxGroupCard label="Performance" subLabel={"Cha"} />
+                      <CheckboxGroupCard label="Persuasion" subLabel={"Cha"} />
+                      <CheckboxGroupCard label="Religion" subLabel={"Int"} />
+                      <CheckboxGroupCard
+                        label="Sleight of Hand"
+                        subLabel={"Dex"}
+                      />
+                      <CheckboxGroupCard label="Stealth" subLabel={"Dex"} />
+                      <CheckboxGroupCard label="Survival" subLabel={"Wis"} />
                     </Card>
                   </GridItem>
 

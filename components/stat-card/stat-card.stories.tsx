@@ -25,5 +25,4 @@ export const StatCardStory: ComponentStory<typeof StatCard> = (args) => {
 
 StatCardStory.args = {
   title: "STR",
-  quantifier: 6,
 };

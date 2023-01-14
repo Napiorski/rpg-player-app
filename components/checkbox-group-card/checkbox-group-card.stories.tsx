@@ -1,26 +1,25 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import * as React from "react";
-import { RadioGroupCard } from ".";
+import { CheckboxGroupCard } from ".";
 
 export default {
-  title: "Components/RadioGroupCard",
-  component: RadioGroupCard,
+  title: "Components/CheckboxGroupCard",
+  component: CheckboxGroupCard,
   parameters: {
-    componentSubtitle: "Hero RadioGroupCard",
+    componentSubtitle: "Hero CheckboxGroupCard",
   },
   argTypes: {
     title: {
-      description: "The RadioGroupCard story",
+      description: "The CheckboxGroupCard story",
     },
   },
-} as ComponentMeta<typeof RadioGroupCard>;
+} as ComponentMeta<typeof CheckboxGroupCard>;
 
-export const RadioGroupCardStory: ComponentStory<typeof RadioGroupCard> = (
-  args
-) => {
-  return <RadioGroupCard {...args} />;
-};
+export const CheckboxGroupCardStory: ComponentStory<typeof CheckboxGroupCard> =
+  (args) => {
+    return <CheckboxGroupCard {...args} />;
+  };
 
-RadioGroupCardStory.args = {
+CheckboxGroupCardStory.args = {
   label: "Strength",
 };

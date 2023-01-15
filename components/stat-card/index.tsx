@@ -21,7 +21,13 @@ export function StatCard({ title }: StatCardProps) {
             />
           </Center>
         </CardBody>
-        <Input bg="gray.100" type="number" size="sm" placeholder="-" />
+        <Input
+          bg="gray.100"
+          type="number"
+          size="sm"
+          placeholder="-"
+          textAlign="center"
+        />
       </Card>
       <br />
     </Box>

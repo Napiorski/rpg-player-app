@@ -29,7 +29,7 @@ export function CheckboxGroupCard({
 }: CheckboxGroupCardProps) {
   return (
     <Flex>
-      <Checkbox size="md" defaultChecked marginLeft={2} marginRight={-3}>
+      <Checkbox size="md" marginLeft={2} marginRight={-3}>
         {" "}
       </Checkbox>
       <Box px="15px" fontWeight={"bold"}>

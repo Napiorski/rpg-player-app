@@ -14,6 +14,12 @@ import {
   Heading,
   Stack,
   color,
+  HStack,
+  Textarea,
+  Checkbox,
+  Flex,
+  Input,
+  Center,
 } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
 import {
@@ -150,8 +156,8 @@ export default function Home() {
                     </Card>
                   </GridItem>
 
-                  <GridItem pl="2" bg="blue.300" area={"footer"}>
-                    PASSIVE WISDOM (PERCEPTION)
+                  <GridItem pl="2" area={"footer"}>
+                    <Card>PASSIVE WISDOM (PERCEPTION)</Card>
                   </GridItem>
                 </Grid>
               </CharacterCard>
@@ -159,39 +165,48 @@ export default function Home() {
             <GridItem w="100%">
               <CharacterCard>
                 <CardBody>
-                  <Stack mt="6" spacing="3">
-                    <List>
-                      <ListItem>AC</ListItem>
-                      <ListItem>INIT</ListItem>
-                      <ListItem>Current Hit Points</ListItem>
-                      <ListItem>Temporary Hit Points</ListItem>
-                      <ListItem>HIT DICE</ListItem>
-                      <ListItem>DEATH SAVES</ListItem>
-                    </List>
-                  </Stack>
+                  <HStack mt="6" spacing="3">
+                    <StatCard title="AC" />
+                    <StatCard title="INIT" />
+                    <StatCard title="SPEED" />
+                  </HStack>
+
+                  <Box>CURRENT HIT POINTS</Box>
+                  <Box>TEMPORARY HIT POINTS</Box>
+                  <HStack>
+                    <StatCard title="HIT DICE" />
+                    <Flex>
+                      <Card
+                        fontWeight="bold"
+                        flexDirection="row"
+                        textAlign="center"
+                      >
+                        SUC:
+                        <Checkbox padding="3px"></Checkbox>
+                        <Checkbox padding="3px"></Checkbox>
+                        <Checkbox padding="3px"></Checkbox>
+                        FAIL:
+                        <Checkbox padding="3px"></Checkbox>
+                        <Checkbox padding="3px"></Checkbox>
+                        <Checkbox padding="3px"></Checkbox>
+                        DEATH SAVES
+                      </Card>
+                    </Flex>
+                  </HStack>
                 </CardBody>
                 <Divider />
               </CharacterCard>
             </GridItem>
             <GridItem w="100%">
-              <CharacterCard>
+              <CharacterCard fontWeight="bold">
+                Background:
                 <List>
-                  <ListItem>Personality Traits</ListItem>
-                  <ListItem>Ideals</ListItem>
-                  <ListItem>Bonds</ListItem>
-                  <ListItem>Flaws</ListItem>
-                  <ListItem>Alignment</ListItem>
+                  <Textarea placeholder="Personality Traits" />
+                  <Textarea placeholder="Ideals" />
+                  <Textarea placeholder="Bonds" />
+                  <Textarea placeholder="Flaws" />
                 </List>
-              </CharacterCard>
-            </GridItem>
-            <GridItem w="100%">
-              <CharacterCard>
-                <OrderedList>
-                  <ListItem>Strength</ListItem>
-                  <ListItem>Dexterity</ListItem>
-                  <ListItem>Constitution</ListItem>
-                  <ListItem>Intelligence</ListItem>
-                </OrderedList>
+                Alignment:
               </CharacterCard>
             </GridItem>
           </Grid>

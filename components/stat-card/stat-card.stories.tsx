@@ -11,7 +11,7 @@ export default {
   argTypes: {
     title: {
       description:
-        "Give us a title (string) for othe stat card. For example Strength could be STR.",
+        "Give us a title (string) for other stat card. For example Strength could be STR.",
     },
     quantifier: {
       description: "Hero badge quantifier",
@@ -19,8 +19,10 @@ export default {
   },
 } as ComponentMeta<typeof StatCard>;
 
-// : ComponentStory<typeof StatCard> 
-export const StatCardStory = () => {
-  const attributes = ['STR', 'DEX', 'CON', 'WIS', 'CHA']
-  return attributes.map((attr, i) => <StatCard key={`attribute-${i}`} title={attr}/>);
+export const StatCardStory: ComponentStory<typeof StatCard> = (args) => {
+  return <StatCard {...args} />;
+};
+
+StatCardStory.args = {
+  title: "STR",
 };

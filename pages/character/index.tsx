@@ -1,25 +1,17 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "@next/font/google";
 import {
   Card,
-  CardHeader,
   CardBody,
-  CardFooter,
   Grid,
   GridItem,
-  Button,
-  ButtonGroup,
   Divider,
   Heading,
-  Stack,
-  color,
-  HStack,
   Textarea,
   Checkbox,
   Flex,
-  Input,
-  Center,
+  VStack,
+  HStack,
 } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
 import {
@@ -112,7 +104,7 @@ export default function Home() {
                   <GridItem pl="2" area={"next"}>
                     <InputLabelCard label="INSPIRATION" />
                     <InputLabelCard label="PROFICIENCY BONUS" />
-                    <Card>
+                    <Card mb={"30px"}>
                       SAVING THROWS
                       <CheckboxGroupCard label="Strength" />
                       <CheckboxGroupCard label="Dexterity" />
@@ -165,34 +157,41 @@ export default function Home() {
             <GridItem w="100%">
               <CharacterCard>
                 <CardBody>
-                  <HStack mt="6" spacing="3">
+                  <Flex gap={4}>
                     <StatCard title="AC" />
                     <StatCard title="INIT" />
                     <StatCard title="SPEED" />
-                  </HStack>
-
-                  <Box>CURRENT HIT POINTS</Box>
-                  <Box>TEMPORARY HIT POINTS</Box>
-                  <HStack>
-                    <StatCard title="HIT DICE" />
-                    <Flex>
-                      <Card
-                        fontWeight="bold"
-                        flexDirection="row"
-                        textAlign="center"
-                      >
-                        SUC:
+                  </Flex>
+                  <Flex mb={"30px"}>
+                    <Textarea placeholder="Current hit points" />
+                  </Flex>
+                  <Flex mb={"30px"}>
+                    <Textarea placeholder="Temporary hit points" />
+                  </Flex>
+                  <Flex>
+                    <Box p={4}>
+                      <StatCard title="HIT DICE" />
+                    </Box>
+                    <Card p={4}>
+                      <VStack>
+                      <Box>
+                        SUCCESSES:
                         <Checkbox padding="3px"></Checkbox>
                         <Checkbox padding="3px"></Checkbox>
                         <Checkbox padding="3px"></Checkbox>
-                        FAIL:
+                      </Box>
+                      <Box>
+                        FAILURES:
                         <Checkbox padding="3px"></Checkbox>
                         <Checkbox padding="3px"></Checkbox>
                         <Checkbox padding="3px"></Checkbox>
-                        DEATH SAVES
-                      </Card>
-                    </Flex>
-                  </HStack>
+                      </Box>
+                      <Box>
+                      DEATH SAVES
+                      </Box>
+                      </VStack>
+                    </Card>
+                  </Flex>
                 </CardBody>
                 <Divider />
               </CharacterCard>
@@ -201,10 +200,10 @@ export default function Home() {
               <CharacterCard fontWeight="bold">
                 Background:
                 <List>
-                  <Textarea placeholder="Personality Traits" />
-                  <Textarea placeholder="Ideals" />
-                  <Textarea placeholder="Bonds" />
-                  <Textarea placeholder="Flaws" />
+                  <Textarea mb={"30px"} placeholder="Personality traits" />
+                  <Textarea mb={"30px"} placeholder="Ideals" />
+                  <Textarea mb={"30px"} placeholder="Bonds" />
+                  <Textarea mb={"30px"} placeholder="Flaws" />
                 </List>
                 Alignment:
               </CharacterCard>

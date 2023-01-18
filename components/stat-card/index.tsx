@@ -8,7 +8,7 @@ interface StatCardProps {
 export function StatCard({ title }: StatCardProps) {
   return (
     <Box>
-      <Card width="60px" variant="elevated">
+      <Card variant="elevated">
         <CardBody py={"5px"}>
           <Center flexDirection={"column"}>
             <Box fontWeight={"bold"}>{title}</Box>

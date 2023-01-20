@@ -12,6 +12,8 @@ import {
   Flex,
   VStack,
   HStack,
+  Select,
+  Input,
 } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
 import {
@@ -149,7 +151,10 @@ export default function Home() {
                   </GridItem>
 
                   <GridItem pl="2" area={"footer"}>
-                    <Card>PASSIVE WISDOM (PERCEPTION)</Card>
+                    <InputLabelCard
+                      placeholder="-"
+                      label="PASSIVE WISDOM (PERCEPTION)"
+                    />
                   </GridItem>
                 </Grid>
               </CharacterCard>
@@ -174,21 +179,19 @@ export default function Home() {
                     </Box>
                     <Card p={4}>
                       <VStack>
-                      <Box>
-                        SUCCESSES:
-                        <Checkbox padding="3px"></Checkbox>
-                        <Checkbox padding="3px"></Checkbox>
-                        <Checkbox padding="3px"></Checkbox>
-                      </Box>
-                      <Box>
-                        FAILURES:
-                        <Checkbox padding="3px"></Checkbox>
-                        <Checkbox padding="3px"></Checkbox>
-                        <Checkbox padding="3px"></Checkbox>
-                      </Box>
-                      <Box>
-                      DEATH SAVES
-                      </Box>
+                        <Box>
+                          SUCCESSES:
+                          <Checkbox padding="3px"></Checkbox>
+                          <Checkbox padding="3px"></Checkbox>
+                          <Checkbox padding="3px"></Checkbox>
+                        </Box>
+                        <Box>
+                          FAILURES:
+                          <Checkbox padding="3px"></Checkbox>
+                          <Checkbox padding="3px"></Checkbox>
+                          <Checkbox padding="3px"></Checkbox>
+                        </Box>
+                        <Box>DEATH SAVES</Box>
                       </VStack>
                     </Card>
                   </Flex>
@@ -198,15 +201,822 @@ export default function Home() {
             </GridItem>
             <GridItem w="100%">
               <CharacterCard fontWeight="bold">
-                Background:
+                <Select placeholder="Background">
+                  <option value="option1">Acolyte</option>
+                  <option value="option1">Charlatan</option>
+                  <option value="option1">Criminal</option>
+                  <option value="option1">Entertainer</option>
+                  <option value="option1">Folk Hero</option>
+                  <option value="option1">Guild Artisan</option>
+                  <option value="option1">Hermit</option>
+                  <option value="option1">Noble</option>
+                  <option value="option1">Outlander</option>
+                  <option value="option1">Sage</option>
+                  <option value="option1">Sailor</option>
+                  <option value="option1">Soldier</option>
+                  <option value="option1">Urchin</option>
+                </Select>
                 <List>
                   <Textarea mb={"30px"} placeholder="Personality traits" />
                   <Textarea mb={"30px"} placeholder="Ideals" />
                   <Textarea mb={"30px"} placeholder="Bonds" />
                   <Textarea mb={"30px"} placeholder="Flaws" />
                 </List>
-                Alignment:
+                <Select placeholder="Alignment">
+                  <option value="option1">Lawful Good</option>
+                  <option value="option2">Lawful Neutral</option>
+                  <option value="option3">Lawful Evil</option>
+                  <option value="option1">Neutral Good</option>
+                  <option value="option2">True Neutral</option>
+                  <option value="option3">Neutral Evil</option>
+                  <option value="option3">Chaotic Good</option>
+                  <option value="option1">Chaotic Neutral</option>
+                  <option value="option2">Chaotic Evil</option>
+                  <option value="option3">Lawful Jerk</option>
+                  <option value="option1">Chaotic Stupid</option>
+                  <option value="option2">Neutral Wuss</option>
+                </Select>
               </CharacterCard>
+            </GridItem>
+            <GridItem w="100%" colStart={2} colSpan={2}>
+              <Box bg="">
+                <Grid templateColumns="repeat(3, 1fr)" gap={5}>
+                  <GridItem>NAME</GridItem>
+                  <GridItem>ATK BONUS</GridItem>
+                  <GridItem>DAMAGE/TYPE</GridItem>
+                  <GridItem>
+                    <Select placeholder="Attack Type">
+                      <option value="option1">Unarmed Strike</option>
+                      <option value="option1">Two-Handed Unarmed Strike</option>
+                      <option value="option1">Natural Attack</option>
+                      <option value="option1">Improvised Weapon</option>
+                      <option value="option1">Club</option>
+                      <option value="option1">Offhand Club</option>
+                      <option value="option1">Dagger</option>
+                      <option value="option1">Offhand Dagger</option>
+                      <option value="option1">Greatclub</option>
+                      <option value="option1">Handaxe</option>
+                      <option value="option1">Offhand Handaxe</option>
+                      <option value="option1">Javelin</option>
+                      <option value="option1">Light Hammer</option>
+                      <option value="option1">Offhand Light Hammer</option>
+                      <option value="option1">Mace</option>
+                      <option value="option1">Offhand Mace</option>
+                      <option value="option1">Quarterstaff</option>
+                      <option value="option1">Two-Handed Quarterstaff</option>
+                      <option value="option1">
+                        Quarterstaff (Opposite End)
+                      </option>
+                      <option value="option1">Sickle</option>
+                      <option value="option1">Offhand Sickle</option>
+                      <option value="option1">Spear</option>
+                      <option value="option1">Spear (Opposite End)</option>
+                      <option value="option1">Two-Handed Spear</option>
+                      <option value="option1">Light Crossbow</option>
+                      <option value="option1">Dart</option>
+                      <option value="option1">Shortbow</option>
+                      <option value="option1">Sling</option>
+                      <option value="option1">Battleaxe</option>
+                      <option value="option1">Two-Handed Battleaxe</option>
+                      <option value="option1">Flail</option>
+                      <option value="option1">Offhand Flail</option>
+                      <option value="option1">Glaive</option>
+                      <option value="option1">Glaive (Opposite End)</option>
+                      <option value="option1">Greataxe</option>
+                      <option value="option1">Greatsword</option>
+                      <option value="option1">Halberd</option>
+                      <option value="option1">Halberd (Opposite End)</option>
+                      <option value="option1">Lance</option>
+                      <option value="option1">Longsword</option>
+                      <option value="option1">Light Hammer</option>
+                      <option value="option1">Two-Handed Longsword</option>
+                      <option value="option1">Offhand Longsword</option>
+                      <option value="option1">Maul</option>
+                      <option value="option1">Morningstar</option>
+                      <option value="option1">Offhand Morningstar</option>
+                      <option value="option1">Pike</option>
+                      <option value="option1">Pike (Opposite End)</option>
+                      <option value="option1">Rapier</option>
+                      <option value="option1">Offhand Rapier</option>
+                      <option value="option1">Scimitar</option>
+                      <option value="option1">Offhand Scimitar</option>
+                      <option value="option1">Shortsword</option>
+                      <option value="option1">Offhand Shortsword</option>
+                      <option value="option1">Trident</option>
+                      <option value="option1">Two-Handed Trident</option>
+                      <option value="option1">War Pick</option>
+                      <option value="option1">Offhand War Pick</option>
+                      <option value="option1">Warhammer</option>
+                      <option value="option1">Two-Handed Warhammer</option>
+                      <option value="option1">Offhand Warhammer</option>
+                      <option value="option1">Whip</option>
+                      <option value="option1">Blowgun</option>
+                      <option value="option1">Hand Crossbow</option>
+                      <option value="option1">Heavy Crossbow</option>
+                      <option value="option1">Longbow</option>
+                      <option value="option1">Net</option>
+                      <option value="option1">Eldritch Blast</option>
+                      <option value="option1">Dagger +1</option>
+                      <option value="option1">Offhand Dagger +1</option>
+                      <option value="option1">Flame Tongue Longsword</option>
+                      <option value="option1">
+                        Two-Handed Flame Tongue Longsword
+                      </option>
+                      <option value="option1">Fire Bolt</option>
+                      <option value="option1">Luck Blade Rapier</option>
+                      <option value="option1">Hammer of Thunderbolts</option>
+                      <option value="option1">Longbow +1</option>
+                      <option value="option1">Silvered Rapier</option>
+                    </Select>
+                  </GridItem>
+                  <GridItem>
+                    <Input
+                      type="string"
+                      size="sm"
+                      variant="unstyled"
+                      placeholder="-"
+                      _placeholder={{ paddingLeft: "40px" }}
+                      mr={"10px"}
+                      w={"100px"}
+                      border={"1px solid black"}
+                    />
+                  </GridItem>
+                  <GridItem>
+                    <Input
+                      type="string"
+                      size="sm"
+                      variant="unstyled"
+                      placeholder="-"
+                      _placeholder={{ paddingLeft: "50px" }}
+                      mr={"10px"}
+                      w={"200px"}
+                      border={"1px solid black"}
+                    />
+                  </GridItem>
+                  <GridItem>
+                    <Select placeholder="Attack Type">
+                      <option value="option1">Unarmed Strike</option>
+                      <option value="option1">Two-Handed Unarmed Strike</option>
+                      <option value="option1">Natural Attack</option>
+                      <option value="option1">Improvised Weapon</option>
+                      <option value="option1">Club</option>
+                      <option value="option1">Offhand Club</option>
+                      <option value="option1">Dagger</option>
+                      <option value="option1">Offhand Dagger</option>
+                      <option value="option1">Greatclub</option>
+                      <option value="option1">Handaxe</option>
+                      <option value="option1">Offhand Handaxe</option>
+                      <option value="option1">Javelin</option>
+                      <option value="option1">Light Hammer</option>
+                      <option value="option1">Offhand Light Hammer</option>
+                      <option value="option1">Mace</option>
+                      <option value="option1">Offhand Mace</option>
+                      <option value="option1">Quarterstaff</option>
+                      <option value="option1">Two-Handed Quarterstaff</option>
+                      <option value="option1">
+                        Quarterstaff (Opposite End)
+                      </option>
+                      <option value="option1">Sickle</option>
+                      <option value="option1">Offhand Sickle</option>
+                      <option value="option1">Spear</option>
+                      <option value="option1">Spear (Opposite End)</option>
+                      <option value="option1">Two-Handed Spear</option>
+                      <option value="option1">Light Crossbow</option>
+                      <option value="option1">Dart</option>
+                      <option value="option1">Shortbow</option>
+                      <option value="option1">Sling</option>
+                      <option value="option1">Battleaxe</option>
+                      <option value="option1">Two-Handed Battleaxe</option>
+                      <option value="option1">Flail</option>
+                      <option value="option1">Offhand Flail</option>
+                      <option value="option1">Glaive</option>
+                      <option value="option1">Glaive (Opposite End)</option>
+                      <option value="option1">Greataxe</option>
+                      <option value="option1">Greatsword</option>
+                      <option value="option1">Halberd</option>
+                      <option value="option1">Halberd (Opposite End)</option>
+                      <option value="option1">Lance</option>
+                      <option value="option1">Longsword</option>
+                      <option value="option1">Light Hammer</option>
+                      <option value="option1">Two-Handed Longsword</option>
+                      <option value="option1">Offhand Longsword</option>
+                      <option value="option1">Maul</option>
+                      <option value="option1">Morningstar</option>
+                      <option value="option1">Offhand Morningstar</option>
+                      <option value="option1">Pike</option>
+                      <option value="option1">Pike (Opposite End)</option>
+                      <option value="option1">Rapier</option>
+                      <option value="option1">Offhand Rapier</option>
+                      <option value="option1">Scimitar</option>
+                      <option value="option1">Offhand Scimitar</option>
+                      <option value="option1">Shortsword</option>
+                      <option value="option1">Offhand Shortsword</option>
+                      <option value="option1">Trident</option>
+                      <option value="option1">Two-Handed Trident</option>
+                      <option value="option1">War Pick</option>
+                      <option value="option1">Offhand War Pick</option>
+                      <option value="option1">Warhammer</option>
+                      <option value="option1">Two-Handed Warhammer</option>
+                      <option value="option1">Offhand Warhammer</option>
+                      <option value="option1">Whip</option>
+                      <option value="option1">Blowgun</option>
+                      <option value="option1">Hand Crossbow</option>
+                      <option value="option1">Heavy Crossbow</option>
+                      <option value="option1">Longbow</option>
+                      <option value="option1">Net</option>
+                      <option value="option1">Eldritch Blast</option>
+                      <option value="option1">Dagger +1</option>
+                      <option value="option1">Offhand Dagger +1</option>
+                      <option value="option1">Flame Tongue Longsword</option>
+                      <option value="option1">
+                        Two-Handed Flame Tongue Longsword
+                      </option>
+                      <option value="option1">Fire Bolt</option>
+                      <option value="option1">Luck Blade Rapier</option>
+                      <option value="option1">Hammer of Thunderbolts</option>
+                      <option value="option1">Longbow +1</option>
+                      <option value="option1">Silvered Rapier</option>
+                    </Select>
+                  </GridItem>
+                  <GridItem>
+                    <Input
+                      type="string"
+                      size="sm"
+                      variant="unstyled"
+                      placeholder="-"
+                      _placeholder={{ paddingLeft: "40px" }}
+                      mr={"10px"}
+                      w={"100px"}
+                      border={"1px solid black"}
+                    />
+                  </GridItem>
+                  <GridItem>
+                    <Input
+                      type="string"
+                      size="sm"
+                      variant="unstyled"
+                      placeholder="-"
+                      _placeholder={{ paddingLeft: "50px" }}
+                      mr={"10px"}
+                      w={"200px"}
+                      border={"1px solid black"}
+                    />
+                  </GridItem>
+                  <GridItem>
+                    <Select placeholder="Attack Type">
+                      <option value="option1">Unarmed Strike</option>
+                      <option value="option1">Two-Handed Unarmed Strike</option>
+                      <option value="option1">Natural Attack</option>
+                      <option value="option1">Improvised Weapon</option>
+                      <option value="option1">Club</option>
+                      <option value="option1">Offhand Club</option>
+                      <option value="option1">Dagger</option>
+                      <option value="option1">Offhand Dagger</option>
+                      <option value="option1">Greatclub</option>
+                      <option value="option1">Handaxe</option>
+                      <option value="option1">Offhand Handaxe</option>
+                      <option value="option1">Javelin</option>
+                      <option value="option1">Light Hammer</option>
+                      <option value="option1">Offhand Light Hammer</option>
+                      <option value="option1">Mace</option>
+                      <option value="option1">Offhand Mace</option>
+                      <option value="option1">Quarterstaff</option>
+                      <option value="option1">Two-Handed Quarterstaff</option>
+                      <option value="option1">
+                        Quarterstaff (Opposite End)
+                      </option>
+                      <option value="option1">Sickle</option>
+                      <option value="option1">Offhand Sickle</option>
+                      <option value="option1">Spear</option>
+                      <option value="option1">Spear (Opposite End)</option>
+                      <option value="option1">Two-Handed Spear</option>
+                      <option value="option1">Light Crossbow</option>
+                      <option value="option1">Dart</option>
+                      <option value="option1">Shortbow</option>
+                      <option value="option1">Sling</option>
+                      <option value="option1">Battleaxe</option>
+                      <option value="option1">Two-Handed Battleaxe</option>
+                      <option value="option1">Flail</option>
+                      <option value="option1">Offhand Flail</option>
+                      <option value="option1">Glaive</option>
+                      <option value="option1">Glaive (Opposite End)</option>
+                      <option value="option1">Greataxe</option>
+                      <option value="option1">Greatsword</option>
+                      <option value="option1">Halberd</option>
+                      <option value="option1">Halberd (Opposite End)</option>
+                      <option value="option1">Lance</option>
+                      <option value="option1">Longsword</option>
+                      <option value="option1">Light Hammer</option>
+                      <option value="option1">Two-Handed Longsword</option>
+                      <option value="option1">Offhand Longsword</option>
+                      <option value="option1">Maul</option>
+                      <option value="option1">Morningstar</option>
+                      <option value="option1">Offhand Morningstar</option>
+                      <option value="option1">Pike</option>
+                      <option value="option1">Pike (Opposite End)</option>
+                      <option value="option1">Rapier</option>
+                      <option value="option1">Offhand Rapier</option>
+                      <option value="option1">Scimitar</option>
+                      <option value="option1">Offhand Scimitar</option>
+                      <option value="option1">Shortsword</option>
+                      <option value="option1">Offhand Shortsword</option>
+                      <option value="option1">Trident</option>
+                      <option value="option1">Two-Handed Trident</option>
+                      <option value="option1">War Pick</option>
+                      <option value="option1">Offhand War Pick</option>
+                      <option value="option1">Warhammer</option>
+                      <option value="option1">Two-Handed Warhammer</option>
+                      <option value="option1">Offhand Warhammer</option>
+                      <option value="option1">Whip</option>
+                      <option value="option1">Blowgun</option>
+                      <option value="option1">Hand Crossbow</option>
+                      <option value="option1">Heavy Crossbow</option>
+                      <option value="option1">Longbow</option>
+                      <option value="option1">Net</option>
+                      <option value="option1">Eldritch Blast</option>
+                      <option value="option1">Dagger +1</option>
+                      <option value="option1">Offhand Dagger +1</option>
+                      <option value="option1">Flame Tongue Longsword</option>
+                      <option value="option1">
+                        Two-Handed Flame Tongue Longsword
+                      </option>
+                      <option value="option1">Fire Bolt</option>
+                      <option value="option1">Luck Blade Rapier</option>
+                      <option value="option1">Hammer of Thunderbolts</option>
+                      <option value="option1">Longbow +1</option>
+                      <option value="option1">Silvered Rapier</option>
+                    </Select>
+                  </GridItem>
+                  <GridItem>
+                    <Input
+                      type="string"
+                      size="sm"
+                      variant="unstyled"
+                      placeholder="-"
+                      _placeholder={{ paddingLeft: "40px" }}
+                      mr={"10px"}
+                      w={"100px"}
+                      border={"1px solid black"}
+                    />
+                  </GridItem>
+                  <GridItem>
+                    <Input
+                      type="string"
+                      size="sm"
+                      variant="unstyled"
+                      placeholder="-"
+                      _placeholder={{ paddingLeft: "50px" }}
+                      mr={"10px"}
+                      w={"200px"}
+                      border={"1px solid black"}
+                    />
+                  </GridItem>
+                  <GridItem>
+                    <Select placeholder="Attack Type">
+                      <option value="option1">Unarmed Strike</option>
+                      <option value="option1">Two-Handed Unarmed Strike</option>
+                      <option value="option1">Natural Attack</option>
+                      <option value="option1">Improvised Weapon</option>
+                      <option value="option1">Club</option>
+                      <option value="option1">Offhand Club</option>
+                      <option value="option1">Dagger</option>
+                      <option value="option1">Offhand Dagger</option>
+                      <option value="option1">Greatclub</option>
+                      <option value="option1">Handaxe</option>
+                      <option value="option1">Offhand Handaxe</option>
+                      <option value="option1">Javelin</option>
+                      <option value="option1">Light Hammer</option>
+                      <option value="option1">Offhand Light Hammer</option>
+                      <option value="option1">Mace</option>
+                      <option value="option1">Offhand Mace</option>
+                      <option value="option1">Quarterstaff</option>
+                      <option value="option1">Two-Handed Quarterstaff</option>
+                      <option value="option1">
+                        Quarterstaff (Opposite End)
+                      </option>
+                      <option value="option1">Sickle</option>
+                      <option value="option1">Offhand Sickle</option>
+                      <option value="option1">Spear</option>
+                      <option value="option1">Spear (Opposite End)</option>
+                      <option value="option1">Two-Handed Spear</option>
+                      <option value="option1">Light Crossbow</option>
+                      <option value="option1">Dart</option>
+                      <option value="option1">Shortbow</option>
+                      <option value="option1">Sling</option>
+                      <option value="option1">Battleaxe</option>
+                      <option value="option1">Two-Handed Battleaxe</option>
+                      <option value="option1">Flail</option>
+                      <option value="option1">Offhand Flail</option>
+                      <option value="option1">Glaive</option>
+                      <option value="option1">Glaive (Opposite End)</option>
+                      <option value="option1">Greataxe</option>
+                      <option value="option1">Greatsword</option>
+                      <option value="option1">Halberd</option>
+                      <option value="option1">Halberd (Opposite End)</option>
+                      <option value="option1">Lance</option>
+                      <option value="option1">Longsword</option>
+                      <option value="option1">Light Hammer</option>
+                      <option value="option1">Two-Handed Longsword</option>
+                      <option value="option1">Offhand Longsword</option>
+                      <option value="option1">Maul</option>
+                      <option value="option1">Morningstar</option>
+                      <option value="option1">Offhand Morningstar</option>
+                      <option value="option1">Pike</option>
+                      <option value="option1">Pike (Opposite End)</option>
+                      <option value="option1">Rapier</option>
+                      <option value="option1">Offhand Rapier</option>
+                      <option value="option1">Scimitar</option>
+                      <option value="option1">Offhand Scimitar</option>
+                      <option value="option1">Shortsword</option>
+                      <option value="option1">Offhand Shortsword</option>
+                      <option value="option1">Trident</option>
+                      <option value="option1">Two-Handed Trident</option>
+                      <option value="option1">War Pick</option>
+                      <option value="option1">Offhand War Pick</option>
+                      <option value="option1">Warhammer</option>
+                      <option value="option1">Two-Handed Warhammer</option>
+                      <option value="option1">Offhand Warhammer</option>
+                      <option value="option1">Whip</option>
+                      <option value="option1">Blowgun</option>
+                      <option value="option1">Hand Crossbow</option>
+                      <option value="option1">Heavy Crossbow</option>
+                      <option value="option1">Longbow</option>
+                      <option value="option1">Net</option>
+                      <option value="option1">Eldritch Blast</option>
+                      <option value="option1">Dagger +1</option>
+                      <option value="option1">Offhand Dagger +1</option>
+                      <option value="option1">Flame Tongue Longsword</option>
+                      <option value="option1">
+                        Two-Handed Flame Tongue Longsword
+                      </option>
+                      <option value="option1">Fire Bolt</option>
+                      <option value="option1">Luck Blade Rapier</option>
+                      <option value="option1">Hammer of Thunderbolts</option>
+                      <option value="option1">Longbow +1</option>
+                      <option value="option1">Silvered Rapier</option>
+                    </Select>
+                  </GridItem>
+                  <GridItem>
+                    <Input
+                      type="string"
+                      size="sm"
+                      variant="unstyled"
+                      placeholder="-"
+                      _placeholder={{ paddingLeft: "40px" }}
+                      mr={"10px"}
+                      w={"100px"}
+                      border={"1px solid black"}
+                    />
+                  </GridItem>
+                  <GridItem>
+                    <Input
+                      type="string"
+                      size="sm"
+                      variant="unstyled"
+                      placeholder="-"
+                      _placeholder={{ paddingLeft: "50px" }}
+                      mr={"10px"}
+                      w={"200px"}
+                      border={"1px solid black"}
+                    />
+                  </GridItem>
+                  <GridItem>
+                    <Select placeholder="Attack Type">
+                      <option value="option1">Unarmed Strike</option>
+                      <option value="option1">Two-Handed Unarmed Strike</option>
+                      <option value="option1">Natural Attack</option>
+                      <option value="option1">Improvised Weapon</option>
+                      <option value="option1">Club</option>
+                      <option value="option1">Offhand Club</option>
+                      <option value="option1">Dagger</option>
+                      <option value="option1">Offhand Dagger</option>
+                      <option value="option1">Greatclub</option>
+                      <option value="option1">Handaxe</option>
+                      <option value="option1">Offhand Handaxe</option>
+                      <option value="option1">Javelin</option>
+                      <option value="option1">Light Hammer</option>
+                      <option value="option1">Offhand Light Hammer</option>
+                      <option value="option1">Mace</option>
+                      <option value="option1">Offhand Mace</option>
+                      <option value="option1">Quarterstaff</option>
+                      <option value="option1">Two-Handed Quarterstaff</option>
+                      <option value="option1">
+                        Quarterstaff (Opposite End)
+                      </option>
+                      <option value="option1">Sickle</option>
+                      <option value="option1">Offhand Sickle</option>
+                      <option value="option1">Spear</option>
+                      <option value="option1">Spear (Opposite End)</option>
+                      <option value="option1">Two-Handed Spear</option>
+                      <option value="option1">Light Crossbow</option>
+                      <option value="option1">Dart</option>
+                      <option value="option1">Shortbow</option>
+                      <option value="option1">Sling</option>
+                      <option value="option1">Battleaxe</option>
+                      <option value="option1">Two-Handed Battleaxe</option>
+                      <option value="option1">Flail</option>
+                      <option value="option1">Offhand Flail</option>
+                      <option value="option1">Glaive</option>
+                      <option value="option1">Glaive (Opposite End)</option>
+                      <option value="option1">Greataxe</option>
+                      <option value="option1">Greatsword</option>
+                      <option value="option1">Halberd</option>
+                      <option value="option1">Halberd (Opposite End)</option>
+                      <option value="option1">Lance</option>
+                      <option value="option1">Longsword</option>
+                      <option value="option1">Light Hammer</option>
+                      <option value="option1">Two-Handed Longsword</option>
+                      <option value="option1">Offhand Longsword</option>
+                      <option value="option1">Maul</option>
+                      <option value="option1">Morningstar</option>
+                      <option value="option1">Offhand Morningstar</option>
+                      <option value="option1">Pike</option>
+                      <option value="option1">Pike (Opposite End)</option>
+                      <option value="option1">Rapier</option>
+                      <option value="option1">Offhand Rapier</option>
+                      <option value="option1">Scimitar</option>
+                      <option value="option1">Offhand Scimitar</option>
+                      <option value="option1">Shortsword</option>
+                      <option value="option1">Offhand Shortsword</option>
+                      <option value="option1">Trident</option>
+                      <option value="option1">Two-Handed Trident</option>
+                      <option value="option1">War Pick</option>
+                      <option value="option1">Offhand War Pick</option>
+                      <option value="option1">Warhammer</option>
+                      <option value="option1">Two-Handed Warhammer</option>
+                      <option value="option1">Offhand Warhammer</option>
+                      <option value="option1">Whip</option>
+                      <option value="option1">Blowgun</option>
+                      <option value="option1">Hand Crossbow</option>
+                      <option value="option1">Heavy Crossbow</option>
+                      <option value="option1">Longbow</option>
+                      <option value="option1">Net</option>
+                      <option value="option1">Eldritch Blast</option>
+                      <option value="option1">Dagger +1</option>
+                      <option value="option1">Offhand Dagger +1</option>
+                      <option value="option1">Flame Tongue Longsword</option>
+                      <option value="option1">
+                        Two-Handed Flame Tongue Longsword
+                      </option>
+                      <option value="option1">Fire Bolt</option>
+                      <option value="option1">Luck Blade Rapier</option>
+                      <option value="option1">Hammer of Thunderbolts</option>
+                      <option value="option1">Longbow +1</option>
+                      <option value="option1">Silvered Rapier</option>
+                    </Select>
+                  </GridItem>
+                  <GridItem>
+                    <Input
+                      type="string"
+                      size="sm"
+                      variant="unstyled"
+                      placeholder="-"
+                      _placeholder={{ paddingLeft: "40px" }}
+                      mr={"10px"}
+                      w={"100px"}
+                      border={"1px solid black"}
+                    />
+                  </GridItem>
+                  <GridItem>
+                    <Input
+                      type="string"
+                      size="sm"
+                      variant="unstyled"
+                      placeholder="-"
+                      _placeholder={{ paddingLeft: "50px" }}
+                      mr={"10px"}
+                      w={"200px"}
+                      border={"1px solid black"}
+                    />
+                  </GridItem>
+                  <GridItem>
+                    <Select placeholder="Attack Type">
+                      <option value="option1">Unarmed Strike</option>
+                      <option value="option1">Two-Handed Unarmed Strike</option>
+                      <option value="option1">Natural Attack</option>
+                      <option value="option1">Improvised Weapon</option>
+                      <option value="option1">Club</option>
+                      <option value="option1">Offhand Club</option>
+                      <option value="option1">Dagger</option>
+                      <option value="option1">Offhand Dagger</option>
+                      <option value="option1">Greatclub</option>
+                      <option value="option1">Handaxe</option>
+                      <option value="option1">Offhand Handaxe</option>
+                      <option value="option1">Javelin</option>
+                      <option value="option1">Light Hammer</option>
+                      <option value="option1">Offhand Light Hammer</option>
+                      <option value="option1">Mace</option>
+                      <option value="option1">Offhand Mace</option>
+                      <option value="option1">Quarterstaff</option>
+                      <option value="option1">Two-Handed Quarterstaff</option>
+                      <option value="option1">
+                        Quarterstaff (Opposite End)
+                      </option>
+                      <option value="option1">Sickle</option>
+                      <option value="option1">Offhand Sickle</option>
+                      <option value="option1">Spear</option>
+                      <option value="option1">Spear (Opposite End)</option>
+                      <option value="option1">Two-Handed Spear</option>
+                      <option value="option1">Light Crossbow</option>
+                      <option value="option1">Dart</option>
+                      <option value="option1">Shortbow</option>
+                      <option value="option1">Sling</option>
+                      <option value="option1">Battleaxe</option>
+                      <option value="option1">Two-Handed Battleaxe</option>
+                      <option value="option1">Flail</option>
+                      <option value="option1">Offhand Flail</option>
+                      <option value="option1">Glaive</option>
+                      <option value="option1">Glaive (Opposite End)</option>
+                      <option value="option1">Greataxe</option>
+                      <option value="option1">Greatsword</option>
+                      <option value="option1">Halberd</option>
+                      <option value="option1">Halberd (Opposite End)</option>
+                      <option value="option1">Lance</option>
+                      <option value="option1">Longsword</option>
+                      <option value="option1">Light Hammer</option>
+                      <option value="option1">Two-Handed Longsword</option>
+                      <option value="option1">Offhand Longsword</option>
+                      <option value="option1">Maul</option>
+                      <option value="option1">Morningstar</option>
+                      <option value="option1">Offhand Morningstar</option>
+                      <option value="option1">Pike</option>
+                      <option value="option1">Pike (Opposite End)</option>
+                      <option value="option1">Rapier</option>
+                      <option value="option1">Offhand Rapier</option>
+                      <option value="option1">Scimitar</option>
+                      <option value="option1">Offhand Scimitar</option>
+                      <option value="option1">Shortsword</option>
+                      <option value="option1">Offhand Shortsword</option>
+                      <option value="option1">Trident</option>
+                      <option value="option1">Two-Handed Trident</option>
+                      <option value="option1">War Pick</option>
+                      <option value="option1">Offhand War Pick</option>
+                      <option value="option1">Warhammer</option>
+                      <option value="option1">Two-Handed Warhammer</option>
+                      <option value="option1">Offhand Warhammer</option>
+                      <option value="option1">Whip</option>
+                      <option value="option1">Blowgun</option>
+                      <option value="option1">Hand Crossbow</option>
+                      <option value="option1">Heavy Crossbow</option>
+                      <option value="option1">Longbow</option>
+                      <option value="option1">Net</option>
+                      <option value="option1">Eldritch Blast</option>
+                      <option value="option1">Dagger +1</option>
+                      <option value="option1">Offhand Dagger +1</option>
+                      <option value="option1">Flame Tongue Longsword</option>
+                      <option value="option1">
+                        Two-Handed Flame Tongue Longsword
+                      </option>
+                      <option value="option1">Fire Bolt</option>
+                      <option value="option1">Luck Blade Rapier</option>
+                      <option value="option1">Hammer of Thunderbolts</option>
+                      <option value="option1">Longbow +1</option>
+                      <option value="option1">Silvered Rapier</option>
+                    </Select>
+                  </GridItem>
+                  <GridItem>
+                    <Input
+                      type="string"
+                      size="sm"
+                      variant="unstyled"
+                      placeholder="-"
+                      _placeholder={{ paddingLeft: "40px" }}
+                      mr={"10px"}
+                      w={"100px"}
+                      border={"1px solid black"}
+                    />
+                  </GridItem>
+                  <GridItem>
+                    <Input
+                      type="string"
+                      size="sm"
+                      variant="unstyled"
+                      placeholder="-"
+                      _placeholder={{ paddingLeft: "50px" }}
+                      mr={"10px"}
+                      w={"200px"}
+                      border={"1px solid black"}
+                    />
+                  </GridItem>
+                  <GridItem>
+                    <Select placeholder="Attack Type">
+                      <option value="option1">Unarmed Strike</option>
+                      <option value="option1">Two-Handed Unarmed Strike</option>
+                      <option value="option1">Natural Attack</option>
+                      <option value="option1">Improvised Weapon</option>
+                      <option value="option1">Club</option>
+                      <option value="option1">Offhand Club</option>
+                      <option value="option1">Dagger</option>
+                      <option value="option1">Offhand Dagger</option>
+                      <option value="option1">Greatclub</option>
+                      <option value="option1">Handaxe</option>
+                      <option value="option1">Offhand Handaxe</option>
+                      <option value="option1">Javelin</option>
+                      <option value="option1">Light Hammer</option>
+                      <option value="option1">Offhand Light Hammer</option>
+                      <option value="option1">Mace</option>
+                      <option value="option1">Offhand Mace</option>
+                      <option value="option1">Quarterstaff</option>
+                      <option value="option1">Two-Handed Quarterstaff</option>
+                      <option value="option1">
+                        Quarterstaff (Opposite End)
+                      </option>
+                      <option value="option1">Sickle</option>
+                      <option value="option1">Offhand Sickle</option>
+                      <option value="option1">Spear</option>
+                      <option value="option1">Spear (Opposite End)</option>
+                      <option value="option1">Two-Handed Spear</option>
+                      <option value="option1">Light Crossbow</option>
+                      <option value="option1">Dart</option>
+                      <option value="option1">Shortbow</option>
+                      <option value="option1">Sling</option>
+                      <option value="option1">Battleaxe</option>
+                      <option value="option1">Two-Handed Battleaxe</option>
+                      <option value="option1">Flail</option>
+                      <option value="option1">Offhand Flail</option>
+                      <option value="option1">Glaive</option>
+                      <option value="option1">Glaive (Opposite End)</option>
+                      <option value="option1">Greataxe</option>
+                      <option value="option1">Greatsword</option>
+                      <option value="option1">Halberd</option>
+                      <option value="option1">Halberd (Opposite End)</option>
+                      <option value="option1">Lance</option>
+                      <option value="option1">Longsword</option>
+                      <option value="option1">Light Hammer</option>
+                      <option value="option1">Two-Handed Longsword</option>
+                      <option value="option1">Offhand Longsword</option>
+                      <option value="option1">Maul</option>
+                      <option value="option1">Morningstar</option>
+                      <option value="option1">Offhand Morningstar</option>
+                      <option value="option1">Pike</option>
+                      <option value="option1">Pike (Opposite End)</option>
+                      <option value="option1">Rapier</option>
+                      <option value="option1">Offhand Rapier</option>
+                      <option value="option1">Scimitar</option>
+                      <option value="option1">Offhand Scimitar</option>
+                      <option value="option1">Shortsword</option>
+                      <option value="option1">Offhand Shortsword</option>
+                      <option value="option1">Trident</option>
+                      <option value="option1">Two-Handed Trident</option>
+                      <option value="option1">War Pick</option>
+                      <option value="option1">Offhand War Pick</option>
+                      <option value="option1">Warhammer</option>
+                      <option value="option1">Two-Handed Warhammer</option>
+                      <option value="option1">Offhand Warhammer</option>
+                      <option value="option1">Whip</option>
+                      <option value="option1">Blowgun</option>
+                      <option value="option1">Hand Crossbow</option>
+                      <option value="option1">Heavy Crossbow</option>
+                      <option value="option1">Longbow</option>
+                      <option value="option1">Net</option>
+                      <option value="option1">Eldritch Blast</option>
+                      <option value="option1">Dagger +1</option>
+                      <option value="option1">Offhand Dagger +1</option>
+                      <option value="option1">Flame Tongue Longsword</option>
+                      <option value="option1">
+                        Two-Handed Flame Tongue Longsword
+                      </option>
+                      <option value="option1">Fire Bolt</option>
+                      <option value="option1">Luck Blade Rapier</option>
+                      <option value="option1">Hammer of Thunderbolts</option>
+                      <option value="option1">Longbow +1</option>
+                      <option value="option1">Silvered Rapier</option>
+                    </Select>
+                  </GridItem>
+                  <GridItem>
+                    <Input
+                      type="string"
+                      size="sm"
+                      variant="unstyled"
+                      placeholder="-"
+                      _placeholder={{ paddingLeft: "40px" }}
+                      mr={"10px"}
+                      w={"100px"}
+                      border={"1px solid black"}
+                    />
+                  </GridItem>
+                  <GridItem>
+                    <Input
+                      type="string"
+                      size="sm"
+                      variant="unstyled"
+                      placeholder="-"
+                      _placeholder={{ paddingLeft: "50px" }}
+                      mr={"10px"}
+                      w={"200px"}
+                      border={"1px solid black"}
+                    />
+                  </GridItem>
+                  <GridItem w="100%" colStart={1} colSpan={3} p="5px">
+                    <Textarea
+                      fontSize="small"
+                      mb={"30px"}
+                      textAlign="center"
+                      placeholder="ATTACKS & NOTES"
+                    />
+                  </GridItem>
+                </Grid>
+              </Box>
             </GridItem>
           </Grid>
         </Primary>

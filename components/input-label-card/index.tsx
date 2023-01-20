@@ -3,9 +3,10 @@ import { Card, Box, CardBody, Center, Input } from "@chakra-ui/react";
 
 type InputLabelCardProps = {
   label: string;
+  placeholder?: string;
 };
 
-export function InputLabelCard({ label }: InputLabelCardProps) {
+export function InputLabelCard({ label, placeholder }: InputLabelCardProps) {
   return (
     <Card variant="elevated" flexDirection={"row"} p={"10px"} mb={"30px"}>
       <Center>
@@ -14,7 +15,8 @@ export function InputLabelCard({ label }: InputLabelCardProps) {
             type="number"
             size="sm"
             variant="unstyled"
-            placeholder=""
+            placeholder={placeholder ?? ""}
+            _placeholder={{ paddingLeft: "25px" }}
             mr={"10px"}
             w={"60px"}
             border={"1px solid black"}

@@ -1,11 +1,15 @@
 import * as React from "react";
 import { Card, Box, CardBody, Center, Input } from "@chakra-ui/react";
+import { UseFormRegister } from "react-hook-form";
+import { CharacterSheetInputs } from "../../pages/character";
 
 interface StatCardProps {
   title: string;
+  registerId: keyof CharacterSheetInputs;
+  register: UseFormRegister<CharacterSheetInputs>;
 }
 
-export function StatCard({ title }: StatCardProps) {
+export function StatCard({ title, registerId, register }: StatCardProps) {
   return (
     <Box>
       <Card variant="elevated">

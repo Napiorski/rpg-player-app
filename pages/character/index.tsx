@@ -1,3 +1,4 @@
+import { useForm, SubmitHandler } from "react-hook-form";
 import Head from "next/head";
 import { Inter } from "@next/font/google";
 import {
@@ -14,6 +15,7 @@ import {
   HStack,
   Select,
   Input,
+  Button,
 } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
 import {
@@ -92,7 +94,26 @@ const listItems = [
 <option value="n">
 */
 
+export type CharacterSheetInputs = {
+  inspiration: string;
+  inspirationRequired: string;
+  firstName: string;
+  proficiency: string;
+  perception: string;
+};
+
 export default function Home() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<CharacterSheetInputs>();
+  const onSubmit: SubmitHandler<CharacterSheetInputs> = (data) => {
+    debugger;
+    console.log(data);
+  };
+
   // JSX is really the view-layer (put any data or logic above this)
   return (
     <>
@@ -104,430 +125,461 @@ export default function Home() {
       </Head>
       <main>
         <Primary>
-          <Heading>Character Sheet</Heading>
-          <Grid gridTemplateColumns="33.3333% 66.6666%" gap={10}>
-            <GridItem w="100%">
-              <CharacterCard textAlign="center" fontWeight="bold">
-                <Grid
-                  templateAreas={`
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Heading>Character Sheet</Heading>
+            <Button mt={4} colorScheme="teal" type="submit">
+              Submit
+            </Button>
+            <Grid gridTemplateColumns="33.3333% 66.6666%" gap={10}>
+              <GridItem w="100%">
+                <CharacterCard textAlign="center" fontWeight="bold">
+                  <Grid
+                    templateAreas={`
                   "stat next"
                   "footer footer"`}
-                  gridTemplateColumns={"70px 1fr"}
-                  gap="1"
-                  fontWeight="bold"
-                >
-                  <GridItem pl="2" area={"stat"} mb={3}>
-                    <List>
-                      {listItems.map(({ title }) => {
-                        return (
-                          <ListItem key={`list-item-${title}`}>
-                            <StatCard title={title} />
-                          </ListItem>
-                        );
-                      })}
-                    </List>
-                  </GridItem>
-                  <GridItem pl="2" area={"next"}>
-                    <InputLabelCard label="INSPIRATION" />
-                    <InputLabelCard label="PROFICIENCY BONUS" />
-                    <Card mb={"30px"}>
-                      SAVING THROWS
-                      <CheckboxGroupCard label="Strength" />
-                      <CheckboxGroupCard label="Dexterity" />
-                      <CheckboxGroupCard label="Constitution" />
-                      <CheckboxGroupCard label="Intelligence" />
-                      <CheckboxGroupCard label="Wisdom" />
-                      <CheckboxGroupCard label="Charisma" />
-                    </Card>
-                    <Card>
-                      SKILLS
-                      <CheckboxGroupCard label="Acrobatics" subLabel={"Dex"} />
-                      <CheckboxGroupCard
-                        label="Animal Handling"
-                        subLabel={"Wis"}
+                    gridTemplateColumns={"70px 1fr"}
+                    gap="1"
+                    fontWeight="bold"
+                  >
+                    <GridItem pl="2" area={"stat"} mb={3}>
+                      <List>
+                        {listItems.map(({ title }) => {
+                          return (
+                            <ListItem key={`list-item-${title}`}>
+                              <StatCard title={title} />
+                            </ListItem>
+                          );
+                        })}
+                      </List>
+                    </GridItem>
+                    <GridItem pl="2" area={"next"}>
+                      <InputLabelCard
+                        register={register}
+                        registerId="inspiration"
+                        label="INSPIRATION"
                       />
-                      <CheckboxGroupCard label="Arcana" subLabel={"Int"} />
-                      <CheckboxGroupCard label="Athletics" subLabel={"Str"} />
-                      <CheckboxGroupCard label="Deception" subLabel={"Cha"} />
-                      <CheckboxGroupCard label="History" subLabel={"Int"} />
-                      <CheckboxGroupCard label="Insight" subLabel={"Wis"} />
-                      <CheckboxGroupCard
-                        label="Intimidation"
-                        subLabel={"Cha"}
-                      />
-                      <CheckboxGroupCard
-                        label="Investigation"
-                        subLabel={"Int"}
-                      />
-                      <CheckboxGroupCard label="Medicine" subLabel={"Wis"} />
-                      <CheckboxGroupCard label="Nature" subLabel={"Int"} />
-                      <CheckboxGroupCard label="Perception" subLabel={"Wis"} />
-                      <CheckboxGroupCard label="Performance" subLabel={"Cha"} />
-                      <CheckboxGroupCard label="Persuasion" subLabel={"Cha"} />
-                      <CheckboxGroupCard label="Religion" subLabel={"Int"} />
-                      <CheckboxGroupCard
-                        label="Sleight of Hand"
-                        subLabel={"Dex"}
-                      />
-                      <CheckboxGroupCard label="Stealth" subLabel={"Dex"} />
-                      <CheckboxGroupCard label="Survival" subLabel={"Wis"} />
-                    </Card>
-                  </GridItem>
+                      {errors.inspirationRequired && (
+                        <span>This field is required</span>
+                      )}
 
-                  <GridItem pl="2" area={"footer"}>
-                    <InputLabelCard
-                      placeholder="-"
-                      label="PASSIVE WISDOM (PERCEPTION)"
-                    />
-                  </GridItem>
-                </Grid>
-              </CharacterCard>
-            </GridItem>
-            <GridItem w="100%">
-              <Grid templateColumns="repeat(2, 1fr)" gap={2}>
-                <CharacterCard>
-                  <CardBody>
-                    <Flex gap={4}>
-                      <StatCard title="AC" />
-                      <StatCard title="INIT" />
-                      <StatCard title="SPEED" />
-                    </Flex>
-                    <Flex mb={"30px"}>
-                      <Textarea placeholder="Current hit points" />
-                    </Flex>
-                    <Flex mb={"30px"}>
-                      <Textarea placeholder="Temporary hit points" />
-                    </Flex>
-                    <Flex>
-                      <Box p={4}>
-                        <StatCard title="HIT DICE" />
-                      </Box>
-                      <Card p={4}>
-                        <VStack>
-                          <Box>
-                            SUCCESSES:
-                            <Checkbox padding="3px"></Checkbox>
-                            <Checkbox padding="3px"></Checkbox>
-                            <Checkbox padding="3px"></Checkbox>
-                          </Box>
-                          <Box>
-                            FAILURES:
-                            <Checkbox padding="3px"></Checkbox>
-                            <Checkbox padding="3px"></Checkbox>
-                            <Checkbox padding="3px"></Checkbox>
-                          </Box>
-                          <Box>DEATH SAVES</Box>
-                        </VStack>
+                      <InputLabelCard
+                        registerId="proficiency"
+                        register={register}
+                        label="PROFICIENCY BONUS"
+                      />
+                      <Card mb={"30px"}>
+                        SAVING THROWS
+                        <CheckboxGroupCard label="Strength" />
+                        <CheckboxGroupCard label="Dexterity" />
+                        <CheckboxGroupCard label="Constitution" />
+                        <CheckboxGroupCard label="Intelligence" />
+                        <CheckboxGroupCard label="Wisdom" />
+                        <CheckboxGroupCard label="Charisma" />
                       </Card>
-                    </Flex>
-                  </CardBody>
-                  <Divider />
+                      <Card>
+                        SKILLS
+                        <CheckboxGroupCard
+                          label="Acrobatics"
+                          subLabel={"Dex"}
+                        />
+                        <CheckboxGroupCard
+                          label="Animal Handling"
+                          subLabel={"Wis"}
+                        />
+                        <CheckboxGroupCard label="Arcana" subLabel={"Int"} />
+                        <CheckboxGroupCard label="Athletics" subLabel={"Str"} />
+                        <CheckboxGroupCard label="Deception" subLabel={"Cha"} />
+                        <CheckboxGroupCard label="History" subLabel={"Int"} />
+                        <CheckboxGroupCard label="Insight" subLabel={"Wis"} />
+                        <CheckboxGroupCard
+                          label="Intimidation"
+                          subLabel={"Cha"}
+                        />
+                        <CheckboxGroupCard
+                          label="Investigation"
+                          subLabel={"Int"}
+                        />
+                        <CheckboxGroupCard label="Medicine" subLabel={"Wis"} />
+                        <CheckboxGroupCard label="Nature" subLabel={"Int"} />
+                        <CheckboxGroupCard
+                          label="Perception"
+                          subLabel={"Wis"}
+                        />
+                        <CheckboxGroupCard
+                          label="Performance"
+                          subLabel={"Cha"}
+                        />
+                        <CheckboxGroupCard
+                          label="Persuasion"
+                          subLabel={"Cha"}
+                        />
+                        <CheckboxGroupCard label="Religion" subLabel={"Int"} />
+                        <CheckboxGroupCard
+                          label="Sleight of Hand"
+                          subLabel={"Dex"}
+                        />
+                        <CheckboxGroupCard label="Stealth" subLabel={"Dex"} />
+                        <CheckboxGroupCard label="Survival" subLabel={"Wis"} />
+                      </Card>
+                    </GridItem>
+
+                    <GridItem pl="2" area={"footer"}>
+                      <InputLabelCard
+                        registerId="perception"
+                        register={register}
+                        placeholder="-"
+                        label="PASSIVE WISDOM (PERCEPTION)"
+                      />
+                    </GridItem>
+                  </Grid>
                 </CharacterCard>
-                <CharacterCard fontWeight="bold">
-                  <Select pb={4} placeholder="Background">
-                    <option value="option1">Acolyte</option>
-                    <option value="option1">Charlatan</option>
-                    <option value="option1">Criminal</option>
-                    <option value="option1">Entertainer</option>
-                    <option value="option1">Folk Hero</option>
-                    <option value="option1">Guild Artisan</option>
-                    <option value="option1">Hermit</option>
-                    <option value="option1">Noble</option>
-                    <option value="option1">Outlander</option>
-                    <option value="option1">Sage</option>
-                    <option value="option1">Sailor</option>
-                    <option value="option1">Soldier</option>
-                    <option value="option1">Urchin</option>
-                  </Select>
-                  <List>
-                    <Textarea mb={"30px"} placeholder="Personality traits" />
-                    <Textarea mb={"30px"} placeholder="Ideals" />
-                    <Textarea mb={"30px"} placeholder="Bonds" />
-                    <Textarea mb={"30px"} placeholder="Flaws" />
-                  </List>
-                  <Select placeholder="Alignment">
-                    <option value="option1">Lawful Good</option>
-                    <option value="option2">Lawful Neutral</option>
-                    <option value="option3">Lawful Evil</option>
-                    <option value="option1">Neutral Good</option>
-                    <option value="option2">True Neutral</option>
-                    <option value="option3">Neutral Evil</option>
-                    <option value="option3">Chaotic Good</option>
-                    <option value="option1">Chaotic Neutral</option>
-                    <option value="option2">Chaotic Evil</option>
-                    <option value="option3">Lawful Jerk</option>
-                    <option value="option1">Chaotic Stupid</option>
-                    <option value="option2">Neutral Wuss</option>
-                  </Select>
-                </CharacterCard>
-                {/*One big row spanning both of our Grid columns*/}
-                <GridItem w="100%" colSpan={2}>
-                  <Box p={10}>
-                    <Grid gridTemplateColumns="30% 20% 50%" gap={5}>
-                      <GridItem>NAME</GridItem>
-                      <GridItem>ATK BONUS</GridItem>
-                      <GridItem>DAMAGE/TYPE</GridItem>
-                      <GridItem>
-                        <Select placeholder="Attack Type">
-                          {attackTypes.map(({ value, name }, i) => {
-                            return (
-                              <option value={value} key={`attack-type-${i}`}>
-                                {name}
-                              </option>
-                            );
-                          })}
-                        </Select>
-                      </GridItem>
-                      <GridItem>
-                        <Input
-                          type="string"
-                          size="sm"
-                          variant="unstyled"
-                          placeholder="-"
-                          _placeholder={{ paddingLeft: "40px" }}
-                          mr={"10px"}
-                          w={"100px"}
-                          border={"1px solid black"}
-                        />
-                      </GridItem>
-                      <GridItem>
-                        <Input
-                          type="string"
-                          size="sm"
-                          variant="unstyled"
-                          placeholder="-"
-                          _placeholder={{ paddingLeft: "50px" }}
-                          mr={"10px"}
-                          w={"200px"}
-                          border={"1px solid black"}
-                        />
-                      </GridItem>
-                      <GridItem>
-                        <Select placeholder="Attack Type">
-                          {attackTypes.map(({ value, name }, i) => {
-                            return (
-                              <option value={value} key={`attack-type-${i}`}>
-                                {name}
-                              </option>
-                            );
-                          })}
-                        </Select>
-                      </GridItem>
-                      <GridItem>
-                        <Input
-                          type="string"
-                          size="sm"
-                          variant="unstyled"
-                          placeholder="-"
-                          _placeholder={{ paddingLeft: "40px" }}
-                          mr={"10px"}
-                          w={"100px"}
-                          border={"1px solid black"}
-                        />
-                      </GridItem>
-                      <GridItem>
-                        <Input
-                          type="string"
-                          size="sm"
-                          variant="unstyled"
-                          placeholder="-"
-                          _placeholder={{ paddingLeft: "50px" }}
-                          mr={"10px"}
-                          w={"200px"}
-                          border={"1px solid black"}
-                        />
-                      </GridItem>
-                      <GridItem>
-                        <Select placeholder="Attack Type">
-                          {attackTypes.map(({ value, name }, i) => {
-                            return (
-                              <option value={value} key={`attack-type-${i}`}>
-                                {name}
-                              </option>
-                            );
-                          })}
-                        </Select>
-                      </GridItem>
-                      <GridItem>
-                        <Input
-                          type="string"
-                          size="sm"
-                          variant="unstyled"
-                          placeholder="-"
-                          _placeholder={{ paddingLeft: "40px" }}
-                          mr={"10px"}
-                          w={"100px"}
-                          border={"1px solid black"}
-                        />
-                      </GridItem>
-                      <GridItem>
-                        <Input
-                          type="string"
-                          size="sm"
-                          variant="unstyled"
-                          placeholder="-"
-                          _placeholder={{ paddingLeft: "50px" }}
-                          mr={"10px"}
-                          w={"200px"}
-                          border={"1px solid black"}
-                        />
-                      </GridItem>
-                      <GridItem>
-                        <Select placeholder="Attack Type">
-                          {attackTypes.map(({ value, name }, i) => {
-                            return (
-                              <option value={value} key={`attack-type-${i}`}>
-                                {name}
-                              </option>
-                            );
-                          })}
-                        </Select>
-                      </GridItem>
-                      <GridItem>
-                        <Input
-                          type="string"
-                          size="sm"
-                          variant="unstyled"
-                          placeholder="-"
-                          _placeholder={{ paddingLeft: "40px" }}
-                          mr={"10px"}
-                          w={"100px"}
-                          border={"1px solid black"}
-                        />
-                      </GridItem>
-                      <GridItem>
-                        <Input
-                          type="string"
-                          size="sm"
-                          variant="unstyled"
-                          placeholder="-"
-                          _placeholder={{ paddingLeft: "50px" }}
-                          mr={"10px"}
-                          w={"200px"}
-                          border={"1px solid black"}
-                        />
-                      </GridItem>
-                      <GridItem>
-                        <Select placeholder="Attack Type">
-                          {attackTypes.map(({ value, name }, i) => {
-                            return (
-                              <option value={value} key={`attack-type-${i}`}>
-                                {name}
-                              </option>
-                            );
-                          })}
-                        </Select>
-                      </GridItem>
-                      <GridItem>
-                        <Input
-                          type="string"
-                          size="sm"
-                          variant="unstyled"
-                          placeholder="-"
-                          _placeholder={{ paddingLeft: "40px" }}
-                          mr={"10px"}
-                          w={"100px"}
-                          border={"1px solid black"}
-                        />
-                      </GridItem>
-                      <GridItem>
-                        <Input
-                          type="string"
-                          size="sm"
-                          variant="unstyled"
-                          placeholder="-"
-                          _placeholder={{ paddingLeft: "50px" }}
-                          mr={"10px"}
-                          w={"200px"}
-                          border={"1px solid black"}
-                        />
-                      </GridItem>
-                      <GridItem>
-                        <Select placeholder="Attack Type">
-                          {attackTypes.map(({ value, name }, i) => {
-                            return (
-                              <option value={value} key={`attack-type-${i}`}>
-                                {name}
-                              </option>
-                            );
-                          })}
-                        </Select>
-                      </GridItem>
-                      <GridItem>
-                        <Input
-                          type="string"
-                          size="sm"
-                          variant="unstyled"
-                          placeholder="-"
-                          _placeholder={{ paddingLeft: "40px" }}
-                          mr={"10px"}
-                          w={"100px"}
-                          border={"1px solid black"}
-                        />
-                      </GridItem>
-                      <GridItem>
-                        <Input
-                          type="string"
-                          size="sm"
-                          variant="unstyled"
-                          placeholder="-"
-                          _placeholder={{ paddingLeft: "50px" }}
-                          mr={"10px"}
-                          w={"200px"}
-                          border={"1px solid black"}
-                        />
-                      </GridItem>
-                      <GridItem>
-                        <Select placeholder="Attack Type">
-                          {attackTypes.map(({ value, name }, i) => {
-                            return (
-                              <option value={value} key={`attack-type-${i}`}>
-                                {name}
-                              </option>
-                            );
-                          })}
-                        </Select>
-                      </GridItem>
-                      <GridItem>
-                        <Input
-                          type="string"
-                          size="sm"
-                          variant="unstyled"
-                          placeholder="-"
-                          _placeholder={{ paddingLeft: "40px" }}
-                          mr={"10px"}
-                          w={"100px"}
-                          border={"1px solid black"}
-                        />
-                      </GridItem>
-                      <GridItem>
-                        <Input
-                          type="string"
-                          size="sm"
-                          variant="unstyled"
-                          placeholder="-"
-                          _placeholder={{ paddingLeft: "50px" }}
-                          mr={"10px"}
-                          w={"200px"}
-                          border={"1px solid black"}
-                        />
-                      </GridItem>
-                      <GridItem w="100%" colStart={1} colSpan={3} p="5px">
-                        <Textarea
-                          fontSize="small"
-                          mb={"30px"}
-                          textAlign="center"
-                          placeholder="ATTACKS & NOTES"
-                        />
-                      </GridItem>
-                    </Grid>
-                  </Box>
-                </GridItem>
-                {/*TODO: add the Languages column (GridItem) - do not colSpan*/}
-                {/*TODO: add the Equipped Items column (GridItem) - do not colSpan*/}
-              </Grid>
-            </GridItem>
-          </Grid>
+              </GridItem>
+              <GridItem w="100%">
+                <Grid templateColumns="repeat(2, 1fr)" gap={2}>
+                  <CharacterCard>
+                    <CardBody>
+                      <Flex gap={4}>
+                        <StatCard title="AC" />
+                        <StatCard title="INIT" />
+                        <StatCard title="SPEED" />
+                      </Flex>
+                      <Flex mb={"30px"}>
+                        <Textarea placeholder="Current hit points" />
+                      </Flex>
+                      <Flex mb={"30px"}>
+                        <Textarea placeholder="Temporary hit points" />
+                      </Flex>
+                      <Flex>
+                        <Box p={4}>
+                          <StatCard title="HIT DICE" />
+                        </Box>
+                        <Card p={4}>
+                          <VStack>
+                            <Box>
+                              SUCCESSES:
+                              <Checkbox padding="3px"></Checkbox>
+                              <Checkbox padding="3px"></Checkbox>
+                              <Checkbox padding="3px"></Checkbox>
+                            </Box>
+                            <Box>
+                              FAILURES:
+                              <Checkbox padding="3px"></Checkbox>
+                              <Checkbox padding="3px"></Checkbox>
+                              <Checkbox padding="3px"></Checkbox>
+                            </Box>
+                            <Box>DEATH SAVES</Box>
+                          </VStack>
+                        </Card>
+                      </Flex>
+                    </CardBody>
+                    <Divider />
+                  </CharacterCard>
+                  <CharacterCard fontWeight="bold">
+                    <Select pb={4} placeholder="Background">
+                      <option value="option1">Acolyte</option>
+                      <option value="option1">Charlatan</option>
+                      <option value="option1">Criminal</option>
+                      <option value="option1">Entertainer</option>
+                      <option value="option1">Folk Hero</option>
+                      <option value="option1">Guild Artisan</option>
+                      <option value="option1">Hermit</option>
+                      <option value="option1">Noble</option>
+                      <option value="option1">Outlander</option>
+                      <option value="option1">Sage</option>
+                      <option value="option1">Sailor</option>
+                      <option value="option1">Soldier</option>
+                      <option value="option1">Urchin</option>
+                    </Select>
+                    <List>
+                      <Textarea mb={"30px"} placeholder="Personality traits" />
+                      <Textarea mb={"30px"} placeholder="Ideals" />
+                      <Textarea mb={"30px"} placeholder="Bonds" />
+                      <Textarea mb={"30px"} placeholder="Flaws" />
+                    </List>
+                    <Select placeholder="Alignment">
+                      <option value="option1">Lawful Good</option>
+                      <option value="option2">Lawful Neutral</option>
+                      <option value="option3">Lawful Evil</option>
+                      <option value="option1">Neutral Good</option>
+                      <option value="option2">True Neutral</option>
+                      <option value="option3">Neutral Evil</option>
+                      <option value="option3">Chaotic Good</option>
+                      <option value="option1">Chaotic Neutral</option>
+                      <option value="option2">Chaotic Evil</option>
+                      <option value="option3">Lawful Jerk</option>
+                      <option value="option1">Chaotic Stupid</option>
+                      <option value="option2">Neutral Wuss</option>
+                    </Select>
+                  </CharacterCard>
+                  {/*One big row spanning both of our Grid columns*/}
+                  <GridItem w="100%" colSpan={2}>
+                    <Box p={10}>
+                      <Grid gridTemplateColumns="30% 20% 50%" gap={5}>
+                        <GridItem>NAME</GridItem>
+                        <GridItem>ATK BONUS</GridItem>
+                        <GridItem>DAMAGE/TYPE</GridItem>
+                        <GridItem>
+                          <Select placeholder="Attack Type">
+                            {attackTypes.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`attack-type-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                        </GridItem>
+                        <GridItem>
+                          <Input
+                            type="string"
+                            size="sm"
+                            variant="unstyled"
+                            placeholder="-"
+                            _placeholder={{ paddingLeft: "40px" }}
+                            mr={"10px"}
+                            w={"100px"}
+                            border={"1px solid black"}
+                          />
+                        </GridItem>
+                        <GridItem>
+                          <Input
+                            type="string"
+                            size="sm"
+                            variant="unstyled"
+                            placeholder="-"
+                            _placeholder={{ paddingLeft: "50px" }}
+                            mr={"10px"}
+                            w={"200px"}
+                            border={"1px solid black"}
+                          />
+                        </GridItem>
+                        <GridItem>
+                          <Select placeholder="Attack Type">
+                            {attackTypes.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`attack-type-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                        </GridItem>
+                        <GridItem>
+                          <Input
+                            type="string"
+                            size="sm"
+                            variant="unstyled"
+                            placeholder="-"
+                            _placeholder={{ paddingLeft: "40px" }}
+                            mr={"10px"}
+                            w={"100px"}
+                            border={"1px solid black"}
+                          />
+                        </GridItem>
+                        <GridItem>
+                          <Input
+                            type="string"
+                            size="sm"
+                            variant="unstyled"
+                            placeholder="-"
+                            _placeholder={{ paddingLeft: "50px" }}
+                            mr={"10px"}
+                            w={"200px"}
+                            border={"1px solid black"}
+                          />
+                        </GridItem>
+                        <GridItem>
+                          <Select placeholder="Attack Type">
+                            {attackTypes.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`attack-type-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                        </GridItem>
+                        <GridItem>
+                          <Input
+                            type="string"
+                            size="sm"
+                            variant="unstyled"
+                            placeholder="-"
+                            _placeholder={{ paddingLeft: "40px" }}
+                            mr={"10px"}
+                            w={"100px"}
+                            border={"1px solid black"}
+                          />
+                        </GridItem>
+                        <GridItem>
+                          <Input
+                            type="string"
+                            size="sm"
+                            variant="unstyled"
+                            placeholder="-"
+                            _placeholder={{ paddingLeft: "50px" }}
+                            mr={"10px"}
+                            w={"200px"}
+                            border={"1px solid black"}
+                          />
+                        </GridItem>
+                        <GridItem>
+                          <Select placeholder="Attack Type">
+                            {attackTypes.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`attack-type-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                        </GridItem>
+                        <GridItem>
+                          <Input
+                            type="string"
+                            size="sm"
+                            variant="unstyled"
+                            placeholder="-"
+                            _placeholder={{ paddingLeft: "40px" }}
+                            mr={"10px"}
+                            w={"100px"}
+                            border={"1px solid black"}
+                          />
+                        </GridItem>
+                        <GridItem>
+                          <Input
+                            type="string"
+                            size="sm"
+                            variant="unstyled"
+                            placeholder="-"
+                            _placeholder={{ paddingLeft: "50px" }}
+                            mr={"10px"}
+                            w={"200px"}
+                            border={"1px solid black"}
+                          />
+                        </GridItem>
+                        <GridItem>
+                          <Select placeholder="Attack Type">
+                            {attackTypes.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`attack-type-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                        </GridItem>
+                        <GridItem>
+                          <Input
+                            type="string"
+                            size="sm"
+                            variant="unstyled"
+                            placeholder="-"
+                            _placeholder={{ paddingLeft: "40px" }}
+                            mr={"10px"}
+                            w={"100px"}
+                            border={"1px solid black"}
+                          />
+                        </GridItem>
+                        <GridItem>
+                          <Input
+                            type="string"
+                            size="sm"
+                            variant="unstyled"
+                            placeholder="-"
+                            _placeholder={{ paddingLeft: "50px" }}
+                            mr={"10px"}
+                            w={"200px"}
+                            border={"1px solid black"}
+                          />
+                        </GridItem>
+                        <GridItem>
+                          <Select placeholder="Attack Type">
+                            {attackTypes.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`attack-type-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                        </GridItem>
+                        <GridItem>
+                          <Input
+                            type="string"
+                            size="sm"
+                            variant="unstyled"
+                            placeholder="-"
+                            _placeholder={{ paddingLeft: "40px" }}
+                            mr={"10px"}
+                            w={"100px"}
+                            border={"1px solid black"}
+                          />
+                        </GridItem>
+                        <GridItem>
+                          <Input
+                            type="string"
+                            size="sm"
+                            variant="unstyled"
+                            placeholder="-"
+                            _placeholder={{ paddingLeft: "50px" }}
+                            mr={"10px"}
+                            w={"200px"}
+                            border={"1px solid black"}
+                          />
+                        </GridItem>
+                        <GridItem>
+                          <Select placeholder="Attack Type">
+                            {attackTypes.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`attack-type-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                        </GridItem>
+                        <GridItem>
+                          <Input
+                            type="string"
+                            size="sm"
+                            variant="unstyled"
+                            placeholder="-"
+                            _placeholder={{ paddingLeft: "40px" }}
+                            mr={"10px"}
+                            w={"100px"}
+                            border={"1px solid black"}
+                          />
+                        </GridItem>
+                        <GridItem>
+                          <Input
+                            type="string"
+                            size="sm"
+                            variant="unstyled"
+                            placeholder="-"
+                            _placeholder={{ paddingLeft: "50px" }}
+                            mr={"10px"}
+                            w={"200px"}
+                            border={"1px solid black"}
+                          />
+                        </GridItem>
+                        <GridItem w="100%" colStart={1} colSpan={3} p="5px">
+                          <Textarea
+                            fontSize="small"
+                            mb={"30px"}
+                            textAlign="center"
+                            placeholder="ATTACKS & NOTES"
+                          />
+                        </GridItem>
+                      </Grid>
+                    </Box>
+                  </GridItem>
+                  {/*TODO: add the Languages column (GridItem) - do not colSpan*/}
+                  {/*TODO: add the Equipped Items column (GridItem) - do not colSpan*/}
+                </Grid>
+              </GridItem>
+            </Grid>
+          </form>
         </Primary>
       </main>
     </>

@@ -20,15 +20,10 @@ import {
 import { Box } from "@chakra-ui/react";
 import {
   List,
-  Badge,
   ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
-  Text,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import { StatCard } from "../../components/stat-card";
+import { InputStatCard } from "../../components/input-stat-card";
 import { InputLabelCard } from "../../components/input-label-card";
 import { CheckboxGroupCard } from "../../components/checkbox-group-card";
 import { attackTypes } from "../../data/attack-types";
@@ -95,11 +90,7 @@ const listItems = [
 */
 
 export type CharacterSheetInputs = {
-  inspiration: string;
-  inspirationRequired: string;
-  firstName: string;
-  proficiency: string;
-  perception: string;
+  [key: string]: string;
 };
 
 export default function Home() {
@@ -145,8 +136,13 @@ export default function Home() {
                       <List>
                         {listItems.map(({ title }) => {
                           return (
-                            <ListItem key={`list-item-${title}`}>
-                              <StatCard title={title} />
+                            <ListItem key={`list-item-${title}`} paddingBottom={'10px'}>
+                              <InputStatCard 
+                                register={register}
+                                registerId={title}
+                                title={title} 
+                                errors={errors}
+                              />
                             </ListItem>
                           );
                         })}
@@ -157,6 +153,7 @@ export default function Home() {
                         register={register}
                         registerId="inspiration"
                         label="INSPIRATION"
+                        errors={errors}
                       />
                       {errors.inspirationRequired && (
                         <span>This field is required</span>
@@ -166,6 +163,7 @@ export default function Home() {
                         registerId="proficiency"
                         register={register}
                         label="PROFICIENCY BONUS"
+                        errors={errors}
                       />
                       <Card mb={"30px"}>
                         SAVING THROWS
@@ -238,10 +236,25 @@ export default function Home() {
                 <Grid templateColumns="repeat(2, 1fr)" gap={2}>
                   <CharacterCard>
                     <CardBody>
-                      <Flex gap={4}>
-                        <StatCard title="AC" />
-                        <StatCard title="INIT" />
-                        <StatCard title="SPEED" />
+                      <Flex gap={4} paddingBottom={4}>
+                        <InputStatCard                         
+                          registerId="AC"
+                          register={register}
+                          title="AC"
+                          errors={errors}
+                        />
+                        <InputStatCard                         
+                          registerId="INIT"
+                          register={register}
+                          title="INIT"
+                          errors={errors}
+                        />
+                        <InputStatCard                         
+                          registerId="SPEED"
+                          register={register}
+                          title="SPEED"
+                          errors={errors}
+                        />
                       </Flex>
                       <Flex mb={"30px"}>
                         <Textarea placeholder="Current hit points" />
@@ -251,7 +264,12 @@ export default function Home() {
                       </Flex>
                       <Flex>
                         <Box p={4}>
-                          <StatCard title="HIT DICE" />
+                          <InputStatCard 
+                            registerId="HIT_DICE"
+                            register={register}
+                            title="HIT DICE" 
+                            errors={errors}
+                          />
                         </Box>
                         <Card p={4}>
                           <VStack>

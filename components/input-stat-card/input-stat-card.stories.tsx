@@ -1,12 +1,12 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import * as React from "react";
-import { StatCard } from ".";
+import { InputStatCard } from ".";
 
 export default {
-  title: "Components/StatCard",
-  component: StatCard,
+  title: "Components/InputStatCard",
+  component: InputStatCard,
   parameters: {
-    componentSubtitle: "Hero StatCard",
+    componentSubtitle: "Hero InputStatCard",
   },
   argTypes: {
     title: {
@@ -17,12 +17,12 @@ export default {
       description: "Hero badge quantifier",
     },
   },
-} as ComponentMeta<typeof StatCard>;
+} as ComponentMeta<typeof InputStatCard>;
 
-export const StatCardStory: ComponentStory<typeof StatCard> = (args) => {
-  return <StatCard {...args} />;
+export const InputStatCardStory: ComponentStory<typeof InputStatCard> = (args) => {
+  return <InputStatCard {...args} />;
 };
 
-StatCardStory.args = {
+InputStatCardStory.args = {
   title: "STR",
 };

@@ -1,12 +1,16 @@
+import * as React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Head from "next/head";
 import { Inter } from "@next/font/google";
 import {
+  Box,
   Card,
   CardBody,
   Grid,
   GridItem,
   Divider,
+  List,
+  ListItem,
   Heading,
   Textarea,
   Checkbox,
@@ -16,17 +20,15 @@ import {
   Select,
   Input,
   Button,
-} from "@chakra-ui/react";
-import { Box } from "@chakra-ui/react";
-import {
-  List,
-  ListItem,
+  Center,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { InputStatCard } from "../../components/input-stat-card";
 import { InputLabelCard } from "../../components/input-label-card";
 import { CheckboxGroupCard } from "../../components/checkbox-group-card";
 import { attackTypes } from "../../data/attack-types";
+import { languages } from "../../data/languages";
+import { equippedItems } from "../../data/equipped-items";
 
 const CharacterCard = styled(Card)`
   margin-top: 10px;
@@ -38,6 +40,8 @@ const Primary = styled.div`
 `;
 
 const inter = Inter({ subsets: ["latin"] });
+
+const rowIndexes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 // TODO: offload to our database
 const listItems = [
@@ -136,11 +140,14 @@ export default function Home() {
                       <List>
                         {listItems.map(({ title }) => {
                           return (
-                            <ListItem key={`list-item-${title}`} paddingBottom={'10px'}>
-                              <InputStatCard 
+                            <ListItem
+                              key={`list-item-${title}`}
+                              paddingBottom={"10px"}
+                            >
+                              <InputStatCard
                                 register={register}
                                 registerId={title}
-                                title={title} 
+                                title={title}
                                 errors={errors}
                               />
                             </ListItem>
@@ -227,6 +234,7 @@ export default function Home() {
                         register={register}
                         placeholder="-"
                         label="PASSIVE WISDOM (PERCEPTION)"
+                        errors={errors}
                       />
                     </GridItem>
                   </Grid>
@@ -237,19 +245,19 @@ export default function Home() {
                   <CharacterCard>
                     <CardBody>
                       <Flex gap={4} paddingBottom={4}>
-                        <InputStatCard                         
+                        <InputStatCard
                           registerId="AC"
                           register={register}
                           title="AC"
                           errors={errors}
                         />
-                        <InputStatCard                         
+                        <InputStatCard
                           registerId="INIT"
                           register={register}
                           title="INIT"
                           errors={errors}
                         />
-                        <InputStatCard                         
+                        <InputStatCard
                           registerId="SPEED"
                           register={register}
                           title="SPEED"
@@ -264,10 +272,10 @@ export default function Home() {
                       </Flex>
                       <Flex>
                         <Box p={4}>
-                          <InputStatCard 
+                          <InputStatCard
                             registerId="HIT_DICE"
                             register={register}
-                            title="HIT DICE" 
+                            title="HIT DICE"
                             errors={errors}
                           />
                         </Box>
@@ -331,16 +339,414 @@ export default function Home() {
                   </CharacterCard>
                   {/*One big row spanning both of our Grid columns*/}
                   <GridItem w="100%" colSpan={2}>
-                    <Box p={10}>
-                      <Grid gridTemplateColumns="30% 20% 50%" gap={5}>
-                        <GridItem>NAME</GridItem>
-                        <GridItem>ATK BONUS</GridItem>
-                        <GridItem>DAMAGE/TYPE</GridItem>
-                        <GridItem>
-                          <Select placeholder="Attack Type">
-                            {attackTypes.map(({ value, name }, i) => {
+                    <Card mb={"30px"} mt={"30px"}>
+                      <Heading
+                        as="h4"
+                        mt={"15px"}
+                        size={"md"}
+                        textAlign={"center"}
+                      >
+                        ATTACKS & NOTES
+                      </Heading>
+                      <Box p={10}>
+                        <Grid gridTemplateColumns="30% 20% 50%" gap={5}>
+                          <GridItem>NAME</GridItem>
+                          <GridItem>ATK BONUS</GridItem>
+                          <GridItem>DAMAGE/TYPE</GridItem>
+                          <GridItem>
+                            <Select placeholder="Attack Type">
+                              {attackTypes.map(({ value, name }, i) => {
+                                return (
+                                  <option
+                                    value={value}
+                                    key={`attack-type-${i}`}
+                                  >
+                                    {name}
+                                  </option>
+                                );
+                              })}
+                            </Select>
+                          </GridItem>
+                          <GridItem>
+                            <Input
+                              type="string"
+                              size="sm"
+                              variant="unstyled"
+                              placeholder="-"
+                              _placeholder={{ paddingLeft: "40px" }}
+                              mr={"10px"}
+                              w={"100px"}
+                              border={"1px solid black"}
+                            />
+                          </GridItem>
+                          <GridItem>
+                            <Input
+                              type="string"
+                              size="sm"
+                              variant="unstyled"
+                              placeholder="-"
+                              _placeholder={{ paddingLeft: "50px" }}
+                              mr={"10px"}
+                              w={"200px"}
+                              border={"1px solid black"}
+                            />
+                          </GridItem>
+                          <GridItem>
+                            <Select placeholder="Attack Type">
+                              {attackTypes.map(({ value, name }, i) => {
+                                return (
+                                  <option
+                                    value={value}
+                                    key={`attack-type-${i}`}
+                                  >
+                                    {name}
+                                  </option>
+                                );
+                              })}
+                            </Select>
+                          </GridItem>
+                          <GridItem>
+                            <Input
+                              type="string"
+                              size="sm"
+                              variant="unstyled"
+                              placeholder="-"
+                              _placeholder={{ paddingLeft: "40px" }}
+                              mr={"10px"}
+                              w={"100px"}
+                              border={"1px solid black"}
+                            />
+                          </GridItem>
+                          <GridItem>
+                            <Input
+                              type="string"
+                              size="sm"
+                              variant="unstyled"
+                              placeholder="-"
+                              _placeholder={{ paddingLeft: "50px" }}
+                              mr={"10px"}
+                              w={"200px"}
+                              border={"1px solid black"}
+                            />
+                          </GridItem>
+                          <GridItem>
+                            <Select placeholder="Attack Type">
+                              {attackTypes.map(({ value, name }, i) => {
+                                return (
+                                  <option
+                                    value={value}
+                                    key={`attack-type-${i}`}
+                                  >
+                                    {name}
+                                  </option>
+                                );
+                              })}
+                            </Select>
+                          </GridItem>
+                          <GridItem>
+                            <Input
+                              type="string"
+                              size="sm"
+                              variant="unstyled"
+                              placeholder="-"
+                              _placeholder={{ paddingLeft: "40px" }}
+                              mr={"10px"}
+                              w={"100px"}
+                              border={"1px solid black"}
+                            />
+                          </GridItem>
+                          <GridItem>
+                            <Input
+                              type="string"
+                              size="sm"
+                              variant="unstyled"
+                              placeholder="-"
+                              _placeholder={{ paddingLeft: "50px" }}
+                              mr={"10px"}
+                              w={"200px"}
+                              border={"1px solid black"}
+                            />
+                          </GridItem>
+                          <GridItem>
+                            <Select placeholder="Attack Type">
+                              {attackTypes.map(({ value, name }, i) => {
+                                return (
+                                  <option
+                                    value={value}
+                                    key={`attack-type-${i}`}
+                                  >
+                                    {name}
+                                  </option>
+                                );
+                              })}
+                            </Select>
+                          </GridItem>
+                          <GridItem>
+                            <Input
+                              type="string"
+                              size="sm"
+                              variant="unstyled"
+                              placeholder="-"
+                              _placeholder={{ paddingLeft: "40px" }}
+                              mr={"10px"}
+                              w={"100px"}
+                              border={"1px solid black"}
+                            />
+                          </GridItem>
+                          <GridItem>
+                            <Input
+                              type="string"
+                              size="sm"
+                              variant="unstyled"
+                              placeholder="-"
+                              _placeholder={{ paddingLeft: "50px" }}
+                              mr={"10px"}
+                              w={"200px"}
+                              border={"1px solid black"}
+                            />
+                          </GridItem>
+                          <GridItem>
+                            <Select placeholder="Attack Type">
+                              {attackTypes.map(({ value, name }, i) => {
+                                return (
+                                  <option
+                                    value={value}
+                                    key={`attack-type-${i}`}
+                                  >
+                                    {name}
+                                  </option>
+                                );
+                              })}
+                            </Select>
+                          </GridItem>
+                          <GridItem>
+                            <Input
+                              type="string"
+                              size="sm"
+                              variant="unstyled"
+                              placeholder="-"
+                              _placeholder={{ paddingLeft: "40px" }}
+                              mr={"10px"}
+                              w={"100px"}
+                              border={"1px solid black"}
+                            />
+                          </GridItem>
+                          <GridItem>
+                            <Input
+                              type="string"
+                              size="sm"
+                              variant="unstyled"
+                              placeholder="-"
+                              _placeholder={{ paddingLeft: "50px" }}
+                              mr={"10px"}
+                              w={"200px"}
+                              border={"1px solid black"}
+                            />
+                          </GridItem>
+                          <GridItem>
+                            <Select placeholder="Attack Type">
+                              {attackTypes.map(({ value, name }, i) => {
+                                return (
+                                  <option
+                                    value={value}
+                                    key={`attack-type-${i}`}
+                                  >
+                                    {name}
+                                  </option>
+                                );
+                              })}
+                            </Select>
+                          </GridItem>
+                          <GridItem>
+                            <Input
+                              type="string"
+                              size="sm"
+                              variant="unstyled"
+                              placeholder="-"
+                              _placeholder={{ paddingLeft: "40px" }}
+                              mr={"10px"}
+                              w={"100px"}
+                              border={"1px solid black"}
+                            />
+                          </GridItem>
+                          <GridItem>
+                            <Input
+                              type="string"
+                              size="sm"
+                              variant="unstyled"
+                              placeholder="-"
+                              _placeholder={{ paddingLeft: "50px" }}
+                              mr={"10px"}
+                              w={"200px"}
+                              border={"1px solid black"}
+                            />
+                          </GridItem>
+                          <GridItem>
+                            <Select placeholder="Attack Type">
+                              {attackTypes.map(({ value, name }, i) => {
+                                return (
+                                  <option
+                                    value={value}
+                                    key={`attack-type-${i}`}
+                                  >
+                                    {name}
+                                  </option>
+                                );
+                              })}
+                            </Select>
+                          </GridItem>
+                          <GridItem>
+                            <Input
+                              type="string"
+                              size="sm"
+                              variant="unstyled"
+                              placeholder="-"
+                              _placeholder={{ paddingLeft: "40px" }}
+                              mr={"10px"}
+                              w={"100px"}
+                              border={"1px solid black"}
+                            />
+                          </GridItem>
+                          <GridItem>
+                            <Input
+                              type="string"
+                              size="sm"
+                              variant="unstyled"
+                              placeholder="-"
+                              _placeholder={{ paddingLeft: "50px" }}
+                              mr={"10px"}
+                              w={"200px"}
+                              border={"1px solid black"}
+                            />
+                          </GridItem>
+                          <GridItem w="100%" colStart={1} colSpan={3} p="5px">
+                            <Textarea
+                              fontSize="small"
+                              mb={"30px"}
+                              textAlign="center"
+                            />
+                          </GridItem>
+                        </Grid>
+                      </Box>
+                    </Card>
+                  </GridItem>
+                  <GridItem colSpan={2}>
+                    <Card mt={"30px"} p={"10px"}>
+                      <Heading
+                        as="h4"
+                        mt={"15px"}
+                        mb={"15px"}
+                        size={"md"}
+                        textAlign={"center"}
+                      >
+                        LANGUAGES & EQUIPPED ITEMS
+                      </Heading>
+                      <Grid templateColumns="repeat(2, 1fr)" gap={2}>
+                        <GridItem w="100%">
+                          <Select fontWeight="bold">
+                            {languages.map(({ value, name }, i) => {
                               return (
-                                <option value={value} key={`attack-type-${i}`}>
+                                <option value={value} key={`languages-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                          <br />
+                          <Select fontWeight="bold">
+                            {languages.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`languages-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                          <br />
+                          <Select fontWeight="bold">
+                            {languages.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`languages-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                          <br />
+                          <Select fontWeight="bold">
+                            {languages.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`languages-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                          <br />
+                          <Select fontWeight="bold">
+                            {languages.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`languages-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                          <br />
+                          <Select fontWeight="bold">
+                            {languages.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`languages-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                          <br />
+                          <Select fontWeight="bold">
+                            {languages.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`languages-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                          <br />
+                          <Select fontWeight="bold">
+                            {languages.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`languages-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                          <br />
+                          <Select fontWeight="bold">
+                            {languages.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`languages-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                          <br />
+                          <Select fontWeight="bold">
+                            {languages.map(({ value, name }, i) => {
+                              return (
+                                <option value={value} key={`languages-${i}`}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </Select>
+                          <br />
+                          <Select fontWeight="bold">
+                            {languages.map(({ name }, i) => {
+                              return (
+                                <option value={name} key={`languages-${i}`}>
                                   {name}
                                 </option>
                               );
@@ -348,251 +754,40 @@ export default function Home() {
                           </Select>
                         </GridItem>
                         <GridItem>
-                          <Input
-                            type="string"
-                            size="sm"
-                            variant="unstyled"
-                            placeholder="-"
-                            _placeholder={{ paddingLeft: "40px" }}
-                            mr={"10px"}
-                            w={"100px"}
-                            border={"1px solid black"}
-                          />
-                        </GridItem>
-                        <GridItem>
-                          <Input
-                            type="string"
-                            size="sm"
-                            variant="unstyled"
-                            placeholder="-"
-                            _placeholder={{ paddingLeft: "50px" }}
-                            mr={"10px"}
-                            w={"200px"}
-                            border={"1px solid black"}
-                          />
-                        </GridItem>
-                        <GridItem>
-                          <Select placeholder="Attack Type">
-                            {attackTypes.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`attack-type-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                        </GridItem>
-                        <GridItem>
-                          <Input
-                            type="string"
-                            size="sm"
-                            variant="unstyled"
-                            placeholder="-"
-                            _placeholder={{ paddingLeft: "40px" }}
-                            mr={"10px"}
-                            w={"100px"}
-                            border={"1px solid black"}
-                          />
-                        </GridItem>
-                        <GridItem>
-                          <Input
-                            type="string"
-                            size="sm"
-                            variant="unstyled"
-                            placeholder="-"
-                            _placeholder={{ paddingLeft: "50px" }}
-                            mr={"10px"}
-                            w={"200px"}
-                            border={"1px solid black"}
-                          />
-                        </GridItem>
-                        <GridItem>
-                          <Select placeholder="Attack Type">
-                            {attackTypes.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`attack-type-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                        </GridItem>
-                        <GridItem>
-                          <Input
-                            type="string"
-                            size="sm"
-                            variant="unstyled"
-                            placeholder="-"
-                            _placeholder={{ paddingLeft: "40px" }}
-                            mr={"10px"}
-                            w={"100px"}
-                            border={"1px solid black"}
-                          />
-                        </GridItem>
-                        <GridItem>
-                          <Input
-                            type="string"
-                            size="sm"
-                            variant="unstyled"
-                            placeholder="-"
-                            _placeholder={{ paddingLeft: "50px" }}
-                            mr={"10px"}
-                            w={"200px"}
-                            border={"1px solid black"}
-                          />
-                        </GridItem>
-                        <GridItem>
-                          <Select placeholder="Attack Type">
-                            {attackTypes.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`attack-type-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                        </GridItem>
-                        <GridItem>
-                          <Input
-                            type="string"
-                            size="sm"
-                            variant="unstyled"
-                            placeholder="-"
-                            _placeholder={{ paddingLeft: "40px" }}
-                            mr={"10px"}
-                            w={"100px"}
-                            border={"1px solid black"}
-                          />
-                        </GridItem>
-                        <GridItem>
-                          <Input
-                            type="string"
-                            size="sm"
-                            variant="unstyled"
-                            placeholder="-"
-                            _placeholder={{ paddingLeft: "50px" }}
-                            mr={"10px"}
-                            w={"200px"}
-                            border={"1px solid black"}
-                          />
-                        </GridItem>
-                        <GridItem>
-                          <Select placeholder="Attack Type">
-                            {attackTypes.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`attack-type-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                        </GridItem>
-                        <GridItem>
-                          <Input
-                            type="string"
-                            size="sm"
-                            variant="unstyled"
-                            placeholder="-"
-                            _placeholder={{ paddingLeft: "40px" }}
-                            mr={"10px"}
-                            w={"100px"}
-                            border={"1px solid black"}
-                          />
-                        </GridItem>
-                        <GridItem>
-                          <Input
-                            type="string"
-                            size="sm"
-                            variant="unstyled"
-                            placeholder="-"
-                            _placeholder={{ paddingLeft: "50px" }}
-                            mr={"10px"}
-                            w={"200px"}
-                            border={"1px solid black"}
-                          />
-                        </GridItem>
-                        <GridItem>
-                          <Select placeholder="Attack Type">
-                            {attackTypes.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`attack-type-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                        </GridItem>
-                        <GridItem>
-                          <Input
-                            type="string"
-                            size="sm"
-                            variant="unstyled"
-                            placeholder="-"
-                            _placeholder={{ paddingLeft: "40px" }}
-                            mr={"10px"}
-                            w={"100px"}
-                            border={"1px solid black"}
-                          />
-                        </GridItem>
-                        <GridItem>
-                          <Input
-                            type="string"
-                            size="sm"
-                            variant="unstyled"
-                            placeholder="-"
-                            _placeholder={{ paddingLeft: "50px" }}
-                            mr={"10px"}
-                            w={"200px"}
-                            border={"1px solid black"}
-                          />
-                        </GridItem>
-                        <GridItem>
-                          <Select placeholder="Attack Type">
-                            {attackTypes.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`attack-type-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                        </GridItem>
-                        <GridItem>
-                          <Input
-                            type="string"
-                            size="sm"
-                            variant="unstyled"
-                            placeholder="-"
-                            _placeholder={{ paddingLeft: "40px" }}
-                            mr={"10px"}
-                            w={"100px"}
-                            border={"1px solid black"}
-                          />
-                        </GridItem>
-                        <GridItem>
-                          <Input
-                            type="string"
-                            size="sm"
-                            variant="unstyled"
-                            placeholder="-"
-                            _placeholder={{ paddingLeft: "50px" }}
-                            mr={"10px"}
-                            w={"200px"}
-                            border={"1px solid black"}
-                          />
-                        </GridItem>
-                        <GridItem w="100%" colStart={1} colSpan={3} p="5px">
-                          <Textarea
-                            fontSize="small"
-                            mb={"30px"}
-                            textAlign="center"
-                            placeholder="ATTACKS & NOTES"
-                          />
+                          {rowIndexes.map((n) => {
+                            return (
+                              <React.Fragment key={`equipped-items-${n}`}>
+                                <Select
+                                  {...register(`equipped-items-${n}`)}
+                                  fontWeight="bold"
+                                >
+                                  {equippedItems.map(({ name }, i) => {
+                                    return i === 0 ? (
+                                      <option
+                                        disabled
+                                        selected
+                                        key={`equipped-items-${i}`}
+                                      >
+                                        {name}
+                                      </option>
+                                    ) : (
+                                      <option
+                                        value={name}
+                                        key={`equipped-items-${i}`}
+                                      >
+                                        {name}
+                                      </option>
+                                    );
+                                  })}
+                                </Select>
+                                <br />
+                              </React.Fragment>
+                            );
+                          })}
                         </GridItem>
                       </Grid>
-                    </Box>
+                    </Card>
                   </GridItem>
-                  {/*TODO: add the Languages column (GridItem) - do not colSpan*/}
                   {/*TODO: add the Equipped Items column (GridItem) - do not colSpan*/}
                 </Grid>
               </GridItem>

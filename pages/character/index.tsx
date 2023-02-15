@@ -20,7 +20,7 @@ import {
   Select,
   Input,
   Button,
-  Center,
+  Text,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { InputStatCard } from "../../components/input-stat-card";
@@ -106,6 +106,10 @@ export default function Home() {
   } = useForm<CharacterSheetInputs>();
   const onSubmit: SubmitHandler<CharacterSheetInputs> = (data) => {
     debugger;
+
+    // TODO: filter out every field with a value of "Equipped Item" or "Language"
+    // Hint: look at Object.keys() with Array.prototype.map() and Array.prototype.filter()
+
     console.log(data);
   };
 
@@ -127,6 +131,66 @@ export default function Home() {
             </Button>
             <Grid gridTemplateColumns="33.3333% 66.6666%" gap={10}>
               <GridItem w="100%">
+                <Card p="5">
+                  <Text mb="8px" fontWeight={"bold"}>
+                    Character Name:
+                  </Text>
+                  <Input {...register("characterName", { required: true })} />
+                </Card>
+              </GridItem>
+              <GridItem w="100%">
+                <Card p="5" fontWeight="bold">
+                  <Grid gridTemplateColumns="50% 50%">
+                    <Card p="5">
+                      <Text mb="8px" fontWeight={"bold"}>
+                        Character Name:
+                      </Text>
+                      <Input
+                        {...register("characterName", { required: true })}
+                      />
+                    </Card>
+                    <Card p="5">
+                      <Text mb="8px" fontWeight={"bold"}>
+                        Class:
+                      </Text>
+                      <Input
+                        {...register("characterName", { required: true })}
+                      />
+                    </Card>
+                    <Card p="5">
+                      <Text mb="8px" fontWeight={"bold"}>
+                        Race:
+                      </Text>
+                      <Input
+                        {...register("characterName", { required: true })}
+                      />
+                    </Card>
+                    <Card p="5">
+                      <Text mb="8px" fontWeight={"bold"}>
+                        Level:
+                      </Text>
+                      <Input
+                        {...register("characterName", { required: true })}
+                      />
+                    </Card>
+                    <Card p="5">
+                      <Text mb="8px" fontWeight={"bold"}>
+                        Experience:
+                      </Text>
+                      <Input
+                        {...register("characterName", { required: true })}
+                      />
+                    </Card>
+                  </Grid>
+                </Card>
+              </GridItem>
+              <GridItem w="100%">
+                <Grid
+                  gridTemplateColumns="repeat(5, 1fr)"
+                  gridTemplateRows="repeat(2, 1fr)"
+                >
+                  <GridItem colStart={3} colEnd={5} bg="black200"></GridItem>{" "}
+                </Grid>
                 <CharacterCard textAlign="center" fontWeight="bold">
                   <Grid
                     templateAreas={`
@@ -643,115 +707,33 @@ export default function Home() {
                       </Heading>
                       <Grid templateColumns="repeat(2, 1fr)" gap={2}>
                         <GridItem w="100%">
-                          <Select fontWeight="bold">
-                            {languages.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`languages-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                          <br />
-                          <Select fontWeight="bold">
-                            {languages.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`languages-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                          <br />
-                          <Select fontWeight="bold">
-                            {languages.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`languages-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                          <br />
-                          <Select fontWeight="bold">
-                            {languages.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`languages-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                          <br />
-                          <Select fontWeight="bold">
-                            {languages.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`languages-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                          <br />
-                          <Select fontWeight="bold">
-                            {languages.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`languages-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                          <br />
-                          <Select fontWeight="bold">
-                            {languages.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`languages-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                          <br />
-                          <Select fontWeight="bold">
-                            {languages.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`languages-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                          <br />
-                          <Select fontWeight="bold">
-                            {languages.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`languages-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                          <br />
-                          <Select fontWeight="bold">
-                            {languages.map(({ value, name }, i) => {
-                              return (
-                                <option value={value} key={`languages-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                          <br />
-                          <Select fontWeight="bold">
-                            {languages.map(({ name }, i) => {
-                              return (
-                                <option value={name} key={`languages-${i}`}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </Select>
+                          {rowIndexes.map((n) => {
+                            return (
+                              <React.Fragment key={`languages-${n}`}>
+                                <Select
+                                  {...register(`languages-${n}`)}
+                                  fontWeight="bold"
+                                  value="Language"
+                                >
+                                  {languages.map(({ name }, i) => {
+                                    return i === 0 ? (
+                                      <option disabled key={`languages-${i}`}>
+                                        {name}
+                                      </option>
+                                    ) : (
+                                      <option
+                                        value={name}
+                                        key={`languages-${i}`}
+                                      >
+                                        {name}
+                                      </option>
+                                    );
+                                  })}
+                                </Select>
+                                <br />
+                              </React.Fragment>
+                            );
+                          })}
                         </GridItem>
                         <GridItem>
                           {rowIndexes.map((n) => {
@@ -760,12 +742,12 @@ export default function Home() {
                                 <Select
                                   {...register(`equipped-items-${n}`)}
                                   fontWeight="bold"
+                                  value="Equipped Item"
                                 >
                                   {equippedItems.map(({ name }, i) => {
                                     return i === 0 ? (
                                       <option
                                         disabled
-                                        selected
                                         key={`equipped-items-${i}`}
                                       >
                                         {name}

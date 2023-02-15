@@ -29,6 +29,7 @@ import { CheckboxGroupCard } from "../../components/checkbox-group-card";
 import { attackTypes } from "../../data/attack-types";
 import { languages } from "../../data/languages";
 import { equippedItems } from "../../data/equipped-items";
+import { LabelInput } from "../../components/label-input";
 
 const CharacterCard = styled(Card)`
   margin-top: 10px;
@@ -129,61 +130,60 @@ export default function Home() {
             <Button mt={4} colorScheme="teal" type="submit">
               Submit
             </Button>
+            <Box>
+              <Grid gridTemplateColumns={"50% 50%"} gap={5}>
+                <GridItem w="100%">
+                  <LabelInput
+                    registerId="characterName"
+                    register={register}
+                    label="Character Name:"
+                    errors={errors}
+                  />
+                </GridItem>
+                <GridItem w="100%" pr="15px">
+                  <LabelInput
+                    registerId="playerName"
+                    register={register}
+                    label="Player Name:"
+                    errors={errors}
+                  />
+                </GridItem>
+
+                <GridItem w="100%">
+                  <LabelInput
+                    registerId="class"
+                    register={register}
+                    label="Class:"
+                    errors={errors}
+                  />
+                </GridItem>
+                <GridItem w="100%" pr={"15px"}>
+                  <LabelInput
+                    registerId="race"
+                    register={register}
+                    label="Race:"
+                    errors={errors}
+                  />
+                </GridItem>
+                <GridItem w="100%">
+                  <LabelInput
+                    registerId="level"
+                    register={register}
+                    label="Level:"
+                    errors={errors}
+                  />
+                </GridItem>
+                <GridItem w="100%" pr="15px">
+                  <LabelInput
+                    registerId="experience"
+                    register={register}
+                    label="Experience:"
+                    errors={errors}
+                  />
+                </GridItem>
+              </Grid>
+            </Box>
             <Grid gridTemplateColumns="33.3333% 66.6666%" gap={10}>
-              <GridItem w="100%">
-                <Card p="5">
-                  <Text mb="8px" fontWeight={"bold"}>
-                    Character Name:
-                  </Text>
-                  <Input {...register("characterName", { required: true })} />
-                </Card>
-              </GridItem>
-              <GridItem w="100%">
-                <Card p="5" fontWeight="bold">
-                  <Grid gridTemplateColumns="50% 50%">
-                    <Card p="5">
-                      <Text mb="8px" fontWeight={"bold"}>
-                        Character Name:
-                      </Text>
-                      <Input
-                        {...register("characterName", { required: true })}
-                      />
-                    </Card>
-                    <Card p="5">
-                      <Text mb="8px" fontWeight={"bold"}>
-                        Class:
-                      </Text>
-                      <Input
-                        {...register("characterName", { required: true })}
-                      />
-                    </Card>
-                    <Card p="5">
-                      <Text mb="8px" fontWeight={"bold"}>
-                        Race:
-                      </Text>
-                      <Input
-                        {...register("characterName", { required: true })}
-                      />
-                    </Card>
-                    <Card p="5">
-                      <Text mb="8px" fontWeight={"bold"}>
-                        Level:
-                      </Text>
-                      <Input
-                        {...register("characterName", { required: true })}
-                      />
-                    </Card>
-                    <Card p="5">
-                      <Text mb="8px" fontWeight={"bold"}>
-                        Experience:
-                      </Text>
-                      <Input
-                        {...register("characterName", { required: true })}
-                      />
-                    </Card>
-                  </Grid>
-                </Card>
-              </GridItem>
               <GridItem w="100%">
                 <Grid
                   gridTemplateColumns="repeat(5, 1fr)"

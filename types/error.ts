@@ -1,0 +1,1 @@
+export type ErrType = { message: string; name: string } | string;

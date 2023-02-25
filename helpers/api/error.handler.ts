@@ -1,6 +1,6 @@
-export { errorHandler };
+import { ErrType } from "types/error";
 
-function errorHandler(err, res) {
+export function errorHandler(err: ErrType, res: any) {
   if (typeof err === "string") {
     // custom application error
     return res.status(400).json({ message: err });

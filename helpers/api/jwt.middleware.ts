@@ -4,9 +4,7 @@ import getConfig from "next/config";
 
 const { serverRuntimeConfig } = getConfig();
 
-export { jwtMiddleware };
-
-function jwtMiddleware(req, res) {
+export function jwtMiddleware(req: any, res: any) {
   const middleware = expressJwt({
     secret: serverRuntimeConfig.secret,
     algorithms: ["HS256"],

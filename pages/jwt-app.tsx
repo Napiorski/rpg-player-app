@@ -8,7 +8,7 @@ import { Nav } from "components";
 
 export default App;
 
-function App({ Component, pageProps }) {
+function App({ Component, pageProps }: any) {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
 
@@ -28,9 +28,9 @@ function App({ Component, pageProps }) {
       router.events.off("routeChangeStart", hideContent);
       router.events.off("routeChangeComplete", authCheck);
     };
-  }, []);
+  }, [authCheck, router.asPath, router.events]);
 
-  function authCheck(url) {
+  function authCheck(url: string) {
     // redirect to login page if accessing a private page and not logged in
     const publicPaths = ["/login"];
     const path = url.split("?")[0];

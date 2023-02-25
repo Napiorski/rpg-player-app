@@ -13,7 +13,7 @@ function Home() {
 
   return (
     <div className="card mt-4">
-      <h4 className="card-header">You're logged in with Next.js 11 & JWT!!</h4>
+      <h4 className="card-header">You are logged in with Next.js 11 & JWT!!</h4>
       <div className="card-body">
         <h6>Users from secure api end point</h6>
         {users && (

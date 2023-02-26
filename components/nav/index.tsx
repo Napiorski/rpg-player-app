@@ -2,7 +2,7 @@ import * as React from "react";
 import { NavLink } from ".";
 import { userService } from "services";
 
-export { Nav };
+export { Nav, NavLink };
 
 function Nav() {
   const [user, setUser] = React.useState(null);

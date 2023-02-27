@@ -1,10 +1,8 @@
+import { NavLink } from "components/nav-link";
 import * as React from "react";
-import { NavLink } from ".";
 import { userService } from "services";
 
-export { Nav, NavLink };
-
-function Nav() {
+export function Nav() {
   const [user, setUser] = React.useState(null);
 
   React.useEffect(() => {

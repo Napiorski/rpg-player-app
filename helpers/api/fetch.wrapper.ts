@@ -11,45 +11,53 @@ export const fetchWrapper = {
   delete: _delete,
 };
 
-function get(url) {
-  const requestOptions = {
+function get(url: string) {
+  const requestOptions: RequestInit = {
     method: "GET",
     headers: authHeader(url),
   };
   return fetch(url, requestOptions).then(handleResponse);
 }
 
-function post(url, body) {
-  const requestOptions = {
+function post(url: string, body: Object) {
+  const requestOptions: RequestInit = {
     method: "POST",
-    headers: { "Content-Type": "application/json", ...authHeader(url) },
+    headers: {
+      "Content-Type": "application/json",
+      ...authHeader(url),
+    },
     credentials: "include",
     body: JSON.stringify(body),
   };
+
   return fetch(url, requestOptions).then(handleResponse);
 }
 
-function put(url, body) {
-  const requestOptions = {
+function put(url: string, body: object) {
+  const requestOptions: RequestInit = {
     method: "PUT",
-    headers: { "Content-Type": "application/json", ...authHeader(url) },
+    headers: {
+      "Content-Type": "application/json",
+      ...authHeader(url),
+    },
     body: JSON.stringify(body),
   };
+
   return fetch(url, requestOptions).then(handleResponse);
 }
 
 // prefixed with underscored because delete is a reserved word in javascript
-function _delete(url) {
+function _delete(url: string) {
   const requestOptions = {
     method: "DELETE",
     headers: authHeader(url),
   };
-  return fetch(url, requestOptions).then(handleResponse);
+  return fetch(url, requestOptions as RequestInit).then(handleResponse);
 }
 
 // helper functions
 
-function authHeader(url) {
+function authHeader(url: string): HeadersInit {
   // return auth header with jwt if user is logged in and request is to the api url
   const user = userService.userValue;
   const isLoggedIn = user && user.token;
@@ -61,7 +69,12 @@ function authHeader(url) {
   }
 }
 
-function handleResponse(response) {
+function handleResponse(response: {
+  text: () => Promise<string>;
+  ok: boolean | string;
+  status: number;
+  statusText: string;
+}) {
   return response.text().then((text) => {
     const data = text && JSON.parse(text);
 

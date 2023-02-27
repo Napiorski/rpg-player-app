@@ -1,13 +1,13 @@
 import { BehaviorSubject } from "rxjs";
 import getConfig from "next/config";
 import Router from "next/router";
-
-import { fetchWrapper } from "helpers";
+import { fetchWrapper } from "helpers/api/fetch.wrapper";
 
 const { publicRuntimeConfig } = getConfig();
 const baseUrl = `${publicRuntimeConfig.apiUrl}/users`;
+const username: string | null = window.localStorage.getItem("user");
 const userSubject = new BehaviorSubject(
-  process.browser && JSON.parse(localStorage.getItem("user"))
+  process.browser && username && JSON.parse(username)
 );
 
 export const userService = {
@@ -20,13 +20,13 @@ export const userService = {
   getAll,
 };
 
-function login(username, password) {
+function login(username: any, password: any) {
   return fetchWrapper
     .post(`${baseUrl}/authenticate`, { username, password })
-    .then((user) => {
+    .then((user: any) => {
       // publish user to subscribers and store in local storage to stay logged in between page refreshes
       userSubject.next(user);
-      localStorage.setItem("user", JSON.stringify(user));
+      window.localStorage.setItem("user", JSON.stringify(user));
 
       return user;
     });
@@ -34,7 +34,7 @@ function login(username, password) {
 
 function logout() {
   // remove user from local storage, publish null to user subscribers and redirect to login page
-  localStorage.removeItem("user");
+  window.localStorage.removeItem("user");
   userSubject.next(null);
   Router.push("/login");
 }

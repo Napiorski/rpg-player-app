@@ -72,33 +72,11 @@ const listItems = [
   },
 ];
 
-/*
-<option value="1">Unarmed Strike</option>
-<option value="2">Two-Handed Unarmed Strike</option>
-<option value="3">Natural Attack</option>
-<option value="4">Improvised Weapon</option>
-<option value="...">Club</option>
-<option value="option1">Offhand Club</option>
-<option value="option1">Dagger</option>
-<option value="option1">Offhand Dagger</option>
-<option value="option1">Greatclub</option>
-<option value="option1">Handaxe</option>
-<option value="option1">Offhand Handaxe</option>
-<option value="option1">Javelin</option>
-<option value="option1">Light Hammer</option>
-<option value="option1">Offhand Light Hammer</option>
-<option value="option1">Mace</option>
-<option value="option1">Offhand Mace</option>
-<option value="option1">Quarterstaff</option>
-<option value="option1">Two-Handed Quarterstaff</option>
-<option value="n">
-*/
-
 export type CharacterSheetInputs = {
   [key: string]: string;
 };
 
-export default function Home() {
+export default function Character() {
   const {
     register,
     handleSubmit,

@@ -5,7 +5,7 @@ const users = require("data/users.json");
 
 export default apiHandler(handler);
 
-function handler(req, res) {
+function handler(req: any, res: any) {
   switch (req.method) {
     case "GET":
       return getUsers();
@@ -15,7 +15,7 @@ function handler(req, res) {
 
   function getUsers() {
     // return users without passwords in the response
-    const response = users.map((user) => {
+    const response = users.map((user: any) => {
       const { password, ...userWithoutPassword } = user;
       return userWithoutPassword;
     });

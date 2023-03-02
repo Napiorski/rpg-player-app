@@ -2,6 +2,7 @@ import * as React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Head from "next/head";
 import { Inter } from "@next/font/google";
+import { creatures } from "./creatures";
 import {
   Box,
   Card,
@@ -21,6 +22,7 @@ import {
   Input,
   Button,
   Text,
+  chakra,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { InputStatCard } from "../../components/input-stat-card";
@@ -86,9 +88,6 @@ export default function Character() {
   const onSubmit: SubmitHandler<CharacterSheetInputs> = (data) => {
     debugger;
 
-    // TODO: filter out every field with a value of "Equipped Item" or "Language"
-    // Hint: look at Object.keys() with Array.prototype.map() and Array.prototype.filter()
-
     console.log(data);
   };
 
@@ -124,7 +123,6 @@ export default function Character() {
                     label="Size:"
                   />
                 </GridItem>
-
                 <GridItem w="100%">
                   <LabelInput
                     registerId="environment"

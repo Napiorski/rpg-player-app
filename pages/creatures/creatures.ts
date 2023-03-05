@@ -9,10 +9,10 @@ export const creatures = [
   },
 
   {
-    name: "Bat",
+    name: "Legolas",
     challengerating: "0",
-    type: "Beast",
-    size: "Tiny",
+    type: "Elf",
+    size: "Medium",
     alignment: "Unaligned",
     npcorcreature: "Misc Creature",
   },

@@ -39,15 +39,47 @@ const Cell = styled.div`
 export default function Creatures() {
   return (
     <Box p={10}>
-      <Grid gridTemplateColumns="33.33% 33.33% 33.33%">
+      <Grid gridTemplateColumns="repeat(7, 1fr)">
         <GridItem>
           <HeaderDiv>Name</HeaderDiv>
+        </GridItem>
+        <GridItem>
+          <HeaderDiv>Rating</HeaderDiv>
         </GridItem>
         <GridItem>
           <HeaderDiv>Type</HeaderDiv>
         </GridItem>
         <GridItem>
           <HeaderDiv>Size</HeaderDiv>
+        </GridItem>
+        <GridItem>
+          <HeaderDiv>Environment</HeaderDiv>
+        </GridItem>
+        <GridItem>
+          <HeaderDiv>Alignment</HeaderDiv>
+        </GridItem>
+        <GridItem>
+          <HeaderDiv>Creature Tag</HeaderDiv>
+        </GridItem>
+        <GridItem>
+          <HeaderDiv>
+            <hr />
+          </HeaderDiv>
+        </GridItem>
+        <GridItem>
+          <HeaderDiv>
+            <hr />
+          </HeaderDiv>
+        </GridItem>
+        <GridItem>
+          <HeaderDiv>
+            <hr />
+          </HeaderDiv>
+        </GridItem>
+        <GridItem>
+          <HeaderDiv>
+            <hr />
+          </HeaderDiv>
         </GridItem>
         <GridItem>
           <HeaderDiv>
@@ -73,10 +105,22 @@ export default function Creatures() {
                 <Cell>{creature.name}</Cell>
               </GridItem>
               <GridItem style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}>
+                <Cell>{creature.challengerating}</Cell>
+              </GridItem>
+              <GridItem style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}>
                 <Cell>{creature.type}</Cell>
               </GridItem>
               <GridItem style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}>
                 <Cell>{creature.size}</Cell>
+              </GridItem>
+              <GridItem style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}>
+                <Cell>{creature.environment}</Cell>
+              </GridItem>
+              <GridItem style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}>
+                <Cell>{creature.alignment}</Cell>
+              </GridItem>
+              <GridItem style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}>
+                <Cell>{creature.creature}</Cell>
               </GridItem>
             </React.Fragment>
           );

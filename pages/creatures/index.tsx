@@ -2,7 +2,7 @@ import * as React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Head from "next/head";
 import { Inter } from "@next/font/google";
-import { creatures } from "./creatures";
+import { creatures2 } from "./creatures";
 import {
   Box,
   Card,
@@ -23,6 +23,8 @@ import {
   Button,
   Text,
   chakra,
+  Image,
+  Center,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 
@@ -41,10 +43,16 @@ export default function Creatures() {
     <Box p={10}>
       <Grid gridTemplateColumns="repeat(7, 1fr)">
         <GridItem>
+          <HeaderDiv>Image</HeaderDiv>
+        </GridItem>
+        <GridItem>
           <HeaderDiv>Name</HeaderDiv>
         </GridItem>
         <GridItem>
-          <HeaderDiv>Rating</HeaderDiv>
+          <HeaderDiv>Hit Points</HeaderDiv>
+        </GridItem>
+        <GridItem>
+          <HeaderDiv>Challenge Rating</HeaderDiv>
         </GridItem>
         <GridItem>
           <HeaderDiv>Type</HeaderDiv>
@@ -53,13 +61,7 @@ export default function Creatures() {
           <HeaderDiv>Size</HeaderDiv>
         </GridItem>
         <GridItem>
-          <HeaderDiv>Environment</HeaderDiv>
-        </GridItem>
-        <GridItem>
           <HeaderDiv>Alignment</HeaderDiv>
-        </GridItem>
-        <GridItem>
-          <HeaderDiv>Creature Tag</HeaderDiv>
         </GridItem>
         <GridItem>
           <HeaderDiv>
@@ -97,30 +99,44 @@ export default function Creatures() {
           </HeaderDiv>
         </GridItem>
 
-        {creatures.map((creature, i) => {
+        {creatures2.map((c, i) => {
           const isOdd = i % 2;
           return (
             <React.Fragment key={`creature-${i}`}>
+              {/*TODO: get that beautiful thumbnail (image) here*/}
               <GridItem style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}>
-                <Cell>{creature.name}</Cell>
+                <Cell>
+                  {c.image ? (
+                    <Image
+                      alt={"monster image"}
+                      src={`https://www.dnd5eapi.co${c.image}`}
+                    />
+                  ) : (
+                    <Center>
+                      <span>
+                        <b>-</b>
+                      </span>
+                    </Center>
+                  )}
+                </Cell>
               </GridItem>
               <GridItem style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}>
-                <Cell>{creature.challengerating}</Cell>
+                <Cell>{c.name}</Cell>
               </GridItem>
               <GridItem style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}>
-                <Cell>{creature.type}</Cell>
+                <Cell>{c.hit_points}</Cell>
               </GridItem>
               <GridItem style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}>
-                <Cell>{creature.size}</Cell>
+                <Cell>{c.challenge_rating}</Cell>
               </GridItem>
               <GridItem style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}>
-                <Cell>{creature.environment}</Cell>
+                <Cell>{c.type}</Cell>
               </GridItem>
               <GridItem style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}>
-                <Cell>{creature.alignment}</Cell>
+                <Cell>{c.size}</Cell>
               </GridItem>
               <GridItem style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}>
-                <Cell>{creature.creature}</Cell>
+                <Cell>{c.alignment}</Cell>
               </GridItem>
             </React.Fragment>
           );

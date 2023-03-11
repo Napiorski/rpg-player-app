@@ -25,6 +25,7 @@ import {
   chakra,
   Image,
   Center,
+  Spinner,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 
@@ -39,9 +40,30 @@ const Cell = styled.div`
 `;
 
 export default function Creatures() {
+  const [person, setPerson] = React.useState();
+
+  function getPerson(pId: number) {
+    fetch("https://swapi.dev/api/people/" + pId)
+      .then((data) => data.json())
+      .then((json) => {
+        setPerson(json.name);
+      });
+  }
+
+  // componentDidMount, componentDidUpdate, componentWillUnmount
+  React.useEffect(() => {
+    getPerson(1);
+  }, []);
+
+  function additionalInfo(mId: number) {}
+
   return (
     <Box p={10}>
-      <Grid gridTemplateColumns="repeat(7, 1fr)">
+      <Box>
+        <h2>Star Wars Person:</h2>
+        {person ? <div>{person}</div> : <Spinner />}
+      </Box>
+      <Grid gridTemplateColumns="repeat(8, 1fr)">
         <GridItem>
           <HeaderDiv>Image</HeaderDiv>
         </GridItem>
@@ -49,10 +71,10 @@ export default function Creatures() {
           <HeaderDiv>Name</HeaderDiv>
         </GridItem>
         <GridItem>
-          <HeaderDiv>Hit Points</HeaderDiv>
+          <HeaderDiv>HP</HeaderDiv>
         </GridItem>
         <GridItem>
-          <HeaderDiv>Challenge Rating</HeaderDiv>
+          <HeaderDiv>CR</HeaderDiv>
         </GridItem>
         <GridItem>
           <HeaderDiv>Type</HeaderDiv>
@@ -62,6 +84,15 @@ export default function Creatures() {
         </GridItem>
         <GridItem>
           <HeaderDiv>Alignment</HeaderDiv>
+        </GridItem>
+        <GridItem>
+          <HeaderDiv>Additional Info</HeaderDiv>
+        </GridItem>
+
+        <GridItem>
+          <HeaderDiv>
+            <hr />
+          </HeaderDiv>
         </GridItem>
         <GridItem>
           <HeaderDiv>
@@ -137,6 +168,11 @@ export default function Creatures() {
               </GridItem>
               <GridItem style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}>
                 <Cell>{c.alignment}</Cell>
+              </GridItem>
+              <GridItem style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}>
+                <Cell>
+                  <Button onClick={() => additionalInfo(i)}>+</Button>
+                </Cell>
               </GridItem>
             </React.Fragment>
           );

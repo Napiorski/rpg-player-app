@@ -72,8 +72,6 @@ const listItems = [
   },
 ];
 
-
-
 export type CharacterSheetInputs = {
   [key: string]: string;
 };
@@ -88,7 +86,6 @@ export default function Home() {
   const onSubmit: SubmitHandler<CharacterSheetInputs> = (data) => {
     debugger;
 
-   
     console.log(data);
   };
 
@@ -307,7 +304,7 @@ export default function Home() {
                         />
                       </Flex>
                       <Flex mb={"30px"}>
-                        <Textarea placeholder="Current hit points" />
+                        <Textarea placeholder="Max & Current Hit Points" />
                       </Flex>
                       <Flex mb={"30px"}>
                         <Textarea placeholder="Temporary hit points" />
@@ -662,16 +659,13 @@ export default function Home() {
                             />
                           </GridItem>
                           <GridItem w="100%" colStart={1} colSpan={3} p="5px">
-                            <Textarea
-                              fontSize="small"
-                              mb={"30px"}
-                              textAlign="center"
-                            />
+                            <Textarea textAlign="center" />
                           </GridItem>
                         </Grid>
                       </Box>
                     </Card>
                   </GridItem>
+
                   <GridItem colSpan={2}>
                     <Card mt={"30px"} p={"10px"}>
                       <Heading
@@ -748,7 +742,31 @@ export default function Home() {
                       </Grid>
                     </Card>
                   </GridItem>
-                  {/*TODO: add the Equipped Items column (GridItem) - do not colSpan*/}
+                  <GridItem>
+                    <Card mt={"30px"} p={"10px"}>
+                      <Heading
+                        as="h4"
+                        mt={"15px"}
+                        mb={"15px"}
+                        size={"md"}
+                        textAlign={"center"}
+                      >
+                        PROFICIENCES
+                      </Heading>
+                      <Text fontWeight="bold">Armor Proficiencies:</Text>
+                      <Input></Input>
+                      <Text fontWeight="bold">Weapon Proficiencies:</Text>
+                      <Input></Input>
+                      <Text fontWeight="bold">Vehicle Proficiencies:</Text>
+                      <Input></Input>
+                      <Text fontWeight="bold">Tool Proficiencies:</Text>
+                      <Input></Input>
+                      <Text fontWeight="bold">Other Proficiencies:</Text>
+                      <Input></Input>
+                      <Text fontWeight="bold">Other Speeds:</Text>
+                      <Input></Input>
+                    </Card>
+                  </GridItem>
                 </Grid>
               </GridItem>
             </Grid>

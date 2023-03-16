@@ -170,7 +170,8 @@ export default function Home() {
                   <Grid
                     templateAreas={`
                   "stat next"
-                  "footer footer"`}
+                  "perception perception"
+                  "proficiency proficiency"`}
                     gridTemplateColumns={"70px 1fr"}
                     gap="1"
                     fontWeight="bold"
@@ -266,8 +267,7 @@ export default function Home() {
                         <CheckboxGroupCard label="Survival" subLabel={"Wis"} />
                       </Card>
                     </GridItem>
-
-                    <GridItem pl="2" area={"footer"}>
+                    <GridItem pl="2" area={"perception"}>
                       <InputLabelCard
                         registerId="perception"
                         register={register}
@@ -276,6 +276,31 @@ export default function Home() {
                         errors={errors}
                       />
                     </GridItem>
+                    <GridItem pl="2" area={"proficiency"}>
+                      <Card mt={"30px"} p={"10px"}>
+                        <Heading
+                          as="h4"
+                          mt={"15px"}
+                          mb={"15px"}
+                          size={"md"}
+                          textAlign={"center"}
+                        >
+                          PROFICIENCIES
+                        </Heading>
+                        <Text fontWeight="bold">Armor Proficiencies:</Text>
+                        <Input></Input>
+                        <Text fontWeight="bold">Weapon Proficiencies:</Text>
+                        <Input></Input>
+                        <Text fontWeight="bold">Vehicle Proficiencies:</Text>
+                        <Input></Input>
+                        <Text fontWeight="bold">Tool Proficiencies:</Text>
+                        <Input></Input>
+                        <Text fontWeight="bold">Other Proficiencies:</Text>
+                        <Input></Input>
+                        <Text fontWeight="bold">Other Speeds:</Text>
+                        <Input></Input>
+                      </Card>
+                    </GridItem>                    
                   </Grid>
                 </CharacterCard>
               </GridItem>
@@ -740,31 +765,6 @@ export default function Home() {
                           })}
                         </GridItem>
                       </Grid>
-                    </Card>
-                  </GridItem>
-                  <GridItem>
-                    <Card mt={"30px"} p={"10px"}>
-                      <Heading
-                        as="h4"
-                        mt={"15px"}
-                        mb={"15px"}
-                        size={"md"}
-                        textAlign={"center"}
-                      >
-                        PROFICIENCES
-                      </Heading>
-                      <Text fontWeight="bold">Armor Proficiencies:</Text>
-                      <Input></Input>
-                      <Text fontWeight="bold">Weapon Proficiencies:</Text>
-                      <Input></Input>
-                      <Text fontWeight="bold">Vehicle Proficiencies:</Text>
-                      <Input></Input>
-                      <Text fontWeight="bold">Tool Proficiencies:</Text>
-                      <Input></Input>
-                      <Text fontWeight="bold">Other Proficiencies:</Text>
-                      <Input></Input>
-                      <Text fontWeight="bold">Other Speeds:</Text>
-                      <Input></Input>
                     </Card>
                   </GridItem>
                 </Grid>

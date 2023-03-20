@@ -72,33 +72,11 @@ const listItems = [
   },
 ];
 
-/*
-<option value="1">Unarmed Strike</option>
-<option value="2">Two-Handed Unarmed Strike</option>
-<option value="3">Natural Attack</option>
-<option value="4">Improvised Weapon</option>
-<option value="...">Club</option>
-<option value="option1">Offhand Club</option>
-<option value="option1">Dagger</option>
-<option value="option1">Offhand Dagger</option>
-<option value="option1">Greatclub</option>
-<option value="option1">Handaxe</option>
-<option value="option1">Offhand Handaxe</option>
-<option value="option1">Javelin</option>
-<option value="option1">Light Hammer</option>
-<option value="option1">Offhand Light Hammer</option>
-<option value="option1">Mace</option>
-<option value="option1">Offhand Mace</option>
-<option value="option1">Quarterstaff</option>
-<option value="option1">Two-Handed Quarterstaff</option>
-<option value="n">
-*/
-
 export type CharacterSheetInputs = {
   [key: string]: string;
 };
 
-export default function Home() {
+export default function Character() {
   const {
     register,
     handleSubmit,
@@ -107,9 +85,6 @@ export default function Home() {
   } = useForm<CharacterSheetInputs>();
   const onSubmit: SubmitHandler<CharacterSheetInputs> = (data) => {
     debugger;
-
-    // TODO: filter out every field with a value of "Equipped Item" or "Language"
-    // Hint: look at Object.keys() with Array.prototype.map() and Array.prototype.filter()
 
     console.log(data);
   };
@@ -195,7 +170,8 @@ export default function Home() {
                   <Grid
                     templateAreas={`
                   "stat next"
-                  "footer footer"`}
+                  "perception perception"
+                  "proficiency proficiency"`}
                     gridTemplateColumns={"70px 1fr"}
                     gap="1"
                     fontWeight="bold"
@@ -291,8 +267,7 @@ export default function Home() {
                         <CheckboxGroupCard label="Survival" subLabel={"Wis"} />
                       </Card>
                     </GridItem>
-
-                    <GridItem pl="2" area={"footer"}>
+                    <GridItem pl="2" area={"perception"}>
                       <InputLabelCard
                         registerId="perception"
                         register={register}
@@ -300,6 +275,31 @@ export default function Home() {
                         label="PASSIVE WISDOM (PERCEPTION)"
                         errors={errors}
                       />
+                    </GridItem>
+                    <GridItem pl="2" area={"proficiency"}>
+                      <Card mt={"30px"} p={"10px"}>
+                        <Heading
+                          as="h4"
+                          mt={"15px"}
+                          mb={"15px"}
+                          size={"md"}
+                          textAlign={"center"}
+                        >
+                          PROFICIENCIES
+                        </Heading>
+                        <Text fontWeight="bold">Armor Proficiencies:</Text>
+                        <Input></Input>
+                        <Text fontWeight="bold">Weapon Proficiencies:</Text>
+                        <Input></Input>
+                        <Text fontWeight="bold">Vehicle Proficiencies:</Text>
+                        <Input></Input>
+                        <Text fontWeight="bold">Tool Proficiencies:</Text>
+                        <Input></Input>
+                        <Text fontWeight="bold">Other Proficiencies:</Text>
+                        <Input></Input>
+                        <Text fontWeight="bold">Other Speeds:</Text>
+                        <Input></Input>
+                      </Card>
                     </GridItem>
                   </Grid>
                 </CharacterCard>
@@ -329,7 +329,7 @@ export default function Home() {
                         />
                       </Flex>
                       <Flex mb={"30px"}>
-                        <Textarea placeholder="Current hit points" />
+                        <Textarea placeholder="Max & Current Hit Points" />
                       </Flex>
                       <Flex mb={"30px"}>
                         <Textarea placeholder="Temporary hit points" />
@@ -684,16 +684,13 @@ export default function Home() {
                             />
                           </GridItem>
                           <GridItem w="100%" colStart={1} colSpan={3} p="5px">
-                            <Textarea
-                              fontSize="small"
-                              mb={"30px"}
-                              textAlign="center"
-                            />
+                            <Textarea textAlign="center" />
                           </GridItem>
                         </Grid>
                       </Box>
                     </Card>
                   </GridItem>
+
                   <GridItem colSpan={2}>
                     <Card mt={"30px"} p={"10px"}>
                       <Heading
@@ -770,7 +767,6 @@ export default function Home() {
                       </Grid>
                     </Card>
                   </GridItem>
-                  {/*TODO: add the Equipped Items column (GridItem) - do not colSpan*/}
                 </Grid>
               </GridItem>
             </Grid>

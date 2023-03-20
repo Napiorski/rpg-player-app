@@ -1,28 +1,10 @@
 import * as React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import Head from "next/head";
-import { Inter } from "@next/font/google";
-import { creatures2 } from "./creatures";
+import { creaturesData } from "../../data/mock-creatures";
 import {
   Box,
-  Card,
-  CardBody,
   Grid,
   GridItem,
-  Divider,
-  List,
-  ListItem,
-  Heading,
-  Textarea,
-  Checkbox,
-  Flex,
-  VStack,
-  HStack,
-  Select,
-  Input,
   Button,
-  Text,
-  chakra,
   Image,
   Center,
   Spinner,
@@ -130,7 +112,7 @@ export default function Creatures() {
           </HeaderDiv>
         </GridItem>
 
-        {creatures2.map((c, i) => {
+        {creaturesData.map((c, i) => {
           const isOdd = i % 2;
           return (
             <React.Fragment key={`creature-${i}`}>

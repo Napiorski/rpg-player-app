@@ -76,7 +76,7 @@ export type CharacterSheetInputs = {
   [key: string]: string;
 };
 
-export default function Home() {
+export default function Character() {
   const {
     register,
     handleSubmit,
@@ -300,7 +300,7 @@ export default function Home() {
                         <Text fontWeight="bold">Other Speeds:</Text>
                         <Input></Input>
                       </Card>
-                    </GridItem>                    
+                    </GridItem>
                   </Grid>
                 </CharacterCard>
               </GridItem>

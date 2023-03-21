@@ -41,10 +41,6 @@ export default function Creatures() {
 
   return (
     <Box p={10}>
-      <Box>
-        <h2>Star Wars Person:</h2>
-        {person ? <div>{person}</div> : <Spinner />}
-      </Box>
       <Grid gridTemplateColumns="repeat(8, 1fr)">
         <GridItem>
           <HeaderDiv>Image</HeaderDiv>
@@ -125,11 +121,7 @@ export default function Creatures() {
                       src={`https://www.dnd5eapi.co${c.image}`}
                     />
                   ) : (
-                    <Center>
-                      <span>
-                        <b>-</b>
-                      </span>
-                    </Center>
+                    <Spinner />
                   )}
                 </Cell>
               </GridItem>

@@ -25,16 +25,16 @@ const Cell = styled.div`
 
 export default function Creatures() {
   const { isLoading, isError, data } = useQuery("creatures", () =>
-    fetch(`https://www.dnd5eapi.co/api/monsters/adult-black-dragon/`)
+    fetch(`http://localhost:3000/monster`)
       .then((data) => data.json())
       .then((json) => json)
   );
 
-  const creaturesData: any[] = [];
+  let creaturesData: any[] = [];
 
   // TODO: get all the other monsters. We need a backend API endpoint to graft the monsters into one request
   if (!isLoading && !isError && data) {
-    creaturesData.push(data);
+    creaturesData = [...data.monsterData];
   }
 
   function additionalInfo(mId: number) {}

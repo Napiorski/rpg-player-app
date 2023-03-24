@@ -174,9 +174,6 @@ export default function Creatures() {
                           <>
                             <h2>
                               <AccordionButton>
-                                <Box as="span" flex="1" textAlign="left">
-                                  Section 2 title
-                                </Box>
                                 {isExpanded ? (
                                   <MinusIcon fontSize="12px" />
                                 ) : (

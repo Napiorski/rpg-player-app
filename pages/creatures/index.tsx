@@ -29,6 +29,7 @@ const Cell = styled.div`
 `;
 
 export default function Creatures() {
+  const [buttons, setButtons] = React.useState<boolean[] | null>(null);
   const { isLoading, isError, data } = useQuery("creatures", () =>
     fetch(`http://localhost:3000/monster`)
       .then((data) => data.json())
@@ -40,9 +41,21 @@ export default function Creatures() {
   // TODO: get all the other monsters. We need a backend API endpoint to graft the monsters into one request
   if (!isLoading && !isError && data) {
     creaturesData = [...data.monsterData];
+    const newButtons: boolean[] = new Array(creaturesData.length).fill(false);
+
+    // If the expanded rows metadata has never been set then set it here (initialize):
+    if (!buttons) {
+      setButtons(newButtons);
+    }
   }
 
   function additionalInfo(mId: number) {}
+
+  function ButtonIcon({ i }: { i: number }) {
+    if (!buttons) return <></>;
+
+    return buttons[i] === false ? <AddIcon /> : <MinusIcon />;
+  }
 
   return (
     <Box p={10}>
@@ -130,7 +143,7 @@ export default function Creatures() {
                         src={`https://www.dnd5eapi.co${c.image}`}
                       />
                     ) : (
-                      <Spinner />
+                      <span>-</span>
                     )}
                   </Cell>
                 </GridItem>
@@ -168,28 +181,35 @@ export default function Creatures() {
                   style={{ backgroundColor: isOdd ? "#ccc" : "inherit" }}
                 >
                   <Cell>
-                    <Accordion>
-                      <AccordionItem>
-                        {({ isExpanded }) => (
-                          <>
-                            <h2>
-                              <AccordionButton>
-                                {isExpanded ? (
-                                  <MinusIcon fontSize="12px" />
-                                ) : (
-                                  <AddIcon fontSize="12px" />
-                                )}
-                              </AccordionButton>
-                            </h2>
-                            <AccordionPanel pb={4}>
-                              Creature Info Here
-                            </AccordionPanel>
-                          </>
-                        )}
-                      </AccordionItem>
-                    </Accordion>
+                    <Button
+                      onClick={() => {
+                        if (buttons) {
+                          buttons[i] = !buttons[i];
+                          setButtons([...buttons]);
+                        }
+                      }}
+                    >
+                      <ButtonIcon i={i} />
+                    </Button>
                   </Cell>
                 </GridItem>
+                {buttons && buttons[i] && (
+                  <GridItem colSpan={8}>
+                    <div>HP: {c.hit_points}</div>
+                    <div>Difficulty: {c.challenge_rating}</div>
+                    <div>XP: {c.xp}</div>
+                    <div>Walk Speed: {c.speed.walk}</div>
+                    <div>Swim Speed: {c.speed.swim}</div>
+                    <div>Fly Speed: {c.speed.fly}</div>
+                    <div>STR: {c.strength}</div>
+                    <div>DEX: {c.dexterity}</div>
+                    <div>CON: {c.constitution}</div>
+                    <div>INT: {c.intelligence}</div>
+                    <div>WIS: {c.wisdom}</div>
+                    <div>CHA: {c.charisma}</div>
+                    <div>Actions: {c.actions.map}</div>
+                  </GridItem>
+                )}
               </React.Fragment>
             );
           })

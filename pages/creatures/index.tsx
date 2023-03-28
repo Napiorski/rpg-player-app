@@ -1,22 +1,9 @@
 import * as React from "react";
-// import { creaturesData } from "../../data/mock-creatures";
-import {
-  Box,
-  Grid,
-  GridItem,
-  Button,
-  Image,
-  Center,
-  Spinner,
-  Accordion,
-  AccordionButton,
-  AccordionItem,
-  AccordionPanel,
-} from "@chakra-ui/react";
+import { Box, Grid, GridItem, Button, Image, Spinner } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { useQuery } from "react-query";
-import MonsterType from "types/creatures";
 import { MinusIcon, AddIcon } from "@chakra-ui/icons";
+import AdditionalInfo from "components/additional-info";
 
 const HeaderDiv = styled.div`
   font-weight: bold;
@@ -39,7 +26,7 @@ export default function Creatures() {
   let creaturesData: any[] = [];
 
   // TODO: get all the other monsters. We need a backend API endpoint to graft the monsters into one request
-  if (!isLoading && !isError && data) {
+  if (!isLoading && !isError && data && data.monsterData) {
     creaturesData = [...data.monsterData];
     const newButtons: boolean[] = new Array(creaturesData.length).fill(false);
 
@@ -48,8 +35,6 @@ export default function Creatures() {
       setButtons(newButtons);
     }
   }
-
-  function additionalInfo(mId: number) {}
 
   function ButtonIcon({ i }: { i: number }) {
     if (!buttons) return <></>;
@@ -184,8 +169,11 @@ export default function Creatures() {
                     <Button
                       onClick={() => {
                         if (buttons) {
-                          buttons[i] = !buttons[i];
-                          setButtons([...buttons]);
+                          const originalButtonVal = buttons[i];
+                          const defaultButtons = buttons.map((b) => false);
+
+                          defaultButtons[i] = !originalButtonVal;
+                          setButtons([...defaultButtons]);
                         }
                       }}
                     >
@@ -193,23 +181,7 @@ export default function Creatures() {
                     </Button>
                   </Cell>
                 </GridItem>
-                {buttons && buttons[i] && (
-                  <GridItem colSpan={8}>
-                    <div>HP: {c.hit_points}</div>
-                    <div>Difficulty: {c.challenge_rating}</div>
-                    <div>XP: {c.xp}</div>
-                    <div>Walk Speed: {c.speed.walk}</div>
-                    <div>Swim Speed: {c.speed.swim}</div>
-                    <div>Fly Speed: {c.speed.fly}</div>
-                    <div>STR: {c.strength}</div>
-                    <div>DEX: {c.dexterity}</div>
-                    <div>CON: {c.constitution}</div>
-                    <div>INT: {c.intelligence}</div>
-                    <div>WIS: {c.wisdom}</div>
-                    <div>CHA: {c.charisma}</div>
-                    <div>Actions: {c.actions.map}</div>
-                  </GridItem>
-                )}
+                {buttons && buttons[i] && <AdditionalInfo data={c} />}
               </React.Fragment>
             );
           })

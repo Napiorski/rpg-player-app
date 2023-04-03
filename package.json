@@ -31,6 +31,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.42.1",
+    "react-icons": "^4.8.0",
     "react-query": "^3.39.3",
     "rxjs": "^7.3.0",
     "storybook": "^6.5.15",

@@ -31,8 +31,32 @@ export default function Login() {
   } = useForm<LoginInputs>();
 
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
-    // TODO: send the data to the server and get a response
-    console.log(data);
+    if (data.username && data.password) {
+      // TODO: setup a dotenv .env file with the backend server url
+      // TODO: call the auth/login with the username and password in the HTTP POST body
+      // You need to figure out how to call fetch with a POST body (method).
+      fetch("http://localhost:3000/auth/login", {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "no-cors", // *no-cors, cors, same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow", // manual, *follow, error
+        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          // This should have the access_token
+          console.log("response for auth/login > ", data);
+        })
+        .catch((err) => {
+          console.log("error for auth/login > ", err);
+        });
+    }
   };
 
   const { user, login, logout } = React.useContext(AppContext);
@@ -50,7 +74,7 @@ export default function Login() {
         </GridItem>
         <GridItem gridColumnStart={4} mb={50}>
           <LabelInput
-            registerId="userName"
+            registerId="username"
             register={register}
             label="Username:"
             errors={errors}

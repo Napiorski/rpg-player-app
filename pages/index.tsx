@@ -7,6 +7,7 @@ import { Card, Grid, GridItem, Heading } from "@chakra-ui/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  // TODO: see if we have an access token in context. If we do not have an access token, redirect to login page
   return (
     <>
       <Heading>Your Homepage</Heading>

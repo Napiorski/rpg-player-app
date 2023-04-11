@@ -1,13 +1,13 @@
 import * as React from "react";
 
 export const AppContext = React.createContext({
-  user: "Guest",
+  user: "",
   login: (userInfo: string) => {},
   logout: () => {},
 });
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = React.useState<string>("Michael");
+  const [user, setUser] = React.useState<string>("");
 
   function login(userInfo: string) {
     setUser(userInfo);

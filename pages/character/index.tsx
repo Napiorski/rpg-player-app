@@ -30,6 +30,7 @@ import { attackTypes } from "../../data/attack-types";
 import { languages } from "../../data/languages";
 import { equippedItems } from "../../data/equipped-items";
 import { LabelInput } from "../../components/label-input";
+import { AppContext } from "context/providers/app-provider";
 
 const CharacterCard = styled(Card)`
   margin-top: 10px;
@@ -83,11 +84,12 @@ export default function Character() {
     watch,
     formState: { errors },
   } = useForm<CharacterSheetInputs>();
-  const onSubmit: SubmitHandler<CharacterSheetInputs> = (data) => {
-    debugger;
 
+  const onSubmit: SubmitHandler<CharacterSheetInputs> = (data) => {
     console.log(data);
   };
+
+  const { user } = React.useContext(AppContext);
 
   // JSX is really the view-layer (put any data or logic above this)
   return (
@@ -101,7 +103,7 @@ export default function Character() {
       <main>
         <Primary>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Heading>Character Sheet</Heading>
+            <Heading>Character Sheet{user ? ` for ${user}` : ""}</Heading>
             <Button mt={4} colorScheme="teal" type="submit">
               Submit
             </Button>

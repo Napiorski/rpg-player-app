@@ -16,6 +16,32 @@ type LabelInputProps = {
   registerId: string;
   register: UseFormRegister<CharacterSheetInputs>;
   errors?: Partial<FieldErrorsImpl<CharacterSheetInputs>>;
+  type?:
+    | "tel"
+    | "text"
+    | "number"
+    | "password"
+    | "email"
+    | "search"
+    | "url"
+    | "date"
+    | "datetime-local"
+    | "month"
+    | "time"
+    | "week"
+    | "color"
+    | "file"
+    | "range"
+    | "image"
+    | "checkbox"
+    | "radio"
+    | "submit"
+    | "reset"
+    | "button"
+    | "hidden"
+    | "file"
+    | "file[]"
+    | undefined;
 };
 
 export function LabelInput({
@@ -23,18 +49,18 @@ export function LabelInput({
   registerId,
   register,
   errors,
+  type = "text",
 }: LabelInputProps) {
   return (
     <>
-      <Text mb="8px" fontWeight={"bold"}>
-        {label}
-        {errors && errors[registerId] && (
-          <Box pl={"15px"} display="inline-flex">
-            <Warning>* This field is required</Warning>
-          </Box>
-        )}
-      </Text>
+      <Text fontWeight={"bold"}>{label}</Text>
+      {errors && errors[registerId] && (
+        <Box pl={"10px"} display="inline-flex">
+          <Warning>* This field is required</Warning>
+        </Box>
+      )}
       <Input
+        type={type}
         borderColor={errors && errors[registerId] ? "red" : "inherit"}
         {...register(registerId, { required: true })}
       />

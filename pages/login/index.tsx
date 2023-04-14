@@ -37,7 +37,7 @@ export default function Login() {
       // You need to figure out how to call fetch with a POST body (method).
       fetch("http://localhost:3000/auth/login", {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "no-cors", // *no-cors, cors, same-origin
+        mode: "cors", // no-cors, *cors, same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
         credentials: "same-origin", // include, *same-origin, omit
         headers: {
@@ -46,7 +46,7 @@ export default function Login() {
         },
         redirect: "follow", // manual, *follow, error
         referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: JSON.stringify(data),
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
       })
         .then((res) => res.json())
         .then((data) => {

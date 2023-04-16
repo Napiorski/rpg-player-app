@@ -34,7 +34,7 @@ import { AppContext } from "context/providers/app-provider";
 
 const CharacterCard = styled(Card)`
   margin-top: 10px;
-  padding: 10px;
+  pad ding: 10px;
 `;
 // Primary div container element
 const Primary = styled.div`

@@ -1,7 +1,5 @@
 import * as React from "react";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "../styles/Home.module.css";
+import { useRouter } from 'next/router';
 import {
   Box,
   Button,
@@ -15,14 +13,18 @@ import {
 import { AppContext } from "context/providers/app-provider";
 import { LabelInput } from "components/label-input";
 import { useForm, SubmitHandler } from "react-hook-form";
+import getConfig from "next/config";
 
-const inter = Inter({ subsets: ["latin"] });
+const { publicRuntimeConfig } = getConfig();
 
 export type LoginInputs = {
   [key: string]: string;
 };
 
 export default function Login() {
+  const { username, setUsername } = React.useContext(AppContext);
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -30,28 +32,26 @@ export default function Login() {
     formState: { errors },
   } = useForm<LoginInputs>();
 
-  const onSubmit: SubmitHandler<LoginInputs> = (data) => {
-    if (data.username && data.password) {
-      // TODO: setup a dotenv .env file with the backend server url
-      // TODO: call the auth/login with the username and password in the HTTP POST body
-      // You need to figure out how to call fetch with a POST body (method).
-      fetch("http://localhost:3000/auth/login", {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
+  const onSubmit: SubmitHandler<LoginInputs> = (form) => {
+    if (form.username && form.password) {
+      fetch(`${publicRuntimeConfig.apiUrl}auth/login`, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
           "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-        redirect: "follow", // manual, *follow, error
-        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(form),
       })
         .then((res) => res.json())
         .then((data) => {
-          // This should have the access_token
-          console.log("response for auth/login > ", data);
+          // At this point, we have a valid access token and we know the user's username (login works)
+          localStorage.setItem("accessToken", data.access_token);
+          setUsername(form.username);
+          router.push("/");
         })
         .catch((err) => {
           console.log("error for auth/login > ", err);
@@ -59,10 +59,9 @@ export default function Login() {
     }
   };
 
-  const { user, login, logout } = React.useContext(AppContext);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {user && <Heading>Welcome {user}</Heading>}
+      {username && <Heading>Welcome {username}</Heading>}
       <Grid
         gridTemplateColumns="repeat(7, 1fr)"
         gridTemplateRows="20% 20% 20% 20% 20%"

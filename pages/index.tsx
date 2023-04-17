@@ -1,13 +1,30 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "../styles/Home.module.css";
+import * as React from 'react';
 import { Card, Grid, GridItem, Heading } from "@chakra-ui/react";
-
-const inter = Inter({ subsets: ["latin"] });
+import { useRouter } from 'next/router';
 
 export default function Home() {
-  // TODO: see if we have an access token in context. If we do not have an access token, redirect to login page
+  const router = useRouter();
+  const [accessToken, setAccessToken] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const storageToken = localStorage.getItem("accessToken");
+
+    // This should be a check for a valid access token when the component first mounts
+    if (storageToken && !accessToken) {
+      setAccessToken(storageToken);
+    } else if (!accessToken) {
+      router.push("/login");
+    }
+  }, [accessToken, router]);
+  
+  if (!accessToken) {
+    return null;
+  }
+
+  /**
+   * This is the homepage - it should be a protected route and only accessible
+   * if the user is logged in with a valid access token
+   */
   return (
     <>
       <Heading>Your Homepage</Heading>

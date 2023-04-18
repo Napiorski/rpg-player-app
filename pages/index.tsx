@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 import { Card, Grid, GridItem, Heading } from "@chakra-ui/react";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 export default function Home() {
   const router = useRouter();
@@ -14,17 +14,39 @@ export default function Home() {
       setAccessToken(storageToken);
     } else if (!accessToken) {
       router.push("/login");
+    } else {
+      // Call the /profile endpoint with the access token to check if it is stale
+      fetch("/profile", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+        .then((response) => {
+          if (response.status === 401) {
+            // Access token is stale, redirect to login page
+            localStorage.removeItem("accessToken");
+            router.push("/login");
+          } else if (response.ok) {
+            // Access token is valid, continue rendering the page
+            return response.json();
+          } else {
+            // Handle other errors if necessary
+          }
+        })
+        .then((data) => {
+          // Do something with the profile data if necessary
+        })
+        .catch((error) => {
+          // Handle errors if necessary
+        });
     }
   }, [accessToken, router]);
-  
+
   if (!accessToken) {
     return null;
   }
 
-  /**
-   * This is the homepage - it should be a protected route and only accessible
-   * if the user is logged in with a valid access token
-   */
   return (
     <>
       <Heading>Your Homepage</Heading>

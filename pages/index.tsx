@@ -16,7 +16,7 @@ export default function Home() {
       router.push("/login");
     } else {
       // Call the /profile endpoint with the access token to check if it is stale
-      fetch("/profile", {
+      fetch("http://localhost:3000/profile", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -30,15 +30,12 @@ export default function Home() {
           } else if (response.ok) {
             // Access token is valid, continue rendering the page
             return response.json();
-          } else {
-            // Handle other errors if necessary
           }
         })
-        .then((data) => {
-          // Do something with the profile data if necessary
-        })
         .catch((error) => {
-          // Handle errors if necessary
+          // Access token is stale, redirect to login page
+          localStorage.removeItem("accessToken");
+          router.push("/login");
         });
     }
   }, [accessToken, router]);

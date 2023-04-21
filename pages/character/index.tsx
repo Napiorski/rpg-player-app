@@ -31,11 +31,11 @@ import { languages } from "../../data/languages";
 import { equippedItems } from "../../data/equipped-items";
 import { LabelInput } from "../../components/label-input";
 import { AppContext } from "context/providers/app-provider";
-
+import { useRouter } from "next/router";
 
 const CharacterCard = styled(Card)`
   margin-top: 10px;
-  pad ding: 10px;
+  padding: 10px;
 `;
 // Primary div container element
 const Primary = styled.div`
@@ -79,18 +79,63 @@ export type CharacterSheetInputs = {
 };
 
 export default function Character() {
+  // TODO: check for character sheet in db and if it exists
+  // then populate the form with the data from the db
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<CharacterSheetInputs>();
 
   const onSubmit: SubmitHandler<CharacterSheetInputs> = (data) => {
+    // TODO: offload to our database - if the character sheet
+    // is not in the db then create it else update it
     console.log(data);
   };
 
-  const { user } = React.useContext(AppContext);
+  // protected route check:
+  const router = useRouter();
+  const [accessToken, setAccessToken] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const storageToken = localStorage.getItem("accessToken");
+
+    // This should be a check for a valid access token when the component first mounts
+    if (storageToken && !accessToken) {
+      setAccessToken(storageToken);
+    } else if (!accessToken) {
+      router.push("/login");
+    } else {
+      // Call the /profile endpoint with the access token to check if it is stale
+      fetch("http://localhost:3000/profile", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+        .then((response) => {
+          if (response.status === 401) {
+            // Access token is stale, redirect to login page
+            localStorage.removeItem("accessToken");
+            router.push("/login");
+          } else if (response.ok) {
+            // Access token is valid, continue rendering the page
+            return response.json();
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          // Access token is stale, redirect to login page
+          localStorage.removeItem("accessToken");
+          router.push("/login");
+        });
+    }
+  }, [accessToken, router]);
+
+  if (!accessToken) {
+    return null;
+  }
 
   // JSX is really the view-layer (put any data or logic above this)
   return (
@@ -104,7 +149,7 @@ export default function Character() {
       <main>
         <Primary>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Heading>Character Sheet{user ? ` for ${user}` : ""}</Heading>
+            <Heading>Character Sheet</Heading>
             <Button mt={4} colorScheme="teal" type="submit">
               Submit
             </Button>

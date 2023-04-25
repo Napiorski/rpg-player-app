@@ -19,5 +19,5 @@ export const useNightMode = () => {
     setIsNightMode(!isNightMode);
   };
 
-  return [isNightMode, toggleNightMode];
+  return { isNightMode, toggleNightMode };
 };

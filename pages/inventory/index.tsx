@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, Heading } from "@chakra-ui/react";
-import { useAuth } from "hooks/use_Auth";
+import { useAuth } from "hooks/use-auth";
 
 export default function Inventory() {
   const accessToken = useAuth();

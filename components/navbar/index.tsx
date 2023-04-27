@@ -16,6 +16,7 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  useColorMode,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -26,6 +27,7 @@ import {
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import { AppContext } from "context/providers/app-provider";
 
 // See: https://chakra-templates.dev/navigation/navbar
 const NAV_ITEMS = [
@@ -74,6 +76,7 @@ export const Navbar = () => {
   // TODO: setup player context (global store)
   // const {state: {username, isLoggedIn}} = useRpgContext()
 
+  const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
 
   const initialRef = React.useRef();
@@ -118,7 +121,9 @@ export const Navbar = () => {
             <DesktopNav />
           </Flex>
         </Flex>
-
+        <Button onClick={toggleColorMode}>
+          {colorMode === "light" ? "Dark" : "Light"}
+        </Button>
         {/* TODO: revisit this when we work on the login/context
         <Stack
           flex={{base: 1, md: 0}}

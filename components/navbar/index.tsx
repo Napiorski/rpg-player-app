@@ -27,7 +27,6 @@ import {
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-import { useNightMode } from "hooks/nightmode-hook";
 import { AppContext } from "context/providers/app-provider";
 
 // See: https://chakra-templates.dev/navigation/navbar
@@ -77,7 +76,6 @@ export const Navbar = () => {
   // TODO: setup player context (global store)
   // const {state: {username, isLoggedIn}} = useRpgContext()
 
-  // const { isNightMode, toggleNightMode } = React.useContext(AppContext);
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
 

@@ -21,6 +21,7 @@ import {
   Input,
   Button,
   Text,
+  Spinner,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { InputStatCard } from "../../components/input-stat-card";
@@ -32,6 +33,7 @@ import { equippedItems } from "../../data/equipped-items";
 import { LabelInput } from "../../components/label-input";
 import { AppContext } from "context/providers/app-provider";
 import { useRouter } from "next/router";
+import { useQuery } from "react-query";
 
 const CharacterCard = styled(Card)`
   margin-top: 10px;
@@ -98,6 +100,17 @@ export default function Character() {
   const router = useRouter();
   const [accessToken, setAccessToken] = React.useState<string | null>(null);
 
+  // Get the username:
+  const { username } = React.useContext(AppContext);
+
+  const { isLoading, isError, data } = useQuery("character", () =>
+    fetch(`http://localhost:3000/character/${username}`)
+      .then((data) => data.json())
+      .then((json) => json)
+  );
+
+  // This code ensures that we have a valid access token
+  // before rendering the page
   React.useEffect(() => {
     const storageToken = localStorage.getItem("accessToken");
 
@@ -120,6 +133,9 @@ export default function Character() {
             localStorage.removeItem("accessToken");
             router.push("/login");
           } else if (response.ok) {
+            // TODO: call the /character endpoint to get the
+            // character sheet so the app is more performant (not a big deal now)
+
             // Access token is valid, continue rendering the page
             return response.json();
           }
@@ -136,6 +152,16 @@ export default function Character() {
   if (!accessToken) {
     return null;
   }
+
+  if (isLoading) {
+    return <Spinner />;
+  } else if (isError) {
+    return <Text>There was an error loading your character sheet.</Text>;
+  }
+
+  // At this point we should have the data with an existing character:
+  const { characterData } = data;
+  const character = characterData[0];
 
   // JSX is really the view-layer (put any data or logic above this)
   return (
@@ -161,6 +187,7 @@ export default function Character() {
                     register={register}
                     label="Character Name:"
                     errors={errors}
+                    defaultValue={character.characterName}
                   />
                 </GridItem>
                 <GridItem w="100%" pr="15px">
@@ -169,6 +196,7 @@ export default function Character() {
                     register={register}
                     label="Player Name:"
                     errors={errors}
+                    defaultValue={character.playerName}
                   />
                 </GridItem>
 
@@ -178,6 +206,7 @@ export default function Character() {
                     register={register}
                     label="Class:"
                     errors={errors}
+                    defaultValue={character.class}
                   />
                 </GridItem>
                 <GridItem w="100%" pr={"15px"}>
@@ -186,6 +215,7 @@ export default function Character() {
                     register={register}
                     label="Race:"
                     errors={errors}
+                    defaultValue={character.race}
                   />
                 </GridItem>
                 <GridItem w="100%">
@@ -194,6 +224,7 @@ export default function Character() {
                     register={register}
                     label="Level:"
                     errors={errors}
+                    defaultValue={character.level}
                   />
                 </GridItem>
                 <GridItem w="100%" pr="15px">
@@ -202,6 +233,7 @@ export default function Character() {
                     register={register}
                     label="Experience:"
                     errors={errors}
+                    defaultValue={character.experience}
                   />
                 </GridItem>
               </Grid>
@@ -249,6 +281,7 @@ export default function Character() {
                         registerId="inspiration"
                         label="INSPIRATION"
                         errors={errors}
+                        defaultValue={character.inspiration}
                       />
                       {errors.inspirationRequired && (
                         <span>This field is required</span>
@@ -259,64 +292,132 @@ export default function Character() {
                         register={register}
                         label="PROFICIENCY BONUS"
                         errors={errors}
+                        defaultValue={character.proficiencyBonus}
                       />
                       <Card mb={"30px"}>
                         SAVING THROWS
-                        <CheckboxGroupCard label="Strength" />
-                        <CheckboxGroupCard label="Dexterity" />
-                        <CheckboxGroupCard label="Constitution" />
-                        <CheckboxGroupCard label="Intelligence" />
-                        <CheckboxGroupCard label="Wisdom" />
-                        <CheckboxGroupCard label="Charisma" />
+                        <CheckboxGroupCard
+                          label="Strength"
+                          defaultValue={character.strength}
+                        />
+                        <CheckboxGroupCard
+                          label="Dexterity"
+                          defaultValue={character.dexterity}
+                        />
+                        <CheckboxGroupCard
+                          label="Constitution"
+                          defaultValue={character.constitution}
+                        />
+                        <CheckboxGroupCard
+                          label="Intelligence"
+                          defaultValue={character.intelligence}
+                        />
+                        <CheckboxGroupCard
+                          label="Wisdom"
+                          defaultValue={character.wisdom}
+                        />
+                        <CheckboxGroupCard
+                          label="Charisma"
+                          defaultValue={character.charisma}
+                        />
                       </Card>
                       <Card>
                         SKILLS
                         <CheckboxGroupCard
+                          defaultValue={character.skills}
                           label="Acrobatics"
                           subLabel={"Dex"}
                         />
                         <CheckboxGroupCard
+                          defaultValue={character.skills}
                           label="Animal Handling"
                           subLabel={"Wis"}
                         />
-                        <CheckboxGroupCard label="Arcana" subLabel={"Int"} />
-                        <CheckboxGroupCard label="Athletics" subLabel={"Str"} />
-                        <CheckboxGroupCard label="Deception" subLabel={"Cha"} />
-                        <CheckboxGroupCard label="History" subLabel={"Int"} />
-                        <CheckboxGroupCard label="Insight" subLabel={"Wis"} />
+                        <CheckboxGroupCard
+                          label="Arcana"
+                          subLabel={"Int"}
+                          defaultValue={character.skills}
+                        />
+                        <CheckboxGroupCard
+                          label="Athletics"
+                          subLabel={"Str"}
+                          defaultValue={character.skills}
+                        />
+                        <CheckboxGroupCard
+                          label="Deception"
+                          subLabel={"Cha"}
+                          defaultValue={character.skills}
+                        />
+                        <CheckboxGroupCard
+                          label="History"
+                          subLabel={"Int"}
+                          defaultValue={character.skills}
+                        />
+                        <CheckboxGroupCard
+                          label="Insight"
+                          subLabel={"Wis"}
+                          defaultValue={character.skills}
+                        />
                         <CheckboxGroupCard
                           label="Intimidation"
                           subLabel={"Cha"}
+                          defaultValue={character.skills}
                         />
                         <CheckboxGroupCard
                           label="Investigation"
                           subLabel={"Int"}
+                          defaultValue={character.skills}
                         />
-                        <CheckboxGroupCard label="Medicine" subLabel={"Wis"} />
-                        <CheckboxGroupCard label="Nature" subLabel={"Int"} />
                         <CheckboxGroupCard
+                          defaultValue={character.skills}
+                          label="Medicine"
+                          subLabel={"Wis"}
+                        />
+                        <CheckboxGroupCard
+                          defaultValue={character.skills}
+                          label="Nature"
+                          subLabel={"Int"}
+                        />
+                        <CheckboxGroupCard
+                          defaultValue={character.skills}
                           label="Perception"
                           subLabel={"Wis"}
                         />
                         <CheckboxGroupCard
+                          defaultValue={character.skills}
                           label="Performance"
                           subLabel={"Cha"}
                         />
                         <CheckboxGroupCard
+                          defaultValue={character.skills}
                           label="Persuasion"
                           subLabel={"Cha"}
                         />
-                        <CheckboxGroupCard label="Religion" subLabel={"Int"} />
                         <CheckboxGroupCard
+                          defaultValue={character.skills}
+                          label="Religion"
+                          subLabel={"Int"}
+                        />
+                        <CheckboxGroupCard
+                          defaultValue={character.skills}
                           label="Sleight of Hand"
                           subLabel={"Dex"}
                         />
-                        <CheckboxGroupCard label="Stealth" subLabel={"Dex"} />
-                        <CheckboxGroupCard label="Survival" subLabel={"Wis"} />
+                        <CheckboxGroupCard
+                          defaultValue={character.skills}
+                          label="Stealth"
+                          subLabel={"Dex"}
+                        />
+                        <CheckboxGroupCard
+                          defaultValue={character.skills}
+                          label="Survival"
+                          subLabel={"Wis"}
+                        />
                       </Card>
                     </GridItem>
                     <GridItem pl="2" area={"perception"}>
                       <InputLabelCard
+                        defaultValue={character.perception}
                         registerId="perception"
                         register={register}
                         placeholder="-"
@@ -358,18 +459,21 @@ export default function Character() {
                     <CardBody>
                       <Flex gap={4} paddingBottom={4}>
                         <InputStatCard
+                          defaultValue={character.armorClass}
                           registerId="AC"
                           register={register}
                           title="AC"
                           errors={errors}
                         />
                         <InputStatCard
+                          defaultValue={character.initiative}
                           registerId="INIT"
                           register={register}
                           title="INIT"
                           errors={errors}
                         />
                         <InputStatCard
+                          defaultValue={character.speed}
                           registerId="SPEED"
                           register={register}
                           title="SPEED"
@@ -377,10 +481,16 @@ export default function Character() {
                         />
                       </Flex>
                       <Flex mb={"30px"}>
-                        <Textarea placeholder="Max & Current Hit Points" />
+                        <Textarea
+                          defaultValue={character.maxHp}
+                          placeholder="Max Hit Points"
+                        />
                       </Flex>
                       <Flex mb={"30px"}>
-                        <Textarea placeholder="Temporary hit points" />
+                        <Textarea
+                          defaultValue={character.currentHp}
+                          placeholder="Current Hit Points"
+                        />
                       </Flex>
                       <Flex>
                         <Box p={4}>

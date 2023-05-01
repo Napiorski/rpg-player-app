@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import {
   Box,
   Button,
@@ -23,6 +23,7 @@ export type LoginInputs = {
 
 export default function Login() {
   const { username, setUsername } = React.useContext(AppContext);
+
   const router = useRouter();
 
   const {

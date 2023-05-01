@@ -1,33 +1,32 @@
 import React from "react";
 import {
   Box,
+  Button,
+  Collapse,
   Flex,
+  Icon,
+  IconButton,
   Image,
   Link,
-  Text,
-  IconButton,
-  Button,
-  Stack,
-  Collapse,
-  Icon,
   Popover,
-  PopoverTrigger,
   PopoverContent,
-  useColorModeValue,
-  useBreakpointValue,
-  useDisclosure,
+  PopoverTrigger,
+  Stack,
+  Text,
   useColorMode,
+  useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import {
-  HamburgerIcon,
-  CloseIcon,
   ChevronDownIcon,
   ChevronRightIcon,
+  CloseIcon,
+  HamburgerIcon,
+  MoonIcon,
+  SunIcon,
 } from "@chakra-ui/icons";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
-import { AppContext } from "context/providers/app-provider";
 
 // See: https://chakra-templates.dev/navigation/navbar
 const NAV_ITEMS = [
@@ -77,10 +76,7 @@ export const Navbar = () => {
   // const {state: {username, isLoggedIn}} = useRpgContext()
 
   const { colorMode, toggleColorMode } = useColorMode();
-  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
-
-  const initialRef = React.useRef();
-  const finalRef = React.useRef();
+  const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Box>
@@ -122,7 +118,7 @@ export const Navbar = () => {
           </Flex>
         </Flex>
         <Button onClick={toggleColorMode}>
-          {colorMode === "light" ? "Dark" : "Light"}
+          {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
         </Button>
         {/* TODO: revisit this when we work on the login/context
         <Stack

@@ -3,16 +3,7 @@ import { Card, Box, CardBody, Center, Input } from "@chakra-ui/react";
 import { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 import { CharacterSheetInputs } from "../../pages/character";
 import styled from "@emotion/styled";
-
-const WarningView = styled.span`
-  padding: 6px;
-`;
-
-const Warning = styled.span`
-  color: red;
-  font-size: 12px;
-  font-weight: 400;
-`;
+import { Warning } from "components/warning";
 
 interface StatCardProps {
   title: string;
@@ -54,9 +45,7 @@ export function InputStatCard({
           textAlign="center"
         />
         {errors && errors[registerId] && (
-          <WarningView>
-            <Warning>* This field is required</Warning>
-          </WarningView>
+          <Warning>* This field is required</Warning>
         )}
       </Card>
     </Box>

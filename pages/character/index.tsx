@@ -34,6 +34,8 @@ import { LabelInput } from "../../components/label-input";
 import { AppContext } from "context/providers/app-provider";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
+import { LabelWithText } from "components/label-with-text";
+import { Warning } from "components/warning";
 
 const CharacterCard = styled(Card)`
   margin-top: 10px;
@@ -284,7 +286,7 @@ export default function Character() {
                         defaultValue={character.inspiration}
                       />
                       {errors.inspirationRequired && (
-                        <span>This field is required</span>
+                        <Warning>This field is required</Warning>
                       )}
 
                       <InputLabelCard
@@ -495,6 +497,7 @@ export default function Character() {
                       <Flex>
                         <Box p={4}>
                           <InputStatCard
+                            defaultValue={character.hitDice}
                             registerId="HIT_DICE"
                             register={register}
                             title="HIT DICE"
@@ -505,15 +508,33 @@ export default function Character() {
                           <VStack>
                             <Box>
                               SUCCESSES:
-                              <Checkbox padding="3px"></Checkbox>
-                              <Checkbox padding="3px"></Checkbox>
-                              <Checkbox padding="3px"></Checkbox>
+                              <Checkbox
+                                defaultValue={character.deathSaves}
+                                padding="3px"
+                              ></Checkbox>
+                              <Checkbox
+                                defaultValue={character.deathSaves}
+                                padding="3px"
+                              ></Checkbox>
+                              <Checkbox
+                                defaultValue={character.deathSaves}
+                                padding="3px"
+                              ></Checkbox>
                             </Box>
                             <Box>
                               FAILURES:
-                              <Checkbox padding="3px"></Checkbox>
-                              <Checkbox padding="3px"></Checkbox>
-                              <Checkbox padding="3px"></Checkbox>
+                              <Checkbox
+                                defaultValue={character.deathSaves}
+                                padding="3px"
+                              ></Checkbox>
+                              <Checkbox
+                                defaultValue={character.deathSaves}
+                                padding="3px"
+                              ></Checkbox>
+                              <Checkbox
+                                defaultValue={character.deathSaves}
+                                padding="3px"
+                              ></Checkbox>
                             </Box>
                             <Box>DEATH SAVES</Box>
                           </VStack>
@@ -523,26 +544,31 @@ export default function Character() {
                     <Divider />
                   </CharacterCard>
                   <CharacterCard fontWeight="bold">
-                    <Select pb={4} placeholder="Background">
-                      <option value="option1">Acolyte</option>
-                      <option value="option1">Charlatan</option>
-                      <option value="option1">Criminal</option>
-                      <option value="option1">Entertainer</option>
-                      <option value="option1">Folk Hero</option>
-                      <option value="option1">Guild Artisan</option>
-                      <option value="option1">Hermit</option>
-                      <option value="option1">Noble</option>
-                      <option value="option1">Outlander</option>
-                      <option value="option1">Sage</option>
-                      <option value="option1">Sailor</option>
-                      <option value="option1">Soldier</option>
-                      <option value="option1">Urchin</option>
-                    </Select>
+                    <LabelWithText
+                      label="Background"
+                      register={register}
+                      registerId="background"
+                      placeholder={character.background}
+                    />
                     <List>
-                      <Textarea mb={"30px"} placeholder="Personality traits" />
-                      <Textarea mb={"30px"} placeholder="Ideals" />
-                      <Textarea mb={"30px"} placeholder="Bonds" />
-                      <Textarea mb={"30px"} placeholder="Flaws" />
+                      <Textarea
+                        mb={"30px"}
+                        placeholder={
+                          character.personality || "Personality Traits"
+                        }
+                      />
+                      <Textarea
+                        mb={"30px"}
+                        placeholder={character.ideals || "Ideals"}
+                      />
+                      <Textarea
+                        mb={"30px"}
+                        placeholder={character.bonds || "Bonds"}
+                      />
+                      <Textarea
+                        mb={"30px"}
+                        placeholder={character.flaws || "Flaws"}
+                      />
                     </List>
                     <Select placeholder="Alignment">
                       <option value="option1">Lawful Good</option>

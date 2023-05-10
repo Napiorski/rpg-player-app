@@ -438,17 +438,47 @@ export default function Character() {
                         >
                           PROFICIENCIES
                         </Heading>
-                        <Text fontWeight="bold">Armor Proficiencies:</Text>
+                        <Text
+                          defaultValue={character.proficiencies}
+                          fontWeight="bold"
+                        >
+                          Armor Proficiencies:
+                        </Text>
                         <Input></Input>
-                        <Text fontWeight="bold">Weapon Proficiencies:</Text>
+                        <Text
+                          defaultValue={character.proficiencies}
+                          fontWeight="bold"
+                        >
+                          Weapon Proficiencies:
+                        </Text>
                         <Input></Input>
-                        <Text fontWeight="bold">Vehicle Proficiencies:</Text>
+                        <Text
+                          defaultValue={character.proficiencies}
+                          fontWeight="bold"
+                        >
+                          Vehicle Proficiencies:
+                        </Text>
                         <Input></Input>
-                        <Text fontWeight="bold">Tool Proficiencies:</Text>
+                        <Text
+                          defaultValue={character.proficiencies}
+                          fontWeight="bold"
+                        >
+                          Tool Proficiencies:
+                        </Text>
                         <Input></Input>
-                        <Text fontWeight="bold">Other Proficiencies:</Text>
+                        <Text
+                          defaultValue={character.proficiencies}
+                          fontWeight="bold"
+                        >
+                          Other Proficiencies:
+                        </Text>
                         <Input></Input>
-                        <Text fontWeight="bold">Other Speeds:</Text>
+                        <Text
+                          defaultValue={character.proficiencies}
+                          fontWeight="bold"
+                        >
+                          Other Speeds:
+                        </Text>
                         <Input></Input>
                       </Card>
                     </GridItem>
@@ -548,7 +578,7 @@ export default function Character() {
                       label="Background"
                       register={register}
                       registerId="background"
-                      placeholder={character.background}
+                      placeholder={character.background || "Background"}
                     />
                     <List>
                       <Textarea
@@ -570,7 +600,10 @@ export default function Character() {
                         placeholder={character.flaws || "Flaws"}
                       />
                     </List>
-                    <Select placeholder="Alignment">
+                    <Select
+                      defaultValue={character.alignment}
+                      placeholder="Alignment"
+                    >
                       <option value="option1">Lawful Good</option>
                       <option value="option2">Lawful Neutral</option>
                       <option value="option3">Lawful Evil</option>

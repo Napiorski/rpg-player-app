@@ -33,9 +33,10 @@ import { equippedItems } from "../../data/equipped-items";
 import { LabelInput } from "../../components/label-input";
 import { AppContext } from "context/providers/app-provider";
 import { useRouter } from "next/router";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { LabelWithText } from "components/label-with-text";
 import { Warning } from "components/warning";
+import Alignment from "components/alignment";
 
 const CharacterCard = styled(Card)`
   margin-top: 10px;
@@ -96,6 +97,8 @@ export default function Character() {
     // TODO: offload to our database - if the character sheet
     // is not in the db then create it else update it
     console.log(data);
+    event.preventDefault();
+    mutate();
   };
 
   // protected route check:
@@ -110,6 +113,28 @@ export default function Character() {
       .then((data) => data.json())
       .then((json) => json)
   );
+  const UpdateCharacter = ({ username, updatedCharacterData }) => {
+    const [mutate, { isLoading, isError, data }] = useMutation(
+      () =>
+        fetch(`http://localhost:3000/character/${username}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedCharacterData),
+        }).then((res) => res.json()),
+      {
+        onSuccess: (data) => {
+          console.log("Updated character:", data);
+          // Handle success behavior here
+        },
+        onError: (error) => {
+          console.error("Error updating character:", error);
+          // Handle error behavior here
+        },
+      }
+    );
+  
 
   // This code ensures that we have a valid access token
   // before rendering the page
@@ -163,7 +188,7 @@ export default function Character() {
 
   // At this point we should have the data with an existing character:
   const { characterData } = data;
-  const character = characterData[0];
+  const character = characterData ? characterData[0] : null;
 
   // JSX is really the view-layer (put any data or logic above this)
   return (
@@ -600,23 +625,12 @@ export default function Character() {
                         placeholder={character.flaws || "Flaws"}
                       />
                     </List>
-                    <Select
+                    <Alignment
+                      registerId="alignment"
+                      register={register}
+                      errors={errors}
                       defaultValue={character.alignment}
-                      placeholder="Alignment"
-                    >
-                      <option value="option1">Lawful Good</option>
-                      <option value="option2">Lawful Neutral</option>
-                      <option value="option3">Lawful Evil</option>
-                      <option value="option1">Neutral Good</option>
-                      <option value="option2">True Neutral</option>
-                      <option value="option3">Neutral Evil</option>
-                      <option value="option3">Chaotic Good</option>
-                      <option value="option1">Chaotic Neutral</option>
-                      <option value="option2">Chaotic Evil</option>
-                      <option value="option3">Lawful Jerk</option>
-                      <option value="option1">Chaotic Stupid</option>
-                      <option value="option2">Neutral Wuss</option>
-                    </Select>
+                    />
                   </CharacterCard>
                   {/*One big row spanning both of our Grid columns*/}
                   <GridItem w="100%" colSpan={2}>

@@ -21,10 +21,12 @@ const SubLabel = styled.span`
 type CheckboxGroupCardProps = {
   label: string;
   subLabel?: string;
+  defaultValue?: string;
 };
 
 export function CheckboxGroupCard({
   label,
+  defaultValue,
   subLabel = "",
 }: CheckboxGroupCardProps) {
   return (
@@ -33,7 +35,14 @@ export function CheckboxGroupCard({
         {" "}
       </Checkbox>
       <Box px="15px" fontWeight={"bold"}>
-        <Input placeholder="-" w={10} mr={2} variant="flushed" mb={2} />
+        <Input
+          defaultValue={defaultValue}
+          placeholder="-"
+          w={10}
+          mr={2}
+          variant="flushed"
+          mb={2}
+        />
         {label}
         {subLabel && <SubLabel color={"#D3D3D3"}> ({subLabel})</SubLabel>}
       </Box>

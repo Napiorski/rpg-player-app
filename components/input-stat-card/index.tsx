@@ -6,22 +6,29 @@ import styled from "@emotion/styled";
 
 const WarningView = styled.span`
   padding: 6px;
-`
+`;
 
 const Warning = styled.span`
   color: red;
   font-size: 12px;
   font-weight: 400;
-`
+`;
 
 interface StatCardProps {
   title: string;
   registerId: string;
   register: UseFormRegister<CharacterSheetInputs>;
-  errors?: Partial<FieldErrorsImpl<CharacterSheetInputs>>
+  errors?: Partial<FieldErrorsImpl<CharacterSheetInputs>>;
+  defaultValue?: string;
 }
 
-export function InputStatCard({ title, registerId, register, errors }: StatCardProps) {
+export function InputStatCard({
+  title,
+  defaultValue,
+  registerId,
+  register,
+  errors,
+}: StatCardProps) {
   return (
     <Box>
       <Card variant="elevated">
@@ -29,6 +36,7 @@ export function InputStatCard({ title, registerId, register, errors }: StatCardP
           <Center flexDirection={"column"}>
             <Box fontWeight={"bold"}>{title}</Box>
             <Input
+              defaultValue={defaultValue}
               {...register(registerId, { required: true })}
               type="number"
               size="sm"
@@ -45,13 +53,12 @@ export function InputStatCard({ title, registerId, register, errors }: StatCardP
           placeholder="-"
           textAlign="center"
         />
-      {errors && errors[registerId] && (
-        <WarningView>
-          <Warning>* This field is required</Warning>
-        </WarningView>
-      )}        
+        {errors && errors[registerId] && (
+          <WarningView>
+            <Warning>* This field is required</Warning>
+          </WarningView>
+        )}
       </Card>
-
     </Box>
   );
 }

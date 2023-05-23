@@ -11,6 +11,7 @@ const Warning = styled.span`
 `;
 
 type LabelInputProps = {
+  defaultValue?: string;
   label: string;
   placeholder?: string;
   registerId: string;
@@ -45,6 +46,7 @@ type LabelInputProps = {
 };
 
 export function LabelInput({
+  defaultValue,
   label,
   registerId,
   register,
@@ -60,6 +62,7 @@ export function LabelInput({
         </Box>
       )}
       <Input
+        value={defaultValue}
         type={type}
         borderColor={errors && errors[registerId] ? "red" : "inherit"}
         {...register(registerId, { required: true })}

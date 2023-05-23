@@ -2,20 +2,21 @@ import * as React from "react";
 import { Card, Box, CardBody, Center, Input, Flex } from "@chakra-ui/react";
 import { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 import { CharacterSheetInputs } from "../../pages/character";
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
 
 const Warning = styled.span`
   color: red;
   font-size: 12px;
   font-weight: 400;
-`
+`;
 
 type InputLabelCardProps = {
   label: string;
   placeholder?: string;
   registerId: string;
   register: UseFormRegister<CharacterSheetInputs>;
-  errors?: Partial<FieldErrorsImpl<CharacterSheetInputs>>
+  errors?: Partial<FieldErrorsImpl<CharacterSheetInputs>>;
+  defaultValue?: string | number;
 };
 
 export function InputLabelCard({
@@ -23,7 +24,8 @@ export function InputLabelCard({
   placeholder,
   registerId,
   register,
-  errors
+  defaultValue,
+  errors,
 }: InputLabelCardProps) {
   return (
     <Card variant="elevated" mb={"30px"}>
@@ -31,6 +33,7 @@ export function InputLabelCard({
         <Center>
           <Box>
             <Input
+              defaultValue={defaultValue}
               {...register(registerId, { required: true })}
               type="number"
               size="sm"
@@ -46,7 +49,7 @@ export function InputLabelCard({
         <Center>
           <Box px="15px" fontWeight={"bold"}>
             {label}
-          </Box>        
+          </Box>
         </Center>
       </Flex>
       <Flex pl={"10px"} mb={"10px"}>

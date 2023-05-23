@@ -3,12 +3,7 @@ import { Card, Box, CardBody, Center, Input, Flex } from "@chakra-ui/react";
 import { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 import { CharacterSheetInputs } from "../../pages/character";
 import styled from "@emotion/styled";
-
-const Warning = styled.span`
-  color: red;
-  font-size: 12px;
-  font-weight: 400;
-`;
+import { Warning } from "components/warning";
 
 type InputLabelCardProps = {
   label: string;

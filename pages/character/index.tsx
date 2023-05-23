@@ -33,7 +33,10 @@ import { equippedItems } from "../../data/equipped-items";
 import { LabelInput } from "../../components/label-input";
 import { AppContext } from "context/providers/app-provider";
 import { useRouter } from "next/router";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
+import { LabelWithText } from "components/label-with-text";
+import { Warning } from "components/warning";
+import Alignment from "components/alignment";
 
 const CharacterCard = styled(Card)`
   margin-top: 10px;
@@ -94,6 +97,8 @@ export default function Character() {
     // TODO: offload to our database - if the character sheet
     // is not in the db then create it else update it
     console.log(data);
+    //event.preventDefault();
+    // mutate();
   };
 
   // protected route check:
@@ -108,6 +113,28 @@ export default function Character() {
       .then((data) => data.json())
       .then((json) => json)
   );
+
+  //const UpdateCharacter = ({ username, updatedCharacterData }) => {
+  //const [mutate, { isLoading, isError, data }] = useMutation(
+  //() =>
+  //fetch(`http://localhost:3000/character/${username}`, {
+  //method: "POST",
+  //headers: {
+  //"Content-Type": "application/json",
+  //},
+  //body: JSON.stringify(updatedCharacterData),
+  // }).then((res) => res.json()),
+  // {
+  // onSuccess: (data) => {
+  // console.log("Updated character:", data);
+  // Handle success behavior here
+  // },
+  //onError: (error) => {
+  //console.error("Error updating character:", error);
+  // Handle error behavior here
+  //},
+  //}
+  //);
 
   // This code ensures that we have a valid access token
   // before rendering the page
@@ -161,7 +188,7 @@ export default function Character() {
 
   // At this point we should have the data with an existing character:
   const { characterData } = data;
-  const character = characterData[0];
+  const character = characterData ? characterData[0] : null;
 
   // JSX is really the view-layer (put any data or logic above this)
   return (
@@ -284,7 +311,7 @@ export default function Character() {
                         defaultValue={character.inspiration}
                       />
                       {errors.inspirationRequired && (
-                        <span>This field is required</span>
+                        <Warning>This field is required</Warning>
                       )}
 
                       <InputLabelCard
@@ -436,17 +463,47 @@ export default function Character() {
                         >
                           PROFICIENCIES
                         </Heading>
-                        <Text fontWeight="bold">Armor Proficiencies:</Text>
+                        <Text
+                          defaultValue={character.proficiencies}
+                          fontWeight="bold"
+                        >
+                          Armor Proficiencies:
+                        </Text>
                         <Input></Input>
-                        <Text fontWeight="bold">Weapon Proficiencies:</Text>
+                        <Text
+                          defaultValue={character.proficiencies}
+                          fontWeight="bold"
+                        >
+                          Weapon Proficiencies:
+                        </Text>
                         <Input></Input>
-                        <Text fontWeight="bold">Vehicle Proficiencies:</Text>
+                        <Text
+                          defaultValue={character.proficiencies}
+                          fontWeight="bold"
+                        >
+                          Vehicle Proficiencies:
+                        </Text>
                         <Input></Input>
-                        <Text fontWeight="bold">Tool Proficiencies:</Text>
+                        <Text
+                          defaultValue={character.proficiencies}
+                          fontWeight="bold"
+                        >
+                          Tool Proficiencies:
+                        </Text>
                         <Input></Input>
-                        <Text fontWeight="bold">Other Proficiencies:</Text>
+                        <Text
+                          defaultValue={character.proficiencies}
+                          fontWeight="bold"
+                        >
+                          Other Proficiencies:
+                        </Text>
                         <Input></Input>
-                        <Text fontWeight="bold">Other Speeds:</Text>
+                        <Text
+                          defaultValue={character.proficiencies}
+                          fontWeight="bold"
+                        >
+                          Other Speeds:
+                        </Text>
                         <Input></Input>
                       </Card>
                     </GridItem>
@@ -495,6 +552,7 @@ export default function Character() {
                       <Flex>
                         <Box p={4}>
                           <InputStatCard
+                            defaultValue={character.hitDice}
                             registerId="HIT_DICE"
                             register={register}
                             title="HIT DICE"
@@ -505,15 +563,33 @@ export default function Character() {
                           <VStack>
                             <Box>
                               SUCCESSES:
-                              <Checkbox padding="3px"></Checkbox>
-                              <Checkbox padding="3px"></Checkbox>
-                              <Checkbox padding="3px"></Checkbox>
+                              <Checkbox
+                                defaultValue={character.deathSaves}
+                                padding="3px"
+                              ></Checkbox>
+                              <Checkbox
+                                defaultValue={character.deathSaves}
+                                padding="3px"
+                              ></Checkbox>
+                              <Checkbox
+                                defaultValue={character.deathSaves}
+                                padding="3px"
+                              ></Checkbox>
                             </Box>
                             <Box>
                               FAILURES:
-                              <Checkbox padding="3px"></Checkbox>
-                              <Checkbox padding="3px"></Checkbox>
-                              <Checkbox padding="3px"></Checkbox>
+                              <Checkbox
+                                defaultValue={character.deathSaves}
+                                padding="3px"
+                              ></Checkbox>
+                              <Checkbox
+                                defaultValue={character.deathSaves}
+                                padding="3px"
+                              ></Checkbox>
+                              <Checkbox
+                                defaultValue={character.deathSaves}
+                                padding="3px"
+                              ></Checkbox>
                             </Box>
                             <Box>DEATH SAVES</Box>
                           </VStack>
@@ -523,41 +599,38 @@ export default function Character() {
                     <Divider />
                   </CharacterCard>
                   <CharacterCard fontWeight="bold">
-                    <Select pb={4} placeholder="Background">
-                      <option value="option1">Acolyte</option>
-                      <option value="option1">Charlatan</option>
-                      <option value="option1">Criminal</option>
-                      <option value="option1">Entertainer</option>
-                      <option value="option1">Folk Hero</option>
-                      <option value="option1">Guild Artisan</option>
-                      <option value="option1">Hermit</option>
-                      <option value="option1">Noble</option>
-                      <option value="option1">Outlander</option>
-                      <option value="option1">Sage</option>
-                      <option value="option1">Sailor</option>
-                      <option value="option1">Soldier</option>
-                      <option value="option1">Urchin</option>
-                    </Select>
+                    <LabelWithText
+                      label="Background"
+                      register={register}
+                      registerId="background"
+                      placeholder={character.background || "Background"}
+                    />
                     <List>
-                      <Textarea mb={"30px"} placeholder="Personality traits" />
-                      <Textarea mb={"30px"} placeholder="Ideals" />
-                      <Textarea mb={"30px"} placeholder="Bonds" />
-                      <Textarea mb={"30px"} placeholder="Flaws" />
+                      <Textarea
+                        mb={"30px"}
+                        placeholder={
+                          character.personality || "Personality Traits"
+                        }
+                      />
+                      <Textarea
+                        mb={"30px"}
+                        placeholder={character.ideals || "Ideals"}
+                      />
+                      <Textarea
+                        mb={"30px"}
+                        placeholder={character.bonds || "Bonds"}
+                      />
+                      <Textarea
+                        mb={"30px"}
+                        placeholder={character.flaws || "Flaws"}
+                      />
                     </List>
-                    <Select placeholder="Alignment">
-                      <option value="option1">Lawful Good</option>
-                      <option value="option2">Lawful Neutral</option>
-                      <option value="option3">Lawful Evil</option>
-                      <option value="option1">Neutral Good</option>
-                      <option value="option2">True Neutral</option>
-                      <option value="option3">Neutral Evil</option>
-                      <option value="option3">Chaotic Good</option>
-                      <option value="option1">Chaotic Neutral</option>
-                      <option value="option2">Chaotic Evil</option>
-                      <option value="option3">Lawful Jerk</option>
-                      <option value="option1">Chaotic Stupid</option>
-                      <option value="option2">Neutral Wuss</option>
-                    </Select>
+                    <Alignment
+                      registerId="alignment"
+                      register={register}
+                      errors={errors}
+                      defaultValue={character.alignment}
+                    />
                   </CharacterCard>
                   {/*One big row spanning both of our Grid columns*/}
                   <GridItem w="100%" colSpan={2}>
@@ -934,3 +1007,4 @@ export default function Character() {
     </>
   );
 }
+//}

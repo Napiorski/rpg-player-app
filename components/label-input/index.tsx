@@ -3,12 +3,7 @@ import { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 import { CharacterSheetInputs } from "../../pages/character";
 import styled from "@emotion/styled";
 import { Box, Flex, Input, Text } from "@chakra-ui/react";
-
-const Warning = styled.span`
-  color: red;
-  font-size: 12px;
-  font-weight: 400;
-`;
+import { Warning } from "components/warning";
 
 type LabelInputProps = {
   defaultValue?: string;

@@ -13,6 +13,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <ChakraProvider>
           <Navbar />
+          <br />
+          <br />
+          <br />
+          <br />
           <Component {...pageProps} />
         </ChakraProvider>
       </QueryClientProvider>

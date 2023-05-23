@@ -83,7 +83,7 @@ export const Navbar = () => {
   const finalRef = React.useRef();
 
   return (
-    <Box>
+    <Box position="fixed" top="0" width="100%" zIndex="10">
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
@@ -110,12 +110,14 @@ export const Navbar = () => {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Image
-            borderRadius="full"
-            boxSize="70px"
-            src={"/dnd2.jpeg"}
-            alt={"Logo"}
-          />
+          <Link as={NextLink} href={"/"} passHref shallow={true}>
+            <Image
+              borderRadius="full"
+              boxSize="70px"
+              src={"/dnd2.jpeg"}
+              alt={"Logo"}
+            />
+          </Link>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />

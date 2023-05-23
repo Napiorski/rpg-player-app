@@ -1,5 +1,13 @@
 import * as React from "react";
-import { Box, Grid, GridItem, Button, Image, Spinner } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Button,
+  Image,
+  Spinner,
+  Heading,
+} from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { useQuery } from "react-query";
 import { MinusIcon, AddIcon } from "@chakra-ui/icons";
@@ -43,6 +51,7 @@ export default function Creatures() {
 
   return (
     <Box p={10}>
+      <Heading>Creatures</Heading>
       <Grid gridTemplateColumns="repeat(8, 1fr)">
         <GridItem>
           <HeaderDiv>Image</HeaderDiv>

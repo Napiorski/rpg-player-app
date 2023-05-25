@@ -1,27 +1,26 @@
 import * as React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Head from "next/head";
-import { Inter } from "@next/font/google";
 import {
   Box,
+  Button,
   Card,
   CardBody,
+  Checkbox,
+  Divider,
+  Flex,
   Grid,
   GridItem,
-  Divider,
+  Heading,
+  HStack,
+  Input,
   List,
   ListItem,
-  Heading,
-  Textarea,
-  Checkbox,
-  Flex,
-  VStack,
-  HStack,
   Select,
-  Input,
-  Button,
-  Text,
   Spinner,
+  Text,
+  Textarea,
+  VStack,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { InputStatCard } from "../../components/input-stat-card";
@@ -37,6 +36,7 @@ import { useMutation, useQuery } from "react-query";
 import { LabelWithText } from "components/label-with-text";
 import { Warning } from "components/warning";
 import Alignment from "components/alignment";
+import { listItems, rowIndexes } from "./constants";
 
 const CharacterCard = styled(Card)`
   margin-top: 10px;
@@ -46,38 +46,6 @@ const CharacterCard = styled(Card)`
 const Primary = styled.div`
   margin: 20px;
 `;
-
-const inter = Inter({ subsets: ["latin"] });
-
-const rowIndexes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-// TODO: offload to our database
-const listItems = [
-  {
-    title: "STR",
-    quantifier: 0,
-  },
-  {
-    title: "DEX",
-    quantifier: 0,
-  },
-  {
-    title: "CON",
-    quantifier: 0,
-  },
-  {
-    title: "INT",
-    quantifier: 0,
-  },
-  {
-    title: "WIS",
-    quantifier: 0,
-  },
-  {
-    title: "CHA",
-    quantifier: 0,
-  },
-];
 
 export type CharacterSheetInputs = {
   [key: string]: string;
@@ -93,14 +61,6 @@ export default function Character() {
     formState: { errors },
   } = useForm<CharacterSheetInputs>();
 
-  const onSubmit: SubmitHandler<CharacterSheetInputs> = (data) => {
-    // TODO: offload to our database - if the character sheet
-    // is not in the db then create it else update it
-    console.log(data);
-    //event.preventDefault();
-    // mutate();
-  };
-
   // protected route check:
   const router = useRouter();
   const [accessToken, setAccessToken] = React.useState<string | null>(null);
@@ -114,27 +74,26 @@ export default function Character() {
       .then((json) => json)
   );
 
-  //const UpdateCharacter = ({ username, updatedCharacterData }) => {
-  //const [mutate, { isLoading, isError, data }] = useMutation(
-  //() =>
-  //fetch(`http://localhost:3000/character/${username}`, {
-  //method: "POST",
-  //headers: {
-  //"Content-Type": "application/json",
-  //},
-  //body: JSON.stringify(updatedCharacterData),
-  // }).then((res) => res.json()),
-  // {
-  // onSuccess: (data) => {
-  // console.log("Updated character:", data);
-  // Handle success behavior here
-  // },
-  //onError: (error) => {
-  //console.error("Error updating character:", error);
-  // Handle error behavior here
-  //},
-  //}
-  //);
+  const saveUserData = useMutation({
+    mutationFn: (data) => {
+      return fetch(`http://localhost:3000/character/${username}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then((res) => res.json());
+    },
+  });
+
+  const onSubmit: SubmitHandler<CharacterSheetInputs> = (data) => {
+    debugger;
+
+    // TODO: offload to our database - if the character sheet
+    // is not in the db then create it else update it
+    console.log(data);
+    saveUserData.mutate(data as any);
+  };
 
   // This code ensures that we have a valid access token
   // before rendering the page
@@ -1007,4 +966,3 @@ export default function Character() {
     </>
   );
 }
-//}

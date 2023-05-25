@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Avatar,
   Box,
   Button,
   Collapse,
@@ -13,6 +14,8 @@ import {
   PopoverTrigger,
   Stack,
   Text,
+  Wrap,
+  WrapItem,
   useColorMode,
   useColorModeValue,
   useDisclosure,
@@ -27,6 +30,7 @@ import {
 } from "@chakra-ui/icons";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
+import AvatarDropdown from "components/navbar-avatar";
 
 // See: https://chakra-templates.dev/navigation/navbar
 const NAV_ITEMS = [
@@ -122,6 +126,8 @@ export const Navbar = () => {
         <Button onClick={toggleColorMode}>
           {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
         </Button>
+        <AvatarDropdown />
+
         {/* TODO: revisit this when we work on the login/context
         <Stack
           flex={{base: 1, md: 0}}

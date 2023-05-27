@@ -81,6 +81,8 @@ export const Navbar = () => {
 
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onToggle } = useDisclosure();
+  const userInitials = "J.D.";
+  const userAvatarSrc = "https://example.com/avatar.jpg";
 
   return (
     <Box position="fixed" top="0" width="100%" zIndex="10">
@@ -126,7 +128,7 @@ export const Navbar = () => {
         <Button onClick={toggleColorMode}>
           {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
         </Button>
-        <AvatarDropdown />
+        <AvatarDropdown initials={userInitials} />
 
         {/* TODO: revisit this when we work on the login/context
         <Stack

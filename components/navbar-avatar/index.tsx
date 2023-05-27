@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Avatar, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 
-const AvatarDropdown = () => {
+type AvatarDropdownProps = {
+  initials?: string;
+  avatarSrc?: string;
+};
+
+const AvatarDropdown = ({ initials, avatarSrc }: AvatarDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleMenuOpen = () => {
@@ -14,16 +19,16 @@ const AvatarDropdown = () => {
 
   return (
     <Menu isOpen={isOpen} onClose={handleMenuClose}>
-      <MenuButton
-        paddingLeft="2"
-        as={Avatar}
-        name="Dan Abrahmov"
-        src="https://bit.ly/dan-abramov"
-        onClick={handleMenuOpen}
-      />
+      <MenuButton onClick={handleMenuOpen}>
+        {avatarSrc ? (
+          <Avatar name={initials} src={avatarSrc} />
+        ) : (
+          <Avatar name={initials} />
+        )}
+      </MenuButton>
       <MenuList>
-        <MenuItem>Profile Settings</MenuItem>
-        <MenuItem>Sign out</MenuItem>
+        <MenuItem>User Settings</MenuItem>
+        <MenuItem>Sign Out</MenuItem>
       </MenuList>
     </Menu>
   );

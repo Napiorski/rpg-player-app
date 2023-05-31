@@ -4,6 +4,7 @@ import { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Navbar } from "../components/navbar";
 import { AppProvider } from "context/providers/app-provider";
+import Footer from "components/footer";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <br />
           <br />
           <Component {...pageProps} />
+          <Footer />
         </ChakraProvider>
       </QueryClientProvider>
     </AppProvider>

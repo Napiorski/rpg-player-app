@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Box, Card, Grid, GridItem, Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import Footer from "components/footer";
 
 export default function Home() {
   const router = useRouter();
@@ -53,13 +54,14 @@ export default function Home() {
           height="200"
           style={{
             backgroundRepeat: "no-repeat",
-            backgroundSize: "100% 100%",
-            backgroundPosition: "center",
+            backgroundSize: "cover",
+            backgroundPosition: "100% 25%", // Adjust the values here
           }}
         >
           Welcome To DnD Mobile
         </Heading>
       </Grid>
+
       <Heading size="md" fontWeight="bold" p="3">
         Now that you are here...
       </Heading>
@@ -76,7 +78,7 @@ export default function Home() {
           my email. The link to the information is down below.
         </Box>
       </GridItem>
-      <Grid></Grid>
+      <Footer></Footer>
     </>
   );
 }

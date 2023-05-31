@@ -4,7 +4,7 @@ import { CharacterSheetInputs } from "pages/character";
 import React from "react";
 import { UseFormRegister, FieldErrorsImpl } from "react-hook-form";
 
-type AlignmentOptions =
+export type AlignmentOptions =
   | "Neutral"
   | "Lawful Good"
   | "Lawful Neutral"

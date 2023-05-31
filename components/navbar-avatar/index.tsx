@@ -19,7 +19,7 @@ const AvatarDropdown = ({ initials, avatarSrc }: AvatarDropdownProps) => {
 
   return (
     <Menu isOpen={isOpen} onClose={handleMenuClose}>
-      <MenuButton onClick={handleMenuOpen}>
+      <MenuButton p="2" onClick={handleMenuOpen}>
         {avatarSrc ? (
           <Avatar name={initials} src={avatarSrc} />
         ) : (

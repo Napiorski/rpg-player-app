@@ -42,12 +42,20 @@ type LabelInputProps = {
 
 export function LabelInput({
   defaultValue,
+  placeholder,
   label,
   registerId,
   register,
   errors,
   type = "text",
 }: LabelInputProps) {
+  // const [value, setValue] = React.useState(defaultValue ?? "");
+  // const handleChange = (event: {
+  //   target: { value: React.SetStateAction<string> };
+  // }) => {
+  //   setValue(event.target.value);
+  // };
+
   return (
     <>
       <Text fontWeight={"bold"}>{label}</Text>
@@ -57,10 +65,12 @@ export function LabelInput({
         </Box>
       )}
       <Input
-        value={defaultValue}
+        // value={value}
+        placeholder={placeholder}
         type={type}
         borderColor={errors && errors[registerId] ? "red" : "inherit"}
         {...register(registerId, { required: true })}
+        // onChange={handleChange}
       />
     </>
   );

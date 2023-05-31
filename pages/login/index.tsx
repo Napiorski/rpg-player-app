@@ -9,6 +9,7 @@ import {
   GridItem,
   Heading,
   Input,
+  Text,
 } from "@chakra-ui/react";
 import { AppContext } from "context/providers/app-provider";
 import { LabelInput } from "components/label-input";
@@ -65,7 +66,7 @@ export default function Login() {
       {username && <Heading>Welcome {username}</Heading>}
       <Grid
         gridTemplateColumns="repeat(7, 1fr)"
-        gridTemplateRows="20% 20% 20% 20% 20%"
+        gridTemplateRows="10% 10% 10% 10% 10% 10% 10% 10% 10% 10%"
         gap={5}
         margin={5}
       >
@@ -93,6 +94,57 @@ export default function Login() {
         <GridItem gridColumnStart={4}>
           <Button type="submit">Login</Button>
         </GridItem>
+        {/* <Text
+          gridColumnStart={4}
+          gridRowStart={5}
+          fontWeight="bold"
+          fontSize="3xl"
+          textAlign="center"
+        > */}
+        {/* OR
+        </Text>
+        <GridItem gridColumnStart={4}>
+          <Heading>Sign Up</Heading>
+        </GridItem>
+        <GridItem gridColumnStart={3} mb={50}>
+          <LabelInput
+            registerId="email"
+            register={register}
+            label="Email:"
+            errors={errors}
+            type="email"
+          />
+        </GridItem>
+        <GridItem gridColumnStart={4}>
+          <LabelInput
+            registerId="username"
+            register={register}
+            label="Username:"
+            type="username"
+            errors={errors}
+          />
+        </GridItem>
+        <GridItem gridColumnStart={3}>
+          <LabelInput
+            registerId="password"
+            register={register}
+            label="Password:"
+            type="password"
+            errors={errors}
+          />
+        </GridItem>
+        <GridItem gridColumnStart={4}>
+          <LabelInput
+            registerId="password"
+            register={register}
+            label="Re-type Password:"
+            type="password"
+            errors={errors}
+          />
+        </GridItem>
+        <GridItem gridColumnStart={5}>
+          <Button type="submit">Start Adventure!</Button>
+        </GridItem> */}
       </Grid>
     </form>
   );

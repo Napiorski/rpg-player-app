@@ -36,6 +36,7 @@ import { useMutation, useQuery } from "react-query";
 import { LabelWithText } from "components/label-with-text";
 import { Warning } from "components/warning";
 import Alignment from "components/alignment";
+import { AlignmentOptions } from "components/alignment";
 import { listItems, rowIndexes } from "./constants";
 
 const CharacterCard = styled(Card)`
@@ -51,15 +52,115 @@ export type CharacterSheetInputs = {
   [key: string]: string;
 };
 
+type CharacterType = {
+  characterName: string | undefined;
+  playerName: string | undefined;
+  class: string | undefined;
+  race: string | undefined;
+  level: string | undefined;
+  experience: string | undefined;
+  inspiration: string | number | undefined;
+  proficiencyBonus: string | number | undefined;
+  strength: string | number;
+  dexterity: string | undefined;
+  constitution: string | undefined;
+  intelligence: string | undefined;
+  wisdom: string | undefined;
+  charisma: string | undefined;
+  skills: string | undefined;
+  perception: string | number;
+  proficiencies: string | number | readonly string[] | undefined;
+  armorClass: string | number;
+  initiative: string | number;
+  speed: string | undefined;
+  maxHp: string | number | readonly string[] | undefined;
+  currentHp: string | number | readonly string[] | undefined;
+  hitDice: string | undefined;
+  deathSaves: string | number | readonly string[] | undefined;
+  background: string;
+  personality: string;
+  ideals: string;
+  bonds: string;
+  flaws: string;
+  alignment: AlignmentOptions | undefined;
+};
+
 export default function Character() {
+  let character: CharacterType = {
+    characterName: undefined,
+    playerName: undefined,
+    class: undefined,
+    race: undefined,
+    level: undefined,
+    experience: undefined,
+    inspiration: undefined,
+    proficiencyBonus: undefined,
+    strength: undefined,
+    dexterity: undefined,
+    constitution: undefined,
+    intelligence: undefined,
+    wisdom: undefined,
+    charisma: undefined,
+    skills: undefined,
+    perception: undefined,
+    proficiencies: undefined,
+    armorClass: undefined,
+    initiative: undefined,
+    speed: undefined,
+    maxHp: undefined,
+    currentHp: undefined,
+    hitDice: undefined,
+    deathSaves: undefined,
+    background: "",
+    personality: "",
+    ideals: "",
+    bonds: "",
+    flaws: "",
+    alignment: undefined,
+  };
+
   // TODO: check for character sheet in db and if it exists
   // then populate the form with the data from the db
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CharacterSheetInputs>();
+  } = useForm<CharacterSheetInputs>({
+    defaultValues: React.useMemo(() => {
+      return {
+        characterName: character.characterName ?? "",
+        playerName: character.playerName ?? "",
+        class: character.class ?? "",
+        race: character.race ?? "",
+        level: character.level ?? "",
+        experience: character.experience ?? "",
+        inspiration: character.inspiration ?? "",
+        proficiencyBonus: character.proficiencyBonus ?? "",
+        strength: character.strength ?? "",
+        dexterity: character.dexterity ?? "",
+        constitution: character.constitution ?? "",
+        intelligence: character.intelligence ?? "",
+        wisdom: character.wisdom ?? "",
+        charisma: character.charisma ?? "",
+        skills: character.skills ?? "",
+        perception: character.perception ?? "",
+        proficiencies: character.proficiencies ?? "",
+        armorClass: character.armorClass ?? "",
+        initiative: character.initiative ?? "",
+        speed: character.speed ?? "",
+        maxHp: character.maxHp ?? "",
+        currentHp: character.currentHp ?? "",
+        hitDice: character.hitDice ?? "",
+        deathSaves: character.deathSaves ?? "",
+        background: character.background ?? "",
+        personality: character.personality ?? "",
+        ideals: character.ideals ?? "",
+        bonds: character.bonds ?? "",
+        flaws: character.flaws ?? "",
+        alignment: character.alignment ?? "",
+      };
+    }, [character]),
+  });
 
   // protected route check:
   const router = useRouter();
@@ -75,6 +176,7 @@ export default function Character() {
   );
 
   const saveUserData = useMutation({
+    mutationKey: "saveUserData",
     mutationFn: (data) => {
       return fetch(`http://localhost:3000/character/${username}`, {
         method: "POST",
@@ -147,7 +249,7 @@ export default function Character() {
 
   // At this point we should have the data with an existing character:
   const { characterData } = data;
-  const character = characterData ? characterData[0] : null;
+  character = characterData ? characterData[0] : null;
 
   // JSX is really the view-layer (put any data or logic above this)
   return (

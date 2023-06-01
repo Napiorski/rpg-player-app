@@ -36,6 +36,7 @@ export function CheckboxGroupCard({
       </Checkbox>
       <Box px="15px" fontWeight={"bold"}>
         <Input
+          type="number"
           defaultValue={defaultValue}
           placeholder="-"
           w={10}

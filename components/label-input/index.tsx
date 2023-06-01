@@ -65,7 +65,6 @@ export function LabelInput({
         </Box>
       )}
       <Input
-        // value={value}
         placeholder={placeholder}
         type={type}
         borderColor={errors && errors[registerId] ? "red" : "inherit"}

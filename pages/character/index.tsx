@@ -38,6 +38,8 @@ import { Warning } from "components/warning";
 import Alignment from "components/alignment";
 import { AlignmentOptions } from "components/alignment";
 import { listItems, rowIndexes } from "./constants";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { useAuth } from "hooks/use-auth";
 
 const CharacterCard = styled(Card)`
   margin-top: 10px;
@@ -119,7 +121,9 @@ export default function Character() {
     alignment: "Neutral",
   });
 
-  const [accessToken, setAccessToken] = React.useState<string | null>(null);
+  const { accessToken, isAuthLoading } = useAuth();
+
+  // const [accessToken, setAccessToken] = React.useState<string | null>(null);
 
   // TODO: check for character sheet in db and if it exists
   // then populate the form with the data from the db
@@ -165,9 +169,6 @@ export default function Character() {
     }, [character]),
   });
 
-  // protected route check:
-  const router = useRouter();
-
   // Get the username:
   const { username } = React.useContext(AppContext);
 
@@ -205,49 +206,11 @@ export default function Character() {
     saveUserData.mutate(data as any);
   };
 
-  // This code ensures that we have a valid access token
-  // before rendering the page
-  React.useEffect(() => {
-    const storageToken = localStorage.getItem("accessToken");
-
-    // This should be a check for a valid access token when the component first mounts
-    if (storageToken && !accessToken) {
-      setAccessToken(storageToken);
-    } else if (!accessToken) {
-      router.push("/login");
-    } else {
-      // Call the /profile endpoint with the access token to check if it is stale
-      fetch("http://localhost:3000/profile", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-        .then((response) => {
-          if (response.status === 401) {
-            // Access token is stale, redirect to login page
-            localStorage.removeItem("accessToken");
-            router.push("/login");
-          } else if (response.ok) {
-            // TODO: call the /character endpoint to get the
-            // character sheet so the app is more performant (not a big deal now)
-
-            // Access token is valid, continue rendering the page
-            return response.json();
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          // Access token is stale, redirect to login page
-          localStorage.removeItem("accessToken");
-          router.push("/login");
-        });
-    }
-  }, [accessToken, router]);
-
-  if (!accessToken) {
+  if (!accessToken || isAuthLoading) {
     return null;
   }
+
+  debugger;
 
   if (isLoading) {
     return <Spinner />;

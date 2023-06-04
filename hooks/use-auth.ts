@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 export function useAuth() {
   const router = useRouter();
+  const [isAuthLoading, setIsAuthLoading] = React.useState(true);
   const [accessToken, setAccessToken] = React.useState<string | null>(null);
 
   React.useEffect(() => {
@@ -10,6 +11,7 @@ export function useAuth() {
 
     // This should be a check for a valid access token when the component first mounts
     if (localToken && !accessToken) {
+      setIsAuthLoading(false);
       setAccessToken(localToken);
     } else if (!accessToken) {
       router.push("/login");
@@ -28,6 +30,7 @@ export function useAuth() {
             router.push("/login");
           } else if (response.ok) {
             // Access token is valid, continue rendering the page
+            setIsAuthLoading(false);
             return response.json();
           }
         })
@@ -40,5 +43,5 @@ export function useAuth() {
     }
   }, [accessToken, router]);
 
-  return accessToken;
+  return { isAuthLoading, accessToken };
 }

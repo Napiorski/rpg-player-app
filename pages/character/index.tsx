@@ -120,6 +120,21 @@ export default function Character() {
     flaws: "",
     alignment: "Neutral",
   });
+  const { isLoading, isError, data } = useQuery("character", async () => {
+    const response = await fetch(`http://localhost:3000/character/${username}`);
+    const responseData = await response.json();
+    const fulfilledCharacter = responseData?.characterData
+      ? responseData.characterData[0]
+      : null;
+    return fulfilledCharacter;
+  });
+
+  React.useEffect(() => {
+    if (!isLoading && !isError && data) {
+      setCharacter({ ...data });
+      reset(data);
+    }
+  }, [isLoading, isError, data]);
 
   const { accessToken, isAuthLoading } = useAuth();
 
@@ -172,20 +187,6 @@ export default function Character() {
   // Get the username:
   const { username } = React.useContext(AppContext);
 
-  const { isLoading, isError } = useQuery("character", () =>
-    fetch(`http://localhost:3000/character/${username}`)
-      .then((res) => res.json())
-      .then((data) => {
-        // At this point we should have the data with an existing character:
-        const fulfilledCharacter = data?.characterData
-          ? data.characterData[0]
-          : null;
-        setCharacter({ ...fulfilledCharacter });
-        reset(fulfilledCharacter);
-        return fulfilledCharacter;
-      })
-  );
-
   const saveUserData = useMutation({
     mutationKey: "saveUserData",
     mutationFn: (data) => {
@@ -209,8 +210,6 @@ export default function Character() {
   if (!accessToken || isAuthLoading) {
     return null;
   }
-
-  debugger;
 
   if (isLoading) {
     return <Spinner />;
